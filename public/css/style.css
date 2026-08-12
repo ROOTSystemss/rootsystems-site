@@ -1,0 +1,840 @@
+/* ===========================================================
+   RootSystems brand site — design system v4
+   Direction: "retro-terminal hybrid" — keeps v3's warm-cream base,
+   serif/sans type pairing, and skeuomorphic hard-shadow buttons, but
+   brings back the hacker-brand edge from the original brief (a
+   reserved terminal-green "verified" accent, a faint CSS-only grid
+   texture, a blinking cursor) plus actual motion: scroll-reveal,
+   a typewriter hero line, and count-up stats. Motion is all
+   prefers-reduced-motion-aware and degrades to static/visible with
+   no JS - see public/js/site.js.
+   =========================================================== */
+
+:root {
+  --bg: #f7f1e3;
+  --surface: #fffdf7;
+  --surface-2: #f0e8d4;
+
+  --ink: #211d17;
+  --ink-muted: #5b5647;
+  --ink-faint: #8c8571;
+
+  --border: #ddd0af;
+  --border-strong: #c9ba8e;
+
+  /* Four accents, four jobs - saffron leads (primary buttons, headline
+     accents), yellow is the secondary highlight (secondary buttons, IN
+     PROGRESS status), sky blue is reserved for links and quiet tertiary
+     accents, terminal-green is reserved exclusively for LIVE/verified
+     signal (status tags, the hero cursor, count-up numbers) - a direct
+     callback to the original hacker-brand brief. None of these are
+     decorative filler - each has exactly one kind of job on the page. */
+  --saffron: #ff9933;
+  --saffron-rgb: 255, 153, 51;
+  --yellow: #f5c518;
+  --yellow-rgb: 245, 197, 24;
+  --sky: #7ec8e3;
+  --sky-rgb: 126, 200, 227;
+  --terminal-green: #1f9c5a;
+  --terminal-green-rgb: 31, 156, 90;
+
+  --font-display: "Merriweather", Georgia, "Times New Roman", serif;
+  --font-body: "Open Sans", Arial, Helvetica, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* Plain uppercase label - the one small-caps device used consistently for
+   every section eyebrow, in place of any terminal/code-comment styling. */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin: 0 0 1.1rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 2.8vw, 2.35rem);
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  margin: 0 0 3rem;
+  max-width: 22ch;
+  color: var(--ink);
+}
+
+/* Scroll-reveal utility - src/js/site.js adds .is-visible via
+   IntersectionObserver as each section enters the viewport. Content is
+   fully present and readable without JS (this only transitions opacity/
+   transform, never visibility), and reduced-motion users get everything
+   visible immediately with no transition at all. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- header ---------- */
+
+.site-header {
+  border-bottom: 2px solid var(--ink);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand__mark {
+  height: 30px;
+  width: 30px;
+  object-fit: contain;
+}
+
+.brand__word {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.site-nav {
+  display: flex;
+  gap: 30px;
+}
+
+.site-nav__link {
+  position: relative;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink-muted);
+  padding-bottom: 4px;
+  transition: color 0.15s ease;
+}
+
+.site-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--sky);
+  transition: width 0.2s ease;
+}
+
+.site-nav__link:hover {
+  color: var(--ink);
+}
+
+.site-nav__link:hover::after {
+  width: 100%;
+}
+
+/* ---------- buttons ---------- */
+/* Retro "3D" press-buttons - thick ink border, hard offset shadow (no
+   blur), the whole button physically shifts toward its shadow on hover
+   and presses flat on click. This is the deliberate personality choice
+   in place of any glow/blur/gradient. */
+
+.btn-retro {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.7rem;
+  border: 2.5px solid var(--ink);
+  border-radius: 3px;
+  background: var(--saffron);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 700;
+  box-shadow: 5px 5px 0 var(--ink);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+.btn-retro:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 var(--ink);
+  background: #ffad57;
+}
+
+.btn-retro:active,
+.btn-retro:focus-visible {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.btn-retro:focus-visible {
+  outline: 2px solid var(--sky);
+  outline-offset: 3px;
+}
+
+.btn-retro__arrow {
+  transition: transform 0.12s ease;
+}
+
+.btn-retro:hover .btn-retro__arrow {
+  transform: translateX(3px);
+}
+
+/* Secondary button - same 3D mechanic, yellow fill, for the second-tier
+   action wherever a screen needs one. */
+.btn-retro--yellow {
+  background: var(--yellow);
+}
+
+.btn-retro--yellow:hover {
+  background: #ffd54f;
+}
+
+/* Sky blue is reserved for links, never for buttons - a plain underline
+   treatment that thickens and shifts on hover. */
+.link-sky {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #2a7ea3;
+  border-bottom: 2px solid var(--sky);
+  padding-bottom: 1px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.link-sky:hover {
+  color: #1c5f7d;
+  border-color: #1c5f7d;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  padding: 96px 0 108px;
+  border-bottom: 2px solid var(--ink);
+  overflow: hidden;
+}
+
+/* Faint CSS-only grid texture - the one callback to the original
+   hacker-terminal brief kept from v2, dialed back to near-invisible so it
+   reads as texture, not decoration. Fades toward the bottom so it never
+   fights with the headline or button. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(var(--saffron-rgb), 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--saffron-rgb), 0.08) 1px, transparent 1px);
+  background-size: 42px 42px;
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 85%);
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+  pointer-events: none;
+}
+
+.hero--compact {
+  padding: 96px 0;
+}
+
+.eyebrow--hero {
+  font-size: 0.85rem;
+}
+
+.hero__title {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 5.6vw, 4.3rem);
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.75rem;
+  max-width: 20ch;
+  min-height: 1.14em;
+  color: var(--ink);
+}
+
+/* Typewriter target - src/js/site.js types text into this span and cycles
+   between a couple of lines; without JS (or reduced-motion) the fallback
+   text node right after it in the markup shows instead, so nothing is ever
+   blank. */
+.hero__type {
+  display: inline;
+}
+
+/* Blinking terminal cursor, in the one accent reserved for "verified"
+   signal - the single motion element allowed to loop indefinitely. */
+.hero__cursor {
+  display: inline-block;
+  width: 0.5ch;
+  margin-left: 2px;
+  background: var(--terminal-green);
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__cursor {
+    animation: none;
+  }
+}
+
+.hero__subhead {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--ink-muted);
+  max-width: 46ch;
+  margin: 0 0 2.75rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+/* The one deliberate "not dead-center, not predictable" touch in the
+   hero - a slight stuck-on-at-an-angle rotation, like a stamped seal,
+   rather than a perfectly aligned rectangle. Straightens on hover. */
+.hero__actions .btn-retro {
+  transform: rotate(-1.4deg);
+}
+
+.hero__actions .btn-retro:hover {
+  transform: rotate(-1.4deg) translate(2px, 2px);
+}
+
+.hero__actions .btn-retro:active,
+.hero__actions .btn-retro:focus-visible {
+  transform: rotate(-1.4deg) translate(5px, 5px);
+}
+
+/* ---------- products ---------- */
+
+.products {
+  padding: 100px 0;
+  border-bottom: 2px solid var(--ink);
+}
+
+.product-grid {
+  border-top: 2px solid var(--ink);
+}
+
+.product-row {
+  display: grid;
+  grid-template-columns: 56px 220px 1fr auto auto;
+  align-items: center;
+  gap: 8px 24px;
+  padding: 1.7rem 0;
+  border-bottom: 1px solid var(--border-strong);
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.15s ease;
+}
+
+a.product-row:hover {
+  background: rgba(var(--sky-rgb), 0.12);
+}
+
+.product-row__number {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--ink-faint);
+}
+
+/* Third typographic tier, distinct from both the serif headline and the
+   plain body copy: bold uppercase sans with wide tracking. */
+.product-row__name {
+  font-family: var(--font-body);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 0.94rem;
+  color: var(--ink);
+}
+
+.product-row__description {
+  font-family: var(--font-body);
+  color: var(--ink-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.status-tag {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1.5px solid currentColor;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.status-tag--live {
+  color: var(--terminal-green);
+  background: rgba(var(--terminal-green-rgb), 0.14);
+}
+
+.status-tag--in-progress {
+  color: #7a6100;
+  background: rgba(var(--yellow-rgb), 0.22);
+}
+
+.live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--terminal-green);
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Right-aligned "look here" indicator, only on LIVE rows - the
+   intentional asymmetry the retro pass asked for: LIVE rows get an
+   extra beat of visual weight on the right edge, IN PROGRESS rows stay
+   quiet. Purely a visual cue today (products don't link out yet); becomes
+   a real affordance the moment a product's `href` is set. */
+.product-row__go {
+  justify-self: end;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.8rem;
+  color: #2a7ea3;
+}
+
+/* ---------- stats strip ---------- */
+
+.stats {
+  padding: 56px 0;
+  border-bottom: 2px solid var(--ink);
+  background: var(--surface-2);
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.stat {
+  text-align: left;
+}
+
+.stat__number {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  color: var(--terminal-green);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat__label {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 720px) {
+  .stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 32px;
+  }
+}
+
+/* ---------- how it works ---------- */
+
+.how {
+  padding: 100px 0;
+  border-bottom: 2px solid var(--ink);
+}
+
+.how__steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.how-step {
+  position: relative;
+  padding-top: 0.4rem;
+}
+
+.how-step__number {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--terminal-green);
+  border: 1.5px solid var(--terminal-green);
+  border-radius: 3px;
+  padding: 2px 8px;
+  margin-bottom: 1.1rem;
+}
+
+.how-step__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin: 0 0 0.6rem;
+}
+
+.how-step__body {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .how__steps {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+/* ---------- field notes (blog placeholder) ---------- */
+
+.field {
+  padding: 100px 0;
+  border-bottom: 2px solid var(--ink);
+}
+
+.field__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.field-card {
+  border: 2px solid var(--border-strong);
+  border-radius: 3px;
+  padding: 1.6rem;
+  background: var(--surface);
+}
+
+.field-card__tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  border: 1.5px solid var(--border-strong);
+  border-radius: 3px;
+  padding: 3px 8px;
+  margin-bottom: 1rem;
+}
+
+.field-card__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink-muted);
+  margin: 0 0 0.5rem;
+}
+
+.field-card__body {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--ink-faint);
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .field__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- about ---------- */
+
+.about {
+  padding: 100px 0;
+  border-bottom: 2px solid var(--ink);
+}
+
+.about__inner {
+  max-width: 660px;
+}
+
+.about__body {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--ink-muted);
+  margin: 0 0 1.2rem;
+}
+
+.about__body:last-child {
+  margin-bottom: 0;
+}
+
+.about__body strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ---------- resources ("Tools We Use") ---------- */
+
+.resources {
+  padding: 90px 0 110px;
+}
+
+.resources__disclosure {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  max-width: 62ch;
+  margin: 0 0 2.5rem;
+  line-height: 1.65;
+}
+
+.resource-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border-strong);
+}
+
+.resource-item {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.resource-item__name {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+
+a.resource-item__name {
+  color: #2a7ea3;
+  border-bottom: 2px solid var(--sky);
+}
+
+a.resource-item__name:hover {
+  color: #1c5f7d;
+  border-color: #1c5f7d;
+}
+
+.resource-item__desc {
+  font-family: var(--font-body);
+  font-size: 0.87rem;
+  color: var(--ink-faint);
+}
+
+.resource-item__pending {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  opacity: 0.75;
+}
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  border-top: 2px solid var(--ink);
+  padding: 34px 0 46px;
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.site-footer__line {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+}
+
+.site-footer__links {
+  display: flex;
+  gap: 22px;
+}
+
+.site-footer__link {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-faint);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-footer__link:hover {
+  color: var(--saffron);
+}
+
+.site-footer__comment {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 860px) {
+  .hero {
+    padding: 76px 0 64px;
+  }
+
+  .products,
+  .how,
+  .field,
+  .about,
+  .resources {
+    padding: 72px 0;
+  }
+
+  .stats {
+    padding: 40px 0;
+  }
+
+  .product-row {
+    grid-template-columns: 40px 1fr;
+    grid-template-areas:
+      "number name"
+      ". description"
+      ". status"
+      ". go";
+    row-gap: 10px;
+    padding: 1.6rem 0;
+  }
+
+  .product-row__number { grid-area: number; }
+  .product-row__name { grid-area: name; }
+  .product-row__description { grid-area: description; }
+  .status-tag { grid-area: status; justify-self: start; }
+  .product-row__go { grid-area: go; justify-self: start; }
+
+  .site-nav {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .wrap {
+    padding: 0 20px;
+  }
+
+  .site-header__inner {
+    padding: 16px 20px;
+  }
+
+  .site-nav {
+    gap: 12px;
+  }
+
+  .site-footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include("../partials/head") %>
+</head>
+<body>
+  <%- include("../partials/header") %>
+
+  <%
+    // Typewriter lines for the hero headline - the first entry MUST match
+    // the server-rendered text inside [data-typewriter] exactly, so there's
+    // zero flash-of-different-content before JS takes over (and it's the
+    // only line a no-JS/reduced-motion visitor ever sees).
+    const heroLines = [
+      "Proof, not paperwork.",
+      "Verified, not vibes.",
+      "Evidence, not slideware."
+    ];
+  %>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--hero">RootSystems</p>
+        <h1 class="hero__title">
+          <span class="hero__type" data-typewriter='<%- JSON.stringify(heroLines) %>'><%= heroLines[0] %></span><span class="hero__cursor" aria-hidden="true"></span>
+        </h1>
+        <p class="hero__subhead">
+          We build small, sharp tools that prove a claim is actually true —
+          instead of asking anyone to take it on faith.
+        </p>
+        <div class="hero__actions">
+          <a class="btn-retro" href="#products">View products <span class="btn-retro__arrow">&rarr;</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats reveal">
+      <div class="wrap stats__grid">
+        <div class="stat">
+          <span class="stat__number" data-count-to="<%= stats.liveCount %>">0</span>
+          <span class="stat__label">Products LIVE</span>
+        </div>
+        <div class="stat">
+          <span class="stat__number" data-count-to="<%= stats.totalCount %>">0</span>
+          <span class="stat__label">Products total</span>
+        </div>
+        <div class="stat">
+          <span class="stat__number" data-count-to="<%= stats.foundersCount %>">0</span>
+          <span class="stat__label">Founder<%= stats.foundersCount === 1 ? "" : "s" %></span>
+        </div>
+        <div class="stat">
+          <span class="stat__number" data-count-to="<%= stats.unverifiedClaims %>">0</span>
+          <span class="stat__label">Unverified claims shipped</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="products">
+      <div class="wrap">
+        <p class="eyebrow">Currently: compliance &amp; security tools</p>
+        <h2 class="section-title">Products</h2>
+
+        <div class="product-grid">
+          <% products.forEach(function (product) { %>
+            <% const statusClass = "status-tag--" + product.status.toLowerCase().replace(/\s+/g, "-"); %>
+            <% const tag = product.href ? "a" : "div"; %>
+            <<%= tag %> class="product-row"<% if (product.href) { %> href="<%= product.href %>"<% } %>>
+              <span class="product-row__number"><%= product.number %></span>
+              <span class="product-row__name"><%= product.name %></span>
+              <span class="product-row__description"><%= product.description %></span>
+              <span class="status-tag <%= statusClass %>">
+                <% if (product.status === "LIVE") { %><span class="live-dot"></span><% } %><%= product.status %>
+              </span>
+              <% if (product.status === "LIVE") { %><span class="product-row__go">&rarr;</span><% } else { %><span></span><% } %>
+            </<%= tag %>>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+
+    <section class="how reveal">
+      <div class="wrap">
+        <p class="eyebrow">How it works</p>
+        <h2 class="section-title">Three steps, no theater.</h2>
+
+        <div class="how__steps">
+          <div class="how-step">
+            <span class="how-step__number">01</span>
+            <h3 class="how-step__title">Answer what actually matters</h3>
+            <p class="how-step__body">
+              A guided questionnaire scoped to what the framework in
+              question really requires you to show — not a 400-question
+              template dumped on you at once.
+            </p>
+          </div>
+          <div class="how-step">
+            <span class="how-step__number">02</span>
+            <h3 class="how-step__title">Get a deterministic result</h3>
+            <p class="how-step__body">
+              Scoring and deadlines are computed by application code, not
+              guessed at by a model — the same inputs always produce the
+              same output, and you can see why.
+            </p>
+          </div>
+          <div class="how-step">
+            <span class="how-step__number">03</span>
+            <h3 class="how-step__title">Walk away with proof</h3>
+            <p class="how-step__body">
+              A tamper-evident, hash-chained report someone else can
+              actually check — an auditor, a customer's security team, or
+              future you.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about reveal">
+      <div class="wrap about__inner">
+        <p class="eyebrow">About</p>
+        <h2 class="section-title">Built by one person, on purpose.</h2>
+        <p class="about__body">
+          RootSystems is a solo-founder studio. No sales team promising
+          things the product can't do, no roadmap slides — just tools built
+          to hold up under an audit, a customer's security review, or your
+          own scrutiny.
+        </p>
+        <p class="about__body">
+          <strong>If a claim can't be verified, it doesn't ship.</strong>
+          That's the whole filter every product here has to pass — not
+          "does it look done," but "can someone else check it and get the
+          same answer."
+        </p>
+      </div>
+    </section>
+
+    <section id="blog" class="field reveal">
+      <div class="wrap">
+        <p class="eyebrow">From the field</p>
+        <h2 class="section-title">Notes on compliance, without the theater.</h2>
+
+        <div class="field__grid">
+          <div class="field-card">
+            <span class="field-card__tag">Coming soon</span>
+            <h3 class="field-card__title">What auditors actually check first</h3>
+            <p class="field-card__body">
+              Long-form notes from building tools auditors and security
+              reviewers use directly — this space is reserved, not filled
+              with placeholder filler.
+            </p>
+          </div>
+          <div class="field-card">
+            <span class="field-card__tag">Coming soon</span>
+            <h3 class="field-card__title">Deterministic vs. AI-generated evidence</h3>
+            <p class="field-card__body">
+              Why every RootSystems product draws a hard line between what
+              a model proposes and what only a human — or plain code — can
+              confirm.
+            </p>
+          </div>
+          <div class="field-card">
+            <span class="field-card__tag">Coming soon</span>
+            <h3 class="field-card__title">Building in the open, solo</h3>
+            <p class="field-card__body">
+              What shipping compliance software as a one-person studio
+              actually looks like, warts included.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resources" class="resources reveal">
+      <div class="wrap">
+        <p class="eyebrow">Tools we use</p>
+        <p class="resources__disclosure">
+          A short list of things we actually use to run RootSystems — not a
+          sponsored placement section. Some links below are affiliate
+          links — we may earn a small commission at no cost to you if you
+          use them, and only tools we'd recommend either way end up on this
+          list.
+        </p>
+
+        <div class="resource-list">
+          <% resources.forEach(function (item) { %>
+            <div class="resource-item">
+              <% if (item.href) { %>
+                <a class="resource-item__name" href="<%= item.href %>" rel="sponsored noopener" target="_blank"><%= item.name %></a>
+              <% } else { %>
+                <span class="resource-item__name"><%= item.name %></span>
+              <% } %>
+              <span class="resource-item__desc"><%= item.description %></span>
+              <% if (!item.href) { %><span class="resource-item__pending">(link pending)</span><% } %>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include("../partials/footer") %>
+  <script src="/js/site.js"></script>
+</body>
+</html>
