@@ -1,46 +1,53 @@
 /* ===========================================================
-   RootSystems brand site — design system v4
-   Direction: "retro-terminal hybrid" — keeps v3's warm-cream base,
-   serif/sans type pairing, and skeuomorphic hard-shadow buttons, but
-   brings back the hacker-brand edge from the original brief (a
-   reserved terminal-green "verified" accent, a faint CSS-only grid
-   texture, a blinking cursor) plus actual motion: scroll-reveal,
-   a typewriter hero line, and count-up stats. Motion is all
-   prefers-reduced-motion-aware and degrades to static/visible with
-   no JS - see public/js/site.js.
+   RootSystems brand site — design system v5
+   Direction: confident B2B compliance software, not a hacker-terminal
+   dev tool. Dominant navy, saffron as the one "act now" accent, green
+   reserved exclusively for verified/trust signal — the same three-color
+   language the product apps use, applied with more room to breathe and
+   more visual weight than a dashboard needs. Inter carries the whole
+   page through weight and size, not through switching typefaces;
+   JetBrains Mono is reserved for the few places actual proof-shaped data
+   appears (hashes, timestamps, stat counters) so monospace always means
+   "this is real, checkable data," never decoration.
    =========================================================== */
 
 :root {
-  --bg: #f7f1e3;
-  --surface: #fffdf7;
-  --surface-2: #f0e8d4;
+  /* Navy family — dominant */
+  --navy: #0a1f44;
+  --navy-deep: #050f24;
+  --navy-mid: #14315e;
+  --navy-tint: #eef1f7;
 
-  --ink: #211d17;
-  --ink-muted: #5b5647;
-  --ink-faint: #8c8571;
-
-  --border: #ddd0af;
-  --border-strong: #c9ba8e;
-
-  /* Four accents, four jobs - saffron leads (primary buttons, headline
-     accents), yellow is the secondary highlight (secondary buttons, IN
-     PROGRESS status), sky blue is reserved for links and quiet tertiary
-     accents, terminal-green is reserved exclusively for LIVE/verified
-     signal (status tags, the hero cursor, count-up numbers) - a direct
-     callback to the original hacker-brand brief. None of these are
-     decorative filler - each has exactly one kind of job on the page. */
+  /* Saffron — the one CTA / "look here" accent */
   --saffron: #ff9933;
   --saffron-rgb: 255, 153, 51;
-  --yellow: #f5c518;
-  --yellow-rgb: 245, 197, 24;
-  --sky: #7ec8e3;
-  --sky-rgb: 126, 200, 227;
-  --terminal-green: #1f9c5a;
-  --terminal-green-rgb: 31, 156, 90;
+  --saffron-deep: #e37c0f;
 
-  --font-display: "Merriweather", Georgia, "Times New Roman", serif;
-  --font-body: "Open Sans", Arial, Helvetica, sans-serif;
+  /* Green — reserved exclusively for verified/trust/live signal */
+  --green: #1e9e45;
+  --green-rgb: 30, 158, 69;
+  --green-deep: #157836;
+  --green-tint: #e6f6ec;
+
+  /* Neutrals — cool, blue-biased, never a flat mid-grey */
+  --paper: #f6f8fc;
+  --surface: #ffffff;
+  --surface-tint: #eef2f9;
+
+  --ink: #0f1b2e;
+  --ink-muted: #48566e;
+  --ink-faint: #8a97ac;
+
+  --border: #dfe5f0;
+  --border-strong: #c5cee0;
+
+  --font-display: "Inter", -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+  --shadow-sm: 0 1px 2px rgba(10, 31, 68, 0.06), 0 1px 3px rgba(10, 31, 68, 0.08);
+  --shadow-md: 0 8px 24px rgba(10, 31, 68, 0.12);
+  --shadow-lg: 0 20px 48px rgba(10, 31, 68, 0.18);
 }
 
 * {
@@ -48,12 +55,12 @@
 }
 
 html {
-  background: var(--bg);
+  background: var(--paper);
 }
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 16px;
@@ -71,39 +78,56 @@ a {
 }
 
 .wrap {
-  max-width: 1120px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 0 32px;
 }
 
-/* Plain uppercase label - the one small-caps device used consistently for
-   every section eyebrow, in place of any terminal/code-comment styling. */
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: var(--saffron);
+  color: var(--saffron-deep);
   margin: 0 0 1.1rem;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  background: var(--saffron);
+  border-radius: 2px;
+}
+
+.eyebrow--on-dark {
+  color: #ffc27a;
+}
+
+.eyebrow--on-dark::before {
+  background: #ffc27a;
 }
 
 .section-title {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.7rem, 2.8vw, 2.35rem);
-  line-height: 1.25;
-  letter-spacing: -0.005em;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
   margin: 0 0 3rem;
   max-width: 22ch;
-  color: var(--ink);
+  color: var(--navy);
+  text-wrap: balance;
 }
 
-/* Scroll-reveal utility - src/js/site.js adds .is-visible via
+/* Scroll-reveal utility - public/js/site.js adds .is-visible via
    IntersectionObserver as each section enters the viewport. Content is
-   fully present and readable without JS (this only transitions opacity/
-   transform, never visibility), and reduced-motion users get everything
-   visible immediately with no transition at all. */
+   fully present and readable without JS, and reduced-motion users get
+   everything visible immediately with no transition at all. */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -126,10 +150,11 @@ a {
 /* ---------- header ---------- */
 
 .site-header {
-  border-bottom: 2px solid var(--ink);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: var(--bg);
+  background: rgba(246, 248, 252, 0.92);
+  backdrop-filter: blur(8px);
   z-index: 10;
 }
 
@@ -137,13 +162,14 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 32px;
+  gap: 16px;
+  padding: 18px 32px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
 }
 
@@ -155,24 +181,42 @@ a {
 
 .brand__word {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.15rem;
-  letter-spacing: -0.01em;
-  color: var(--ink);
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  color: var(--navy);
 }
 
 .site-nav {
   display: flex;
+  align-items: center;
   gap: 30px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* Flex items default to min-width:auto, which refuses to shrink below
+     content size - without this, the nav never actually narrows enough
+     for its own overflow-x:auto to kick in, and instead spills past the
+     viewport edge on narrow screens. */
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.brand {
+  flex-shrink: 0;
+}
+
+.site-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .site-nav__link {
   position: relative;
   text-decoration: none;
   font-family: var(--font-body);
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.005em;
   color: var(--ink-muted);
   padding-bottom: 4px;
   transition: color 0.15s ease;
@@ -185,315 +229,253 @@ a {
   bottom: 0;
   height: 2px;
   width: 0%;
-  background: var(--sky);
+  background: var(--saffron);
+  border-radius: 2px;
   transition: width 0.2s ease;
 }
 
 .site-nav__link:hover {
-  color: var(--ink);
+  color: var(--navy);
 }
 
 .site-nav__link:hover::after {
   width: 100%;
 }
 
-/* ---------- buttons ---------- */
-/* Retro "3D" press-buttons - thick ink border, hard offset shadow (no
-   blur), the whole button physically shifts toward its shadow on hover
-   and presses flat on click. This is the deliberate personality choice
-   in place of any glow/blur/gradient. */
-
-.btn-retro {
+.site-nav__cta {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.7rem;
-  border: 2.5px solid var(--ink);
-  border-radius: 3px;
-  background: var(--saffron);
-  color: var(--ink);
+  padding: 9px 18px;
+  border-radius: 8px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.site-nav__cta:hover {
+  background: var(--navy-mid);
+  transform: translateY(-1px);
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.95rem 1.9rem;
+  border: none;
+  border-radius: 10px;
   text-decoration: none;
   font-family: var(--font-body);
-  font-size: 0.92rem;
+  font-size: 0.96rem;
   font-weight: 700;
-  box-shadow: 5px 5px 0 var(--ink);
-  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
-.btn-retro:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 3px 3px 0 var(--ink);
-  background: #ffad57;
+.btn-primary {
+  background: var(--saffron);
+  color: var(--navy-deep);
+  box-shadow: 0 10px 24px rgba(var(--saffron-rgb), 0.34);
 }
 
-.btn-retro:active,
-.btn-retro:focus-visible {
-  transform: translate(5px, 5px);
-  box-shadow: 0 0 0 var(--ink);
+.btn-primary:hover {
+  background: #ffa64d;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(var(--saffron-rgb), 0.4);
 }
 
-.btn-retro:focus-visible {
-  outline: 2px solid var(--sky);
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+}
+
+.btn-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+.btn-ghost--on-light {
+  color: var(--navy);
+  border-color: var(--border-strong);
+}
+
+.btn-ghost--on-light:hover {
+  border-color: var(--navy);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--green);
   outline-offset: 3px;
 }
 
-.btn-retro__arrow {
-  transition: transform 0.12s ease;
+.btn__arrow {
+  transition: transform 0.15s ease;
 }
 
-.btn-retro:hover .btn-retro__arrow {
+.btn:hover .btn__arrow {
   transform: translateX(3px);
-}
-
-/* Secondary button - same 3D mechanic, yellow fill, for the second-tier
-   action wherever a screen needs one. */
-.btn-retro--yellow {
-  background: var(--yellow);
-}
-
-.btn-retro--yellow:hover {
-  background: #ffd54f;
-}
-
-/* Sky blue is reserved for links, never for buttons - a plain underline
-   treatment that thickens and shifts on hover. */
-.link-sky {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  text-decoration: none;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.92rem;
-  color: #2a7ea3;
-  border-bottom: 2px solid var(--sky);
-  padding-bottom: 1px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-
-.link-sky:hover {
-  color: #1c5f7d;
-  border-color: #1c5f7d;
 }
 
 /* ---------- hero ---------- */
 
 .hero {
   position: relative;
-  padding: 96px 0 108px;
-  border-bottom: 2px solid var(--ink);
+  background: radial-gradient(ellipse 120% 100% at 15% 0%, var(--navy-mid) 0%, var(--navy) 45%, var(--navy-deep) 100%);
+  color: #fff;
+  padding: 128px 0 150px;
   overflow: hidden;
 }
 
-/* Faint CSS-only grid texture - the one callback to the original
-   hacker-terminal brief kept from v2, dialed back to near-invisible so it
-   reads as texture, not decoration. Fades toward the bottom so it never
-   fights with the headline or button. */
+.hero--compact {
+  padding: 84px 0 96px;
+}
+
+/* Faint dot-grid texture, fading toward the bottom - reads as depth in the
+   navy field, not decoration fighting the headline. */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(var(--saffron-rgb), 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--saffron-rgb), 0.08) 1px, transparent 1px);
-  background-size: 42px 42px;
-  -webkit-mask-image: linear-gradient(to bottom, black, transparent 85%);
-  mask-image: linear-gradient(to bottom, black, transparent 85%);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1.2px, transparent 1.2px);
+  background-size: 26px 26px;
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 75%);
+  mask-image: linear-gradient(to bottom, black, transparent 75%);
   pointer-events: none;
 }
 
-.hero--compact {
-  padding: 96px 0;
-}
-
-.eyebrow--hero {
-  font-size: 0.85rem;
+.hero__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  align-items: center;
+  gap: 48px;
 }
 
 .hero__title {
-  position: relative;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2.5rem, 5.6vw, 4.3rem);
-  line-height: 1.14;
-  letter-spacing: -0.01em;
-  margin: 0 0 1.75rem;
-  max-width: 20ch;
-  min-height: 1.14em;
-  color: var(--ink);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.5rem;
+  max-width: 15ch;
+  color: #fff;
+  text-wrap: balance;
 }
 
-/* Typewriter target - src/js/site.js types text into this span and cycles
-   between a couple of lines; without JS (or reduced-motion) the fallback
-   text node right after it in the markup shows instead, so nothing is ever
-   blank. */
-.hero__type {
-  display: inline;
-}
-
-/* Blinking terminal cursor, in the one accent reserved for "verified"
-   signal - the single motion element allowed to loop indefinitely. */
-.hero__cursor {
-  display: inline-block;
-  width: 0.5ch;
-  margin-left: 2px;
-  background: var(--terminal-green);
-  animation: cursor-blink 1s step-end infinite;
-}
-
-@keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__cursor {
-    animation: none;
-  }
+.hero__title-accent {
+  color: var(--saffron);
 }
 
 .hero__subhead {
   font-family: var(--font-body);
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: var(--ink-muted);
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
   max-width: 46ch;
-  margin: 0 0 2.75rem;
+  margin: 0 0 2.5rem;
 }
 
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1rem;
 }
 
-/* The one deliberate "not dead-center, not predictable" touch in the
-   hero - a slight stuck-on-at-an-angle rotation, like a stamped seal,
-   rather than a perfectly aligned rectangle. Straightens on hover. */
-.hero__actions .btn-retro {
-  transform: rotate(-1.4deg);
+/* ---------- hero verification-chain graphic ---------- */
+/* A literal, not decorative, representation of the product story: a chain
+   of verified nodes, each checked off and linked to the one before it -
+   the same hash-chain concept the products actually implement. Built from
+   plain shapes, not an illustration, so it reads as "diagram" rather than
+   "stock art." */
+
+.chain {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 8px 0;
 }
 
-.hero__actions .btn-retro:hover {
-  transform: rotate(-1.4deg) translate(2px, 2px);
-}
-
-.hero__actions .btn-retro:active,
-.hero__actions .btn-retro:focus-visible {
-  transform: rotate(-1.4deg) translate(5px, 5px);
-}
-
-/* ---------- products ---------- */
-
-.products {
-  padding: 100px 0;
-  border-bottom: 2px solid var(--ink);
-}
-
-.product-grid {
-  border-top: 2px solid var(--ink);
-}
-
-.product-row {
-  display: grid;
-  grid-template-columns: 56px 220px 1fr auto auto;
+.chain-node {
+  display: flex;
   align-items: center;
-  gap: 8px 24px;
-  padding: 1.7rem 0;
-  border-bottom: 1px solid var(--border-strong);
-  text-decoration: none;
-  color: inherit;
-  transition: background-color 0.15s ease;
+  gap: 16px;
+  position: relative;
+  padding: 14px 0;
 }
 
-a.product-row:hover {
-  background: rgba(var(--sky-rgb), 0.12);
-}
-
-.product-row__number {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  color: var(--ink-faint);
-}
-
-/* Third typographic tier, distinct from both the serif headline and the
-   plain body copy: bold uppercase sans with wide tracking. */
-.product-row__name {
-  font-family: var(--font-body);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  font-size: 0.94rem;
-  color: var(--ink);
-}
-
-.product-row__description {
-  font-family: var(--font-body);
-  color: var(--ink-muted);
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
-
-.status-tag {
-  justify-self: end;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border: 1.5px solid currentColor;
-  border-radius: 3px;
-  white-space: nowrap;
-}
-
-.status-tag--live {
-  color: var(--terminal-green);
-  background: rgba(var(--terminal-green-rgb), 0.14);
-}
-
-.status-tag--in-progress {
-  color: #7a6100;
-  background: rgba(var(--yellow-rgb), 0.22);
-}
-
-.live-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
+.chain-node__dot {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  background: var(--terminal-green);
-  animation: pulse-dot 1.8s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--green-rgb), 0.16);
+  border: 1.5px solid rgba(var(--green-rgb), 0.55);
+  color: var(--green);
+  z-index: 1;
 }
 
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+.chain-node:nth-child(2) .chain-node__dot {
+  background: rgba(var(--saffron-rgb), 0.16);
+  border-color: rgba(var(--saffron-rgb), 0.55);
+  color: var(--saffron);
 }
 
-/* Right-aligned "look here" indicator, only on LIVE rows - the
-   intentional asymmetry the retro pass asked for: LIVE rows get an
-   extra beat of visual weight on the right edge, IN PROGRESS rows stay
-   quiet. Purely a visual cue today (products don't link out yet); becomes
-   a real affordance the moment a product's `href` is set. */
-.product-row__go {
-  justify-self: end;
+.chain-node__dot svg {
+  width: 20px;
+  height: 20px;
+}
+
+.chain-node__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.chain-node__label {
   font-family: var(--font-body);
-  font-weight: 800;
-  font-size: 0.8rem;
-  color: #2a7ea3;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #fff;
+}
+
+.chain-node__hash {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.01em;
+}
+
+.chain-node:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 60px;
+  width: 2px;
+  height: calc(100% - 12px);
+  background: linear-gradient(180deg, rgba(var(--green-rgb), 0.5), rgba(255, 255, 255, 0.12));
 }
 
 /* ---------- stats strip ---------- */
 
 .stats {
-  padding: 56px 0;
-  border-bottom: 2px solid var(--ink);
-  background: var(--surface-2);
+  background: var(--navy-deep);
+  padding: 44px 0;
 }
 
 .stats__grid {
@@ -504,14 +486,16 @@ a.product-row:hover {
 
 .stat {
   text-align: left;
+  border-left: 2px solid rgba(255, 255, 255, 0.14);
+  padding-left: 18px;
 }
 
 .stat__number {
   display: block;
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
-  color: var(--terminal-green);
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  color: var(--green);
   line-height: 1;
   margin-bottom: 0.5rem;
 }
@@ -520,22 +504,256 @@ a.product-row:hover {
   font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--ink-muted);
-  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.62);
 }
 
 @media (max-width: 720px) {
   .stats__grid {
     grid-template-columns: repeat(2, 1fr);
-    row-gap: 32px;
+    row-gap: 28px;
+  }
+}
+
+/* ---------- products ---------- */
+
+.products {
+  padding: 108px 0;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 30px 28px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.product-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--accent, var(--navy));
+}
+
+.product-card--saffron { --accent: var(--saffron); }
+.product-card--green { --accent: var(--green); }
+.product-card--navy { --accent: var(--navy-mid); }
+
+a.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+.product-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.product-card__icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent, var(--navy));
+  color: #fff;
+}
+
+.product-card__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.status-tag--live {
+  color: var(--green-deep);
+  background: var(--green-tint);
+}
+
+.status-tag--in-progress {
+  color: #8a5a00;
+  background: #fef3de;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.product-card__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+  margin: 0;
+}
+
+.product-card__description {
+  font-family: var(--font-body);
+  color: var(--ink-muted);
+  font-size: 0.94rem;
+  line-height: 1.65;
+  margin: 0;
+  flex: 1;
+}
+
+.product-card__go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--navy);
+  margin-top: 4px;
+}
+
+.product-card__go svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.15s ease;
+}
+
+a.product-card:hover .product-card__go svg {
+  transform: translateX(3px);
+}
+
+@media (max-width: 780px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- trust / tamper-evidence ---------- */
+
+.trust {
+  padding: 108px 0;
+  background: var(--navy-tint);
+}
+
+.trust__intro {
+  max-width: 62ch;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ink-muted);
+  margin: 0 0 3.5rem;
+}
+
+.trust__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.trust-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px 26px;
+}
+
+.trust-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--green-tint);
+  color: var(--green-deep);
+  margin-bottom: 1.2rem;
+}
+
+.trust-card__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.trust-card__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin: 0 0 0.6rem;
+}
+
+.trust-card__body {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+.trust-card__hash {
+  display: block;
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--green-deep);
+  background: var(--green-tint);
+  border-radius: 6px;
+  padding: 8px 10px;
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+@media (max-width: 860px) {
+  .trust__grid {
+    grid-template-columns: 1fr;
   }
 }
 
 /* ---------- how it works ---------- */
 
 .how {
-  padding: 100px 0;
-  border-bottom: 2px solid var(--ink);
+  padding: 108px 0;
 }
 
 .how__steps {
@@ -550,22 +768,25 @@ a.product-row:hover {
 }
 
 .how-step__number {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 0.82rem;
-  color: var(--terminal-green);
-  border: 1.5px solid var(--terminal-green);
-  border-radius: 3px;
-  padding: 2px 8px;
-  margin-bottom: 1.1rem;
+  font-size: 0.85rem;
+  color: #fff;
+  background: var(--navy);
+  margin-bottom: 1.2rem;
 }
 
 .how-step__title {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.2rem;
-  color: var(--ink);
+  color: var(--navy);
   margin: 0 0 0.6rem;
 }
 
@@ -587,8 +808,8 @@ a.product-row:hover {
 /* ---------- field notes (blog placeholder) ---------- */
 
 .field {
-  padding: 100px 0;
-  border-bottom: 2px solid var(--ink);
+  padding: 108px 0;
+  background: var(--surface-tint);
 }
 
 .field__grid {
@@ -598,9 +819,9 @@ a.product-row:hover {
 }
 
 .field-card {
-  border: 2px solid var(--border-strong);
-  border-radius: 3px;
-  padding: 1.6rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.7rem;
   background: var(--surface);
 }
 
@@ -612,9 +833,9 @@ a.product-row:hover {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-faint);
-  border: 1.5px solid var(--border-strong);
-  border-radius: 3px;
-  padding: 3px 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  padding: 4px 10px;
   margin-bottom: 1rem;
 }
 
@@ -622,7 +843,7 @@ a.product-row:hover {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.05rem;
-  color: var(--ink-muted);
+  color: var(--navy);
   margin: 0 0 0.5rem;
 }
 
@@ -643,8 +864,7 @@ a.product-row:hover {
 /* ---------- about ---------- */
 
 .about {
-  padding: 100px 0;
-  border-bottom: 2px solid var(--ink);
+  padding: 108px 0;
 }
 
 .about__inner {
@@ -653,7 +873,7 @@ a.product-row:hover {
 
 .about__body {
   font-family: var(--font-body);
-  font-size: 1.05rem;
+  font-size: 1.06rem;
   line-height: 1.8;
   color: var(--ink-muted);
   margin: 0 0 1.2rem;
@@ -664,19 +884,20 @@ a.product-row:hover {
 }
 
 .about__body strong {
-  color: var(--ink);
+  color: var(--navy);
   font-weight: 700;
 }
 
 /* ---------- resources ("Tools We Use") ---------- */
 
 .resources {
-  padding: 90px 0 110px;
+  padding: 96px 0 120px;
+  background: var(--surface-tint);
 }
 
 .resources__disclosure {
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   color: var(--ink-faint);
   max-width: 62ch;
   margin: 0 0 2.5rem;
@@ -707,13 +928,12 @@ a.product-row:hover {
 }
 
 a.resource-item__name {
-  color: #2a7ea3;
-  border-bottom: 2px solid var(--sky);
+  color: var(--navy);
+  border-bottom: 2px solid var(--saffron);
 }
 
 a.resource-item__name:hover {
-  color: #1c5f7d;
-  border-color: #1c5f7d;
+  color: var(--navy-mid);
 }
 
 .resource-item__desc {
@@ -732,11 +952,175 @@ a.resource-item__name:hover {
   opacity: 0.75;
 }
 
+/* ---------- pricing page ---------- */
+
+.pricing-notice {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: #fff7ec;
+  border: 1.5px solid rgba(var(--saffron-rgb), 0.5);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 60px;
+}
+
+.pricing-notice__icon {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  color: var(--saffron-deep);
+}
+
+.pricing-notice__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--navy);
+  margin: 0 0 4px;
+}
+
+.pricing-notice__body {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  padding-bottom: 108px;
+}
+
+.pricing-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px 28px;
+}
+
+.pricing-card__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--navy);
+  margin: 0 0 0.6rem;
+}
+
+.pricing-card__blurb {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  margin: 0 0 1.6rem;
+}
+
+.pricing-tiers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.pricing-tier {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 16px;
+  background: var(--paper);
+}
+
+.pricing-tier__name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--saffron-deep);
+  margin: 0 0 8px;
+}
+
+.pricing-tier__price {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--navy);
+  margin: 0 0 6px;
+}
+
+.pricing-tier__price span {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}
+
+.pricing-tier__note {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  .pricing-tiers {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- legal placeholder pages ---------- */
+
+.legal {
+  padding: 96px 0 130px;
+}
+
+.legal__notice {
+  max-width: 70ch;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  background: #fff7ec;
+  border: 1.5px solid rgba(var(--saffron-rgb), 0.5);
+  border-radius: 14px;
+  padding: 26px 28px;
+}
+
+.legal__notice-icon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  color: var(--saffron-deep);
+  margin-top: 2px;
+}
+
+.legal__notice-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--navy);
+  margin: 0 0 8px;
+}
+
+.legal__notice-body {
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
 /* ---------- footer ---------- */
 
 .site-footer {
-  border-top: 2px solid var(--ink);
-  padding: 34px 0 46px;
+  border-top: 1px solid var(--border);
+  background: var(--navy-deep);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 44px 0 46px;
 }
 
 .site-footer__inner {
@@ -745,25 +1129,26 @@ a.resource-item__name:hover {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 .site-footer__line {
   font-family: var(--font-body);
-  font-size: 0.82rem;
-  color: var(--ink-faint);
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .site-footer__links {
   display: flex;
+  flex-wrap: wrap;
   gap: 22px;
 }
 
 .site-footer__link {
   font-family: var(--font-body);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 600;
-  color: var(--ink-faint);
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   transition: color 0.15s ease;
 }
@@ -772,48 +1157,65 @@ a.resource-item__name:hover {
   color: var(--saffron);
 }
 
+.site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.site-footer__legal-link {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+}
+
+.site-footer__legal-link:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .site-footer__comment {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-style: italic;
   font-size: 0.85rem;
-  color: var(--ink-faint);
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 18px;
 }
 
 /* ---------- responsive ---------- */
 
+@media (max-width: 900px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Headline/subhead/CTA stay first in reading order on mobile - the chain
+     graphic is supporting visual, not the primary message, so it follows
+     the text (natural DOM order) instead of jumping ahead of it. */
+  .hero__visual {
+    margin-top: 40px;
+    max-width: 360px;
+  }
+}
+
 @media (max-width: 860px) {
   .hero {
-    padding: 76px 0 64px;
+    padding: 64px 0 56px;
   }
 
   .products,
+  .trust,
   .how,
   .field,
   .about,
-  .resources {
-    padding: 72px 0;
+  .resources,
+  .legal,
+  .pricing-grid {
+    padding-top: 72px;
+    padding-bottom: 72px;
   }
-
-  .stats {
-    padding: 40px 0;
-  }
-
-  .product-row {
-    grid-template-columns: 40px 1fr;
-    grid-template-areas:
-      "number name"
-      ". description"
-      ". status"
-      ". go";
-    row-gap: 10px;
-    padding: 1.6rem 0;
-  }
-
-  .product-row__number { grid-area: number; }
-  .product-row__name { grid-area: name; }
-  .product-row__description { grid-area: description; }
-  .status-tag { grid-area: status; justify-self: start; }
-  .product-row__go { grid-area: go; justify-self: start; }
 
   .site-nav {
     gap: 18px;
@@ -826,15 +1228,15 @@ a.resource-item__name:hover {
   }
 
   .site-header__inner {
-    padding: 16px 20px;
-  }
-
-  .site-nav {
-    gap: 12px;
+    padding: 14px 20px;
   }
 
   .site-footer__inner {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .stat {
+    padding-left: 14px;
   }
 }

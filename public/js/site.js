@@ -41,59 +41,6 @@
     });
   }
 
-  // ---------- hero typewriter ----------
-  // Types each line in HERO_LINES into [data-typewriter], pauses, deletes,
-  // moves to the next line, and loops. The element's original text content
-  // (set server-side in the template) is used as the very first line so
-  // there's zero flash-of-empty-content before JS runs.
-  function initTypewriter() {
-    var el = document.querySelector("[data-typewriter]");
-    if (!el) return;
-
-    var lines;
-    try {
-      lines = JSON.parse(el.getAttribute("data-typewriter"));
-    } catch (e) {
-      return;
-    }
-    if (!Array.isArray(lines) || lines.length < 2) return;
-
-    if (reduceMotion) return; // leave the server-rendered first line as-is
-
-    var lineIndex = 0;
-    var charIndex = lines[0].length; // already "typed" from the SSR text
-    var deleting = false;
-    var typeSpeed = 55;
-    var deleteSpeed = 30;
-    var holdTime = 2200;
-
-    function tick() {
-      var current = lines[lineIndex];
-
-      if (!deleting) {
-        charIndex++;
-        if (charIndex > current.length) {
-          charIndex = current.length;
-          deleting = true;
-          window.setTimeout(tick, holdTime);
-          return;
-        }
-      } else {
-        charIndex--;
-        if (charIndex < 0) {
-          charIndex = 0;
-          deleting = false;
-          lineIndex = (lineIndex + 1) % lines.length;
-        }
-      }
-
-      el.textContent = lines[lineIndex].slice(0, charIndex);
-      window.setTimeout(tick, deleting ? deleteSpeed : typeSpeed);
-    }
-
-    window.setTimeout(tick, holdTime);
-  }
-
   // ---------- count-up stats ----------
   // Animates each [data-count-to] number from 0 to its target once it
   // scrolls into view. Falls back to just showing the final number if
@@ -152,7 +99,6 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     initReveal();
-    initTypewriter();
     initCountUp();
   });
 })();

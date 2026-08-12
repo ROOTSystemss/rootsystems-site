@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include("../partials/head") %>
+</head>
+<body>
+  <%- include("../partials/header") %>
+
+  <main>
+    <section class="hero hero--compact">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--on-dark">Pricing</p>
+        <h1 class="hero__title">Simple pricing, <span class="hero__title-accent">per product.</span></h1>
+        <p class="hero__subhead">
+          Each RootSystems product is priced and billed on its own — use
+          one, or all four.
+        </p>
+      </div>
+    </section>
+
+    <section class="products">
+      <div class="wrap">
+        <div class="pricing-notice">
+          <svg class="pricing-notice__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div>
+            <p class="pricing-notice__title">Pricing shown below is a placeholder</p>
+            <p class="pricing-notice__body">
+              Tier names and structure are set, but the dollar amounts
+              ("$XX") are not final — they're waiting on confirmation from
+              RootSystems before this page is real. Nothing on this page
+              should be treated as a live, bookable price yet.
+            </p>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          <% pricing.forEach(function (product) { %>
+            <div class="pricing-card">
+              <h2 class="pricing-card__name"><%= product.name %></h2>
+              <p class="pricing-card__blurb"><%= product.blurb %></p>
+              <div class="pricing-tiers">
+                <% product.tiers.forEach(function (tier) { %>
+                  <div class="pricing-tier">
+                    <p class="pricing-tier__name"><%= tier.name %></p>
+                    <p class="pricing-tier__price">$<%= tier.price %><span>/<%= tier.period %></span></p>
+                    <p class="pricing-tier__note"><%= tier.note %></p>
+                  </div>
+                <% }); %>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include("../partials/footer") %>
+  <script src="/js/site.js"></script>
+</body>
+</html>

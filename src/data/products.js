@@ -24,7 +24,7 @@ const products = [
   },
   {
     number: "03",
-    name: "HIPAA Risk Assessment",
+    name: "HIPAA Compliance Tool",
     description:
       "A guided risk assessment built around what HIPAA actually requires you to show, not generic checkbox theater.",
     status: "LIVE",
