@@ -16,20 +16,41 @@
 
     <section class="legal">
       <div class="wrap">
-        <div class="legal__notice">
-          <svg class="legal__notice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <div>
-            <p class="legal__notice-title">This page is a placeholder — no <%= pageName.toLowerCase() %> has been published yet</p>
-            <p class="legal__notice-body">
-              RootSystems hasn't written or published real <%= pageName.toLowerCase() %>
-              content here. Consistent with how every product on this site
-              handles a claim it can't back up, we'd rather show this notice
-              than invent legal text that hasn't actually been reviewed.
-              Real <%= pageName.toLowerCase() %> content is pending and will
-              replace this page before it's used for any real transaction.
-            </p>
+        <% if (doc) { %>
+          <article class="legal-doc">
+            <% if (doc.lastUpdated) { %>
+              <p class="legal-doc__meta">Last updated: <%= doc.lastUpdated %></p>
+            <% } %>
+            <% doc.blocks.forEach(function (block) { %>
+              <% if (block.type === "h2") { %>
+                <h2 class="legal-doc__h2"><%- block.html %></h2>
+              <% } else if (block.type === "ul") { %>
+                <ul class="legal-doc__list">
+                  <% block.items.forEach(function (item) { %>
+                    <li><%- item %></li>
+                  <% }) %>
+                </ul>
+              <% } else { %>
+                <p class="legal-doc__p"><%- block.html %></p>
+              <% } %>
+            <% }) %>
+          </article>
+        <% } else { %>
+          <div class="legal__notice">
+            <svg class="legal__notice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div>
+              <p class="legal__notice-title">This page is a placeholder — no <%= pageName.toLowerCase() %> has been published yet</p>
+              <p class="legal__notice-body">
+                RootSystems hasn't written or published real <%= pageName.toLowerCase() %>
+                content here. Consistent with how every product on this site
+                handles a claim it can't back up, we'd rather show this notice
+                than invent legal text that hasn't actually been reviewed.
+                Real <%= pageName.toLowerCase() %> content is pending and will
+                replace this page before it's used for any real transaction.
+              </p>
+            </div>
           </div>
-        </div>
+        <% } %>
       </div>
     </section>
   </main>

@@ -1,6 +1,7 @@
 const products = require("../data/products");
 const resources = require("../data/resources");
 const pricing = require("../data/pricing");
+const { loadLegalDoc } = require("../utils/markdown");
 
 function home(req, res) {
   // Stats strip numbers are all derived from real data above, never
@@ -30,16 +31,20 @@ function pricingPage(req, res) {
   });
 }
 
-// One shared template for all three legal pages - only the title/slug/intro
-// differ, and none of the three have real legal text yet (see legal.ejs).
-// Do NOT add real Terms/Privacy/Refund copy here without it coming from the
-// business - this controller only ever renders the "not published yet"
-// placeholder state.
-function legalPage(pageName) {
+// One shared template for all three legal pages - only the title/slug/source
+// file differ. Real copy comes from the business as a markdown file in the
+// repo root (RootSystems_Terms_of_Service.md etc.), parsed at request time
+// by utils/markdown.js. If a given file is ever missing (not yet delivered,
+// renamed, deleted), loadLegalDoc returns null and legal.ejs automatically
+// falls back to the "not published yet" placeholder notice instead of
+// showing broken or stale content - never hardcode legal copy directly into
+// this controller.
+function legalPage(pageName, filename) {
   return function (req, res) {
     res.render("pages/legal", {
       title: pageName + " — RootSystems",
-      pageName
+      pageName,
+      doc: loadLegalDoc(filename)
     });
   };
 }
@@ -47,7 +52,7 @@ function legalPage(pageName) {
 module.exports = {
   home,
   pricingPage,
-  terms: legalPage("Terms of Service"),
-  privacy: legalPage("Privacy Policy"),
-  refund: legalPage("Refund Policy")
+  terms: legalPage("Terms of Service", "RootSystems_Terms_of_Service.md"),
+  privacy: legalPage("Privacy Policy", "RootSystems_Privacy_Policy.md"),
+  refund: legalPage("Refund Policy", "RootSystems_Refund_Policy.md")
 };
