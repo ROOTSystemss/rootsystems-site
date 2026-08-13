@@ -52,25 +52,21 @@ Visit http://localhost:4300
 
 ## Logo
 
-**Not dropped in yet.** Once you have the real "THE ROOT" logo file, put it
-at:
+**Placeholder, not the final art.** `public/images/logo.svg` is a
+hand-recreated approximation (sprout + root fan, cream on a saffron
+gradient) of the real "THE ROOT" logo, built because the actual logo file
+has only ever existed as an image pasted into chat, not a file anyone has
+saved to disk. It's referenced by both:
 
-```
-public/images/logo.png
-```
+- `src/views/partials/header.ejs` (the `<img class="brand__mark">`)
+- `src/views/partials/head.ejs` (the favicon `<link rel="icon">`, inlined
+  as a matching data-URI so the browser tab matches the header)
 
-It's referenced by `src/views/partials/header.ejs`. Any raster/vector format
-works as long as the filename is `logo.png` (or update that one `src`
-attribute to match a different filename/extension). Until it's there, the
-header gracefully falls back to just the "RootSystems" wordmark (the
-`onerror` handler on that `<img>` hides it rather than showing a broken
-image icon) — nothing looks broken in the meantime.
-
-The favicon is currently a placeholder inline SVG (a terminal `>` prompt
-mark, defined directly in `src/views/partials/head.ejs`) since there's no
-real logo file yet either. Once the real logo exists, you'll likely want a
-proper favicon derived from it (e.g. `public/images/favicon.png` plus
-updating that `<link rel="icon">` tag) rather than keeping the placeholder.
+Once you have the real logo file (SVG preferred, PNG fine), overwrite
+`public/images/logo.svg` — or save it under a different name and update the
+one `src`/`href` in each of those two files to match. The header's
+`onerror` handler hides the `<img>` rather than showing a broken image icon
+if the file is ever missing, so nothing looks broken in the meantime.
 
 ## Domain / routing
 

@@ -177,6 +177,8 @@ a {
   height: 30px;
   width: 30px;
   object-fit: contain;
+  border-radius: 7px;
+  box-shadow: var(--shadow-sm);
 }
 
 .brand__word {
