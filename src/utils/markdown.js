@@ -72,11 +72,22 @@ function parseLegalMarkdown(raw) {
   return { lastUpdated: lastUpdated, blocks: blocks };
 }
 
-// Reads + parses one of the three legal source files from the repo root.
-// Returns null (never throws) if the file isn't there, so the page falls
-// back to the "not published yet" placeholder - same safety property the
-// controller had before any real content existed.
+// Generated from the .md files at build time - see scripts/build-legal-data.js
+// for why this exists (in short: the production host's serverless bundler
+// doesn't reliably pick up a runtime fs.readFileSync of a loose repo-root
+// file, so a plain require()'d module is the source of truth at request
+// time now, kept in sync with the .md files by that script).
+var legalSource = require("../data/legalSource");
+
+// Reads + parses one of the three legal source files. Tries the generated
+// module first (what actually runs in production); falls back to reading
+// the .md file straight off disk if the module doesn't have it yet (e.g.
+// local dev right after editing a .md file, before re-running "npm run
+// build:legal"). Returns null (never throws) if neither has it, so the page
+// falls back to the "not published yet" placeholder - same safety property
+// the controller had before any real content existed.
 function loadLegalDoc(filename) {
+  if (legalSource[filename]) return parseLegalMarkdown(legalSource[filename]);
   var filePath = path.join(__dirname, "..", "..", filename);
   if (!fs.existsSync(filePath)) return null;
   var raw = fs.readFileSync(filePath, "utf8");
