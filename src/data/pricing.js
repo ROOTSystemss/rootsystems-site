@@ -1,20 +1,22 @@
-// Pricing shown on /pricing is PLACEHOLDER until real numbers are confirmed —
-// see the flagged notice rendered at the top of that page. Tier names and
-// structure follow the Starter/Pro shape already used in Offboarding Proof's
-// own billing code; the dollar amounts below are intentionally unset ("XX")
-// rather than a fabricated realistic-looking number, so nothing here can be
-// mistaken for a real, final price.
+// Pricing shown on /pricing. Offboarding Proof/TPRA/HIPAA are CONFIRMED, real
+// numbers - they match the actual Dodo Payments products created for each
+// app's own billing (see each app's billingLib.js) and the actual Dodo
+// product ids each app's checkout uses, not a marketing-only figure that
+// could drift from what a customer is really charged. AI Compliance
+// Readiness has no Dodo product yet, so it's still intentionally "XX"
+// (see the notice rendered at the top of that page, which reflects this
+// split) rather than a fabricated realistic-looking number.
 //
 // `blurb` is real (pulled from what the product actually does), never
-// placeholder text — only the numbers are pending.
+// placeholder text.
 const pricing = [
   {
     slug: "offboarding-proof",
     name: "Offboarding Proof",
     blurb: "Verifiable proof that departing employees actually lost access — on the day it happened, not weeks later.",
     tiers: [
-      { name: "Starter", price: "XX", period: "mo", note: "Core connectors, tamper-evident reports" },
-      { name: "Pro", price: "XX", period: "mo", note: "Higher employee limits, priority support" }
+      { name: "Starter", price: "39", period: "mo", note: "Core connectors, tamper-evident reports" },
+      { name: "Pro", price: "149", period: "mo", note: "Higher employee limits, priority support" }
     ]
   },
   {
@@ -22,8 +24,8 @@ const pricing = [
     name: "TPRA — Vendor Risk",
     blurb: "Third-party risk assessment for the vendors and partners that touch your data, scored deterministically.",
     tiers: [
-      { name: "Starter", price: "XX", period: "mo", note: "Core questionnaire, tamper-evident reports" },
-      { name: "Pro", price: "XX", period: "mo", note: "Persistent risk register, team roles" }
+      { name: "Starter", price: "29", period: "mo", note: "Core questionnaire, tamper-evident reports" },
+      { name: "Pro", price: "79", period: "mo", note: "Persistent risk register, team roles" }
     ]
   },
   {
@@ -31,8 +33,8 @@ const pricing = [
     name: "HIPAA Compliance Tool",
     blurb: "A guided risk assessment built around what HIPAA actually requires you to show, not generic checkbox theater.",
     tiers: [
-      { name: "Starter", price: "XX", period: "mo", note: "Security Rule assessment, risk register" },
-      { name: "Pro", price: "XX", period: "mo", note: "BAA vendor tracking, team roles" }
+      { name: "Starter", price: "59", period: "mo", note: "Security Rule assessment, risk register" },
+      { name: "Pro", price: "149", period: "mo", note: "BAA vendor tracking, team roles" }
     ]
   },
   {

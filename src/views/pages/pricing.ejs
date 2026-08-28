@@ -20,18 +20,22 @@
 
     <section class="products">
       <div class="wrap">
-        <div class="pricing-notice">
-          <svg class="pricing-notice__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <div>
-            <p class="pricing-notice__title">Pricing shown below is a placeholder</p>
-            <p class="pricing-notice__body">
-              Tier names and structure are set, but the dollar amounts
-              ("$XX") are not final — they're waiting on confirmation from
-              RootSystems before this page is real. Nothing on this page
-              should be treated as a live, bookable price yet.
-            </p>
+        <% var pendingProducts = pricing.filter(function (p) { return p.tiers.some(function (t) { return t.price === "XX"; }); }); %>
+        <% if (pendingProducts.length) { %>
+          <div class="pricing-notice">
+            <svg class="pricing-notice__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div>
+              <p class="pricing-notice__title">
+                <%= pendingProducts.map(function (p) { return p.name; }).join(", ") %> pricing is still pending
+              </p>
+              <p class="pricing-notice__body">
+                Every other price on this page is live and bookable. Tier names and structure for
+                <%= pendingProducts.map(function (p) { return p.name; }).join(", ") %> are set, but the dollar
+                amounts ("$XX") aren't final yet — don't treat those specific tiers as bookable until they're confirmed.
+              </p>
+            </div>
           </div>
-        </div>
+        <% } %>
 
         <div class="pricing-grid">
           <% pricing.forEach(function (product) { %>
