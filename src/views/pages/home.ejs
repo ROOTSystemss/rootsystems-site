@@ -1,289 +1,67 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <%- include("../partials/head") %>
-</head>
+<head><%- include("../partials/head") %></head>
 <body>
   <%- include("../partials/header") %>
-
   <main>
-    <section class="hero">
+    <section class="hero hero--home hero--quiet">
+      <div class="hero__aurora hero__aurora--one" aria-hidden="true"></div>
       <div class="wrap hero__grid">
-        <div>
-          <p class="eyebrow eyebrow--on-dark">RootSystems</p>
-          <h1 class="hero__title">Proof, not <span class="hero__title-accent">paperwork.</span></h1>
-          <p class="hero__subhead">
-            We build small, sharp compliance tools that hand you a
-            tamper-evident, independently checkable record — instead of a
-            report someone has to take on faith.
-          </p>
-          <div class="hero__actions">
-            <a class="btn btn-primary" href="/pricing">See pricing <span class="btn__arrow">&rarr;</span></a>
-            <a class="btn btn-ghost" href="#products">View products</a>
-          </div>
+        <div class="hero__content">
+          <div class="hero__flag"><span class="hero__flag-dot"></span>Independent compliance software studio</div>
+          <h1 class="hero__title hero__title--home">Clear tools for accountable work.</h1>
+          <p class="hero__subhead">RootSystems builds focused software for access governance, vendor risk, healthcare compliance, and AI governance.</p>
+          <div class="hero__actions"><a class="btn btn-primary" href="#products">View the products <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></a></div>
         </div>
 
-        <div class="hero__visual" aria-hidden="true">
-          <div class="chain">
-            <div class="chain-node">
-              <span class="chain-node__dot">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
-              </span>
-              <span class="chain-node__body">
-                <span class="chain-node__label">Report generated</span>
-                <span class="chain-node__hash">a1c9…f204</span>
-              </span>
-            </div>
-            <div class="chain-node">
-              <span class="chain-node__dot">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
-              </span>
-              <span class="chain-node__body">
-                <span class="chain-node__label">Chained to prior report</span>
-                <span class="chain-node__hash">7e2b…91ad</span>
-              </span>
-            </div>
-            <div class="chain-node">
-              <span class="chain-node__dot">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
-              </span>
-              <span class="chain-node__body">
-                <span class="chain-node__label">Anchored to Bitcoin</span>
-                <span class="chain-node__hash">block #961,904</span>
-              </span>
-            </div>
-          </div>
-        </div>
+        <figure class="hero-art"><img src="/images/rootsystems-hero-v2.png" alt="Four digital product structures being built around a shared saffron foundation"></figure>
       </div>
     </section>
 
-    <section class="stats reveal">
-      <div class="wrap stats__grid">
-        <div class="stat">
-          <span class="stat__number" data-count-to="<%= stats.liveCount %>">0</span>
-          <span class="stat__label">Products LIVE</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number" data-count-to="<%= stats.totalCount %>">0</span>
-          <span class="stat__label">Products total</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number" data-count-to="<%= stats.foundersCount %>">0</span>
-          <span class="stat__label">Founder<%= stats.foundersCount === 1 ? "" : "s" %></span>
-        </div>
-        <div class="stat">
-          <span class="stat__number" data-count-to="<%= stats.unverifiedClaims %>">0</span>
-          <span class="stat__label">Unverified claims shipped</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="products" class="products">
+    <section id="products" class="products section-shell">
       <div class="wrap">
-        <p class="eyebrow">Currently: compliance &amp; security tools</p>
-        <h2 class="section-title">Four products. One standard of proof.</h2>
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">Products</p><h2 class="section-title">Small, focused tools for specific compliance work.</h2></div>
+          <p class="section-heading__body">Choose the workspace that matches the job. Each product stays independent and easy to understand.</p>
+        </div>
 
-        <div class="product-grid">
-          <% var icons = {
-            "Offboarding Proof": '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>',
-            "TPRA — Vendor Risk": '<circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M8 7.5L11 16M16 7.5L13 16M8.3 6H15.7"/>',
-            "HIPAA Compliance Tool": '<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M12 8v8M8 12h8"/>',
-            "AI Compliance Readiness": '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/>'
-          };
-          var accents = ["saffron", "navy", "green", "saffron"];
-          products.forEach(function (product, i) { %>
-            <% const tag = product.href ? "a" : "div"; %>
-            <<%= tag %> class="product-card product-card--<%= accents[i % accents.length] %>"<% if (product.href) { %> href="<%= product.href %>"<% } %>>
-              <div class="product-card__top">
-                <span class="product-card__icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><%- icons[product.name] || '<circle cx="12" cy="12" r="8"/>' %></svg>
-                </span>
-                <span class="status-tag status-tag--<%= product.status.toLowerCase().replace(/\s+/g, '-') %>">
-                  <% if (product.status === "LIVE") { %><span class="live-dot"></span><% } %><%= product.status %>
-                </span>
-              </div>
-              <h3 class="product-card__name"><%= product.name %></h3>
-              <p class="product-card__description"><%= product.description %></p>
-              <% if (product.href) { %>
-                <span class="product-card__go">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-              <% } %>
+        <div class="product-grid product-grid--simple">
+          <% var logos = {
+            "Offboarding Proof": "/images/products/offboarding-proof.svg",
+            "TPRA — Vendor Risk": "/images/products/tpra.svg",
+            "HIPAA Compliance Tool": "/images/products/hipaa.svg",
+            "AI Compliance Readiness": "/images/products/ai-readiness.svg"
+          }; products.forEach(function (product) { const tag = product.href ? "a" : "article"; %>
+            <<%= tag %> class="simple-product simple-product--<%= product.accent %> reveal"<% if(product.href){ %> href="<%= product.href %>"<% } %>>
+              <div class="simple-product__top"><img class="simple-product__logo" src="<%= logos[product.name] %>" alt=""><span class="status-tag status-tag--<%= product.status.toLowerCase() %>"><span class="live-dot"></span><%= product.status %></span></div>
+              <span class="simple-product__category"><%= product.category %></span>
+              <h3><%= product.name %></h3>
+              <p><%= product.description %></p>
+              <% if(product.href){ %><span class="simple-product__link">Open product <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span><% } %>
             </<%= tag %>>
           <% }); %>
         </div>
       </div>
     </section>
 
-    <section class="trust reveal">
-      <div class="wrap">
-        <p class="eyebrow">Why "proof," specifically</p>
-        <h2 class="section-title">Every report is math you can check, not a PDF you have to trust.</h2>
-        <p class="trust__intro">
-          Every RootSystems report is fingerprinted, chained to the report
-          before it, and independently verifiable — by you, an auditor, or a
-          customer's security team, without ever having to trust our
-          servers.
-        </p>
-
-        <div class="trust__grid">
-          <div class="trust-card">
-            <span class="trust-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg>
-            </span>
-            <h3 class="trust-card__title">Cryptographic fingerprint</h3>
-            <p class="trust-card__body">
-              Every report is hashed with SHA-256 the moment it's generated.
-              Change one character, and the fingerprint no longer matches —
-              there's no way to quietly edit a report after the fact.
-            </p>
-            <code class="trust-card__hash">sha256: 4f2a8e91c6b3d0f7a5e2c8b19d4f6a3e…</code>
-          </div>
-          <div class="trust-card">
-            <span class="trust-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="9" height="7" rx="3.5"/><rect x="13" y="10" width="9" height="7" rx="3.5"/><path d="M9 10.5v3M15 13.5v-3"/></svg>
-            </span>
-            <h3 class="trust-card__title">Chained to every report before it</h3>
-            <p class="trust-card__body">
-              Each report links to the previous one's fingerprint. Tamper
-              with an old report, and every report chained after it breaks
-              visibly — not just the one you touched.
-            </p>
-          </div>
-          <div class="trust-card">
-            <span class="trust-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><path d="M8 11l2 2 4-4.5"/></svg>
-            </span>
-            <h3 class="trust-card__title">Verifiable without trusting us</h3>
-            <p class="trust-card__body">
-              A standalone script recomputes every hash from the actual
-              files and checks the chain — and confirmations are anchored
-              to the Bitcoin blockchain, infrastructure nobody at
-              RootSystems controls.
-            </p>
-          </div>
+    <section id="standard" class="method-section section-shell">
+      <div class="wrap method-section__grid">
+        <div><p class="eyebrow">How we build</p><h2 class="section-title">Useful first. Explainable always.</h2><p class="method-section__lead">Our products favor clear workflows and visible logic over broad platforms and mystery scores.</p></div>
+        <div class="method-list">
+          <div><span>01</span><div><strong>Focused</strong><p>One product solves one recognizable operational problem.</p></div></div>
+          <div><span>02</span><div><strong>Understandable</strong><p>Users can follow how an input became a result.</p></div></div>
+          <div><span>03</span><div><strong>Evidence-aware</strong><p>Important work can be exported and reviewed later.</p></div></div>
         </div>
       </div>
     </section>
 
-    <section class="how reveal">
-      <div class="wrap">
-        <p class="eyebrow">How it works</p>
-        <h2 class="section-title">Three steps, no theater.</h2>
-
-        <div class="how__steps">
-          <div class="how-step">
-            <span class="how-step__number">01</span>
-            <h3 class="how-step__title">Answer what actually matters</h3>
-            <p class="how-step__body">
-              A guided questionnaire scoped to what the framework in
-              question really requires you to show — not a 400-question
-              template dumped on you at once.
-            </p>
-          </div>
-          <div class="how-step">
-            <span class="how-step__number">02</span>
-            <h3 class="how-step__title">Get a deterministic result</h3>
-            <p class="how-step__body">
-              Scoring and deadlines are computed by application code, not
-              guessed at by a model — the same inputs always produce the
-              same output, and you can see why.
-            </p>
-          </div>
-          <div class="how-step">
-            <span class="how-step__number">03</span>
-            <h3 class="how-step__title">Walk away with proof</h3>
-            <p class="how-step__body">
-              A tamper-evident, hash-chained report someone else can
-              actually check — an auditor, a customer's security team, or
-              future you.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="about reveal">
-      <div class="wrap about__inner">
-        <p class="eyebrow">About</p>
-        <h2 class="section-title">Built by one person, on purpose.</h2>
-        <p class="about__body">
-          RootSystems is a solo-founder studio. No sales team promising
-          things the product can't do, no roadmap slides — just tools built
-          to hold up under an audit, a customer's security review, or your
-          own scrutiny.
-        </p>
-        <p class="about__body">
-          <strong>If a claim can't be verified, it doesn't ship.</strong>
-          That's the whole filter every product here has to pass — not
-          "does it look done," but "can someone else check it and get the
-          same answer."
-        </p>
-      </div>
-    </section>
-
-    <section id="blog" class="field reveal">
-      <div class="wrap">
-        <p class="eyebrow">From the field</p>
-        <h2 class="section-title">Notes on compliance, without the theater.</h2>
-
-        <div class="field__grid">
-          <div class="field-card">
-            <span class="field-card__tag">Coming soon</span>
-            <h3 class="field-card__title">What auditors actually check first</h3>
-            <p class="field-card__body">
-              Long-form notes from building tools auditors and security
-              reviewers use directly — this space is reserved, not filled
-              with placeholder filler.
-            </p>
-          </div>
-          <div class="field-card">
-            <span class="field-card__tag">Coming soon</span>
-            <h3 class="field-card__title">Deterministic vs. AI-generated evidence</h3>
-            <p class="field-card__body">
-              Why every RootSystems product draws a hard line between what
-              a model proposes and what only a human — or plain code — can
-              confirm.
-            </p>
-          </div>
-          <div class="field-card">
-            <span class="field-card__tag">Coming soon</span>
-            <h3 class="field-card__title">Building in the open, solo</h3>
-            <p class="field-card__body">
-              What shipping compliance software as a one-person studio
-              actually looks like, warts included.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="resources" class="resources reveal">
-      <div class="wrap">
-        <p class="eyebrow">Tools we use</p>
-        <p class="resources__disclosure">
-          A short list of things we actually use to run RootSystems — not a
-          sponsored placement section. Some links below are affiliate
-          links — we may earn a small commission at no cost to you if you
-          use them, and only tools we'd recommend either way end up on this
-          list.
-        </p>
-
-        <div class="resource-list">
-          <% resources.forEach(function (item) { %>
-            <div class="resource-item">
-              <% if (item.href) { %>
-                <a class="resource-item__name" href="<%= item.href %>" rel="sponsored noopener" target="_blank"><%= item.name %></a>
-              <% } else { %>
-                <span class="resource-item__name"><%= item.name %></span>
-              <% } %>
-              <span class="resource-item__desc"><%= item.description %></span>
-              <% if (!item.href) { %><span class="resource-item__pending">(link pending)</span><% } %>
-            </div>
-          <% }); %>
-        </div>
+    <section id="about" class="studio-strip">
+      <div class="wrap studio-strip__inner reveal">
+        <div><p class="eyebrow">RootSystems</p><h2>An independent studio for high-accountability software.</h2></div>
+        <p>We build narrow products with practical workflows, direct language, and enough structure to support real operational decisions.</p>
       </div>
     </section>
   </main>
-
   <%- include("../partials/footer") %>
   <script src="/js/site.js"></script>
 </body>

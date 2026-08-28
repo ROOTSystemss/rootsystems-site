@@ -1,10 +1,20 @@
 const { Router } = require("express");
 
-const { home, pricingPage, terms, privacy, refund } = require("../controllers/siteController");
+const {
+  home,
+  contactPage,
+  submitContact,
+  pricingPage,
+  terms,
+  privacy,
+  refund
+} = require("../controllers/siteController");
 
 const router = Router();
 
 router.get("/", home);
+router.get("/contact", contactPage);
+router.post("/contact", submitContact);
 
 // About/Products/Resources are same-page sections (#about, #products,
 // #resources) on the homepage, not separate routes - see home.ejs.

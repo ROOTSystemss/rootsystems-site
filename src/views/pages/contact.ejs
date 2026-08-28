@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head><%- include("../partials/head") %></head>
+<body>
+  <%- include("../partials/header") %>
+  <main class="contact-page">
+    <section class="contact-hero">
+      <div class="wrap contact-hero__grid">
+        <div>
+          <p class="eyebrow">Contact RootSystems</p>
+          <h1>Bring us the problem, not a polished brief.</h1>
+          <p>Share a product question, recommendation, or idea. A clear note is enough to start.</p>
+        </div>
+        <div class="contact-hero__signal" aria-hidden="true">
+          <span>01</span><i></i><span>Listen</span><i></i><span>Build</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="wrap contact-grid">
+        <div class="contact-intro">
+          <h2>What would you like to improve?</h2>
+          <p>Suggestions are welcome—especially practical feedback about compliance workflows, product usability, or a problem that deserves a focused tool.</p>
+          <div class="contact-note">
+            <strong>A real response, without a sales sequence.</strong>
+            <span>We’ll use your email only to reply to this message.</span>
+          </div>
+        </div>
+
+        <% if (submitted) { %>
+          <div class="contact-success" role="status">
+            <span class="contact-success__mark">✓</span>
+            <p class="eyebrow">Message received</p>
+            <h2>Thank you. Your note is with RootSystems.</h2>
+            <p>We’ll review it and reply by email when a response is useful.</p>
+            <a class="btn btn-primary" href="/">Return home</a>
+          </div>
+        <% } else { %>
+          <form class="contact-form" method="post" action="/contact" novalidate>
+            <div class="form-row">
+              <label class="form-field">
+                <span>Name</span>
+                <input name="name" type="text" autocomplete="name" maxlength="100" value="<%= values.name || '' %>" aria-invalid="<%= errors.name ? 'true' : 'false' %>" required>
+                <% if (errors.name) { %><small class="form-error"><%= errors.name %></small><% } %>
+              </label>
+              <label class="form-field">
+                <span>Email</span>
+                <input name="email" type="email" autocomplete="email" maxlength="160" value="<%= values.email || '' %>" aria-invalid="<%= errors.email ? 'true' : 'false' %>" required>
+                <% if (errors.email) { %><small class="form-error"><%= errors.email %></small><% } %>
+              </label>
+            </div>
+
+            <label class="form-field">
+              <span>What is this about?</span>
+              <select name="requestType" aria-invalid="<%= errors.requestType ? 'true' : 'false' %>" required>
+                <option value="">Choose one</option>
+                <option value="suggestion" <%= values.requestType === 'suggestion' ? 'selected' : '' %>>Product suggestion</option>
+                <option value="recommendation" <%= values.requestType === 'recommendation' ? 'selected' : '' %>>Recommendation</option>
+                <option value="product-question" <%= values.requestType === 'product-question' ? 'selected' : '' %>>Product question</option>
+                <option value="other" <%= values.requestType === 'other' ? 'selected' : '' %>>Something else</option>
+              </select>
+              <% if (errors.requestType) { %><small class="form-error"><%= errors.requestType %></small><% } %>
+            </label>
+
+            <label class="form-field">
+              <span>Message</span>
+              <textarea name="message" rows="7" maxlength="3000" placeholder="Tell us what you noticed, need, or would like to see…" aria-invalid="<%= errors.message ? 'true' : 'false' %>" required><%= values.message || '' %></textarea>
+              <% if (errors.message) { %><small class="form-error"><%= errors.message %></small><% } %>
+            </label>
+
+            <label class="form-trap" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+            <div class="contact-form__footer">
+              <button class="btn btn-primary" type="submit">Send message</button>
+              <span>Your note is sent directly for RootSystems review.</span>
+            </div>
+          </form>
+        <% } %>
+      </div>
+    </section>
+  </main>
+  <%- include("../partials/footer") %>
+  <script src="/js/site.js"></script>
+</body>
+</html>

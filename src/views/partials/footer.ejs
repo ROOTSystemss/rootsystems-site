@@ -1,24 +1,35 @@
 <footer class="site-footer">
   <div class="wrap">
-    <div class="site-footer__inner">
-      <span class="site-footer__line">© <%= new Date().getFullYear() %> RootSystems. Built to be verified, not taken on faith.</span>
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <a href="/" class="brand brand--footer">
+          <img class="brand__mark" src="/images/logo.svg" alt="" />
+          <span class="brand__word">RootSystems</span>
+        </a>
+        <p>Focused software for compliance work that has to hold up when someone asks for proof.</p>
+      </div>
 
-      <div class="site-footer__links">
-        <a href="/" class="site-footer__link">Home</a>
-        <a href="/#products" class="site-footer__link">Products</a>
-        <a href="/pricing" class="site-footer__link">Pricing</a>
-        <a href="/#about" class="site-footer__link">About</a>
-        <a href="/#resources" class="site-footer__link">Resources</a>
-        <a href="mailto:therootsystems.ops@gmail.com" class="site-footer__link">Contact</a>
+      <div class="site-footer__nav">
+        <div class="site-footer__column">
+          <span class="site-footer__heading">Explore</span>
+          <a href="/#products" class="site-footer__link">Products</a>
+          <a href="/#standard" class="site-footer__link">Approach</a>
+        </div>
+        <div class="site-footer__column">
+          <span class="site-footer__heading">Connect</span>
+          <a href="/contact" class="site-footer__link">Send a message</a>
+          <span class="site-footer__availability"><span></span>Independent product studio</span>
+        </div>
       </div>
     </div>
 
-    <div class="site-footer__legal">
-      <a href="/terms" class="site-footer__legal-link">Terms of Service</a>
-      <a href="/privacy" class="site-footer__legal-link">Privacy Policy</a>
-      <a href="/refund" class="site-footer__legal-link">Refund Policy</a>
+    <div class="site-footer__bottom">
+      <span class="site-footer__line">© <%= new Date().getFullYear() %> RootSystems. Built to be verified, not taken on faith.</span>
+      <div class="site-footer__legal">
+        <a href="/terms" class="site-footer__legal-link">Terms</a>
+        <a href="/privacy" class="site-footer__legal-link">Privacy</a>
+        <a href="/refund" class="site-footer__legal-link">Refunds</a>
+      </div>
     </div>
-
-    <p class="site-footer__comment">— built by a solo founder, one verifiable claim at a time</p>
   </div>
 </footer>

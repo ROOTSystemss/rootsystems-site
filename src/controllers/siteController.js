@@ -2,6 +2,7 @@ const products = require("../data/products");
 const resources = require("../data/resources");
 const pricing = require("../data/pricing");
 const { loadLegalDoc } = require("../utils/markdown");
+const { saveContactSubmission } = require("../services/contactService");
 
 function home(req, res) {
   // Stats strip numbers are all derived from real data above, never
@@ -22,6 +23,62 @@ function home(req, res) {
       unverifiedClaims: 0
     }
   });
+}
+
+function contactPage(req, res) {
+  res.render("pages/contact", {
+    title: "Contact — RootSystems",
+    submitted: false,
+    errors: {},
+    values: {}
+  });
+}
+
+async function submitContact(req, res, next) {
+  const values = {
+    name: String(req.body.name || "").trim().slice(0, 100),
+    email: String(req.body.email || "").trim().slice(0, 160),
+    requestType: String(req.body.requestType || "").trim().slice(0, 40),
+    message: String(req.body.message || "").trim().slice(0, 3000)
+  };
+
+  // Quietly accept bot submissions without writing them to disk.
+  if (req.body.website) {
+    return res.render("pages/contact", {
+      title: "Message received — RootSystems",
+      submitted: true,
+      errors: {},
+      values: {}
+    });
+  }
+
+  const errors = {};
+  const allowedTypes = ["suggestion", "recommendation", "product-question", "other"];
+  if (values.name.length < 2) errors.name = "Please enter your name.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) errors.email = "Please enter a valid email address.";
+  if (!allowedTypes.includes(values.requestType)) errors.requestType = "Please choose a message type.";
+  if (values.message.length < 10) errors.message = "Please add a little more detail (at least 10 characters).";
+
+  if (Object.keys(errors).length) {
+    return res.status(400).render("pages/contact", {
+      title: "Contact — RootSystems",
+      submitted: false,
+      errors,
+      values
+    });
+  }
+
+  try {
+    await saveContactSubmission(values);
+    return res.render("pages/contact", {
+      title: "Message received — RootSystems",
+      submitted: true,
+      errors: {},
+      values: {}
+    });
+  } catch (error) {
+    return next(error);
+  }
 }
 
 function pricingPage(req, res) {
@@ -51,6 +108,8 @@ function legalPage(pageName, filename) {
 
 module.exports = {
   home,
+  contactPage,
+  submitContact,
   pricingPage,
   terms: legalPage("Terms of Service", "RootSystems_Terms_of_Service.md"),
   privacy: legalPage("Privacy Policy", "RootSystems_Privacy_Policy.md"),
