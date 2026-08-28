@@ -108,3 +108,14 @@ absolute internal paths made relative/prefixed with `req.baseUrl`.
   a small "(link pending)" note instead of a clickable link. The disclosure
   line above the list on the homepage is already honest/accurate regardless
   of how many links are filled in.
+# Contact-form email
+
+Contact submissions are delivered to the RootSystems mailbox over SMTP. For
+local development, copy `.env.example` to `.env.local` and set
+`SMTP_APP_PASSWORD` to a Google App Password for the mailbox. Never commit the
+real password. In production, add the same variables from `.env.example` to the
+hosting provider's encrypted environment settings.
+
+The server sets the visitor as `Reply-To`, so replying to the notification goes
+directly to the person who submitted the form. A local JSON record is also kept
+as a best-effort backup and is excluded from Git.

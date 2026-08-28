@@ -3,6 +3,7 @@ const resources = require("../data/resources");
 const pricing = require("../data/pricing");
 const { loadLegalDoc } = require("../utils/markdown");
 const { saveContactSubmission } = require("../services/contactService");
+const { sendContactEmail } = require("../services/emailService");
 
 function home(req, res) {
   // Stats strip numbers are all derived from real data above, never
@@ -69,7 +70,15 @@ async function submitContact(req, res, next) {
   }
 
   try {
-    await saveContactSubmission(values);
+    // Keep a local record as a backup, but do not let a storage problem
+    // prevent an otherwise valid email from reaching RootSystems.
+    try {
+      await saveContactSubmission(values);
+    } catch (storageError) {
+      console.error("Contact backup could not be saved:", storageError);
+    }
+
+    await sendContactEmail(values);
     return res.render("pages/contact", {
       title: "Message received — RootSystems",
       submitted: true,
@@ -77,7 +86,15 @@ async function submitContact(req, res, next) {
       values: {}
     });
   } catch (error) {
-    return next(error);
+    console.error("Contact email could not be delivered:", error);
+    return res.status(503).render("pages/contact", {
+      title: "Contact — RootSystems",
+      submitted: false,
+      errors: {
+        general: "We couldn’t send your message right now. Please try again shortly or email therootsystems.ops@gmail.com directly."
+      },
+      values
+    });
   }
 }
 
