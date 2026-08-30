@@ -12,9 +12,10 @@
 //
 // `href`: same convention as products.js - null until a product is actually purchasable
 // somewhere real, then a direct link to its deployed URL (or, later, a subfolder path on this
-// domain - see products.js's header comment). Offboarding Proof is the first to get one: its
-// Dodo checkout is fully confirmed working with a real test payment as of tonight, so this page
-// can actually send someone there to subscribe, not just look at a price.
+// domain - see products.js's header comment). Offboarding Proof/TPRA/HIPAA all have one as of
+// tonight: each has a real, confirmed-successful Dodo test payment, so this page can actually
+// send someone there to subscribe, not just look at a price. AI Compliance Readiness stays
+// without one - no Dodo product/pricing exists for it yet.
 const pricing = [
   {
     slug: "offboarding-proof",
@@ -30,6 +31,7 @@ const pricing = [
     slug: "tpra",
     name: "TPRA — Vendor Risk",
     blurb: "Third-party risk assessment for the vendors and partners that touch your data, scored deterministically.",
+    href: "https://tpra.onrender.com",
     tiers: [
       { name: "Starter", price: "29", period: "mo", note: "Core questionnaire, tamper-evident reports" },
       { name: "Pro", price: "79", period: "mo", note: "Persistent risk register, team roles" }
@@ -39,6 +41,7 @@ const pricing = [
     slug: "hipaa",
     name: "HIPAA Compliance Tool",
     blurb: "A guided risk assessment built around what HIPAA actually requires you to show, not generic checkbox theater.",
+    href: "https://hipaa-g37n.onrender.com",
     tiers: [
       { name: "Starter", price: "59", period: "mo", note: "Security Rule assessment, risk register" },
       { name: "Pro", price: "149", period: "mo", note: "BAA vendor tracking, team roles" }

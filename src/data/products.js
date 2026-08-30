@@ -3,10 +3,11 @@
 //
 // `href`: leave null until the product is actually reachable somewhere real. Two ways that
 // happens, both valid - use whichever's actually true for a given product right now:
-//   1. A direct link straight to that product's own deployed URL (e.g. Render) - the simple,
-//      immediately-workable option, and what Offboarding Proof below uses as of tonight (its
-//      billing is fully confirmed working with a real test payment, so this product is
-//      actually sellable - the link just needs to exist).
+//   1. A direct link straight to that product's own deployed Render URL - the simple,
+//      immediately-workable option, used below for Offboarding Proof/TPRA/HIPAA as of tonight
+//      (each has a real, confirmed-successful Dodo test payment, so each is actually sellable -
+//      the link just needs to exist). AI Compliance Readiness stays null: no Dodo product/
+//      pricing exists for it yet, so there's nothing to actually sell there.
 //   2. Once/if it's worth the infra work, the product's own Express app mounted at a subfolder
 //      path on this domain instead (see the routing comment block in src/app.js) - set href to
 //      that path (e.g. "/offboarding-proof") instead of the external URL, and everything else
@@ -35,7 +36,7 @@ const products = [
     capabilities: ["Guided assessment", "Risk scoring", "Review trail"],
     accent: "violet",
     status: "LIVE",
-    href: null
+    href: "https://tpra.onrender.com"
   },
   {
     number: "03",
@@ -47,7 +48,7 @@ const products = [
     capabilities: ["Security assessment", "Risk register", "BAA & training"],
     accent: "aqua",
     status: "LIVE",
-    href: null
+    href: "https://hipaa-g37n.onrender.com"
   },
   {
     number: "04",
