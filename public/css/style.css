@@ -1043,6 +1043,16 @@ a.resource-item__name:hover {
   margin: 0 0 8px;
 }
 
+.pricing-card__cta {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1.4rem;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+  font-size: 0.9rem;
+}
+
 .pricing-tier__price {
   font-family: var(--font-display);
   font-weight: 800;

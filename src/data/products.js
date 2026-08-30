@@ -1,10 +1,17 @@
 // Add future products here — the numbered-row grid on the homepage renders
 // directly off this array, so new entries need no template changes.
 //
-// `href`: leave null until the product's own Express app is actually mounted
-// at its subfolder path on this domain (see the routing comment block in
-// src/app.js). Once e.g. Offboarding Proof is reachable at /offboarding-proof
-// on this domain, set href to that path and the row becomes a real link.
+// `href`: leave null until the product is actually reachable somewhere real. Two ways that
+// happens, both valid - use whichever's actually true for a given product right now:
+//   1. A direct link straight to that product's own deployed URL (e.g. Render) - the simple,
+//      immediately-workable option, and what Offboarding Proof below uses as of tonight (its
+//      billing is fully confirmed working with a real test payment, so this product is
+//      actually sellable - the link just needs to exist).
+//   2. Once/if it's worth the infra work, the product's own Express app mounted at a subfolder
+//      path on this domain instead (see the routing comment block in src/app.js) - set href to
+//      that path (e.g. "/offboarding-proof") instead of the external URL, and everything else
+//      here (this file, home.ejs) needs no change either way - the template already renders a
+//      real <a> whenever href is set, external or internal.
 const products = [
   {
     number: "01",
@@ -16,7 +23,7 @@ const products = [
     capabilities: ["Access evidence", "Connector checks", "Proof bundle"],
     accent: "coral",
     status: "LIVE",
-    href: null
+    href: "https://offboarding-proof.onrender.com"
   },
   {
     number: "02",

@@ -51,6 +51,9 @@
                   </div>
                 <% }); %>
               </div>
+              <% if (product.href) { %>
+                <a class="btn btn-primary pricing-card__cta" href="<%= product.href %>">Get started with <%= product.name %></a>
+              <% } %>
             </div>
           <% }); %>
         </div>

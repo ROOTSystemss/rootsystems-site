@@ -9,11 +9,18 @@
 //
 // `blurb` is real (pulled from what the product actually does), never
 // placeholder text.
+//
+// `href`: same convention as products.js - null until a product is actually purchasable
+// somewhere real, then a direct link to its deployed URL (or, later, a subfolder path on this
+// domain - see products.js's header comment). Offboarding Proof is the first to get one: its
+// Dodo checkout is fully confirmed working with a real test payment as of tonight, so this page
+// can actually send someone there to subscribe, not just look at a price.
 const pricing = [
   {
     slug: "offboarding-proof",
     name: "Offboarding Proof",
     blurb: "Verifiable proof that departing employees actually lost access — on the day it happened, not weeks later.",
+    href: "https://offboarding-proof.onrender.com",
     tiers: [
       { name: "Starter", price: "39", period: "mo", note: "Core connectors, tamper-evident reports" },
       { name: "Pro", price: "149", period: "mo", note: "Higher employee limits, priority support" }
