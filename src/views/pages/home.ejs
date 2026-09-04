@@ -33,7 +33,7 @@
             "AI Compliance Readiness": "/images/products/ai-readiness.svg"
           }; products.forEach(function (product) { const tag = product.href ? "a" : "article"; %>
             <<%= tag %> class="simple-product simple-product--<%= product.accent %> reveal"<% if(product.href){ %> href="<%= product.href %>"<% } %>>
-              <div class="simple-product__top"><img class="simple-product__logo" src="<%= logos[product.name] %>" alt=""><span class="status-tag status-tag--<%= product.status.toLowerCase() %>"><span class="live-dot"></span><%= product.status %></span></div>
+              <div class="simple-product__top"><img class="simple-product__logo" src="<%= logos[product.name] %>" alt=""><span class="status-tag status-tag--<%= product.status.toLowerCase().replace(/\s+/g, '-') %>"><% if(product.status === "LIVE"){ %><span class="live-dot"></span><% } %><%= product.status %></span></div>
               <span class="simple-product__category"><%= product.category %></span>
               <h3><%= product.name %></h3>
               <p><%= product.description %></p>

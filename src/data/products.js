@@ -59,7 +59,7 @@ const products = [
     outcome: "Translate AI governance obligations into a concrete readiness path.",
     capabilities: ["ISO 42001 gaps", "Incident triage", "Deadline logic"],
     accent: "amber",
-    status: "LIVE",
+    status: "Coming Soon",
     href: null
   }
 ];

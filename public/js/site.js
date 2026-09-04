@@ -97,8 +97,57 @@
     });
   }
 
+  // ---------- mobile nav toggle ----------
+  // Below the nav's collapse breakpoint (see style.css), the nav is a
+  // hidden dropdown panel behind this button instead of an inline row.
+  // Fully inert without JS: the toggle just won't do anything, same as
+  // any other progressive-enhancement control here.
+  function initMobileNav() {
+    var toggle = document.querySelector(".site-nav__toggle");
+    var nav = document.getElementById("site-nav");
+    if (!toggle || !nav) return;
+
+    function closeMenu() {
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open menu");
+      nav.classList.remove("is-open");
+    }
+
+    function openMenu() {
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "Close menu");
+      nav.classList.add("is-open");
+    }
+
+    toggle.addEventListener("click", function () {
+      if (nav.classList.contains("is-open")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    nav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!nav.classList.contains("is-open")) return;
+      if (nav.contains(event.target) || toggle.contains(event.target)) return;
+      closeMenu();
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && nav.classList.contains("is-open")) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initReveal();
     initCountUp();
+    initMobileNav();
   });
 })();
