@@ -1,11 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Recreated (not pixel-traced) from the "THE ROOT" reference mark: a
-       sprout splitting into two leaves above a mirrored root fan below,
-       cream on an orange field. Built from the site's own --saffron /
-       --saffron-deep tokens rather than new colors, so it reads as part of
-       this design system, not a bolted-on external logo. If a real vector
-       export of the source logo shows up later, swap this file directly -
-       header.ejs and head.ejs both already point at /images/logo.svg. -->
+  <!-- RootSystems sprout and root-fan mark, using the site's saffron palette. -->
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#FF9933" />

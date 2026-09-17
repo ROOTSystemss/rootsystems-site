@@ -7,6 +7,8 @@ const siteRoutes = require("./routes/siteRoutes");
 // const blogRoutes = require("./routes/blogRoutes");
 
 const app = express();
+app.disable("x-powered-by");
+require("./utils/security").installSecurity(app, { sessions: false });
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));

@@ -23,7 +23,7 @@ const products = [
     outcome: "Turn every departure into a defensible access-removal record.",
     capabilities: ["Access evidence", "Connector checks", "Proof bundle"],
     accent: "coral",
-    status: "LIVE",
+    status: "Pilot",
     href: "https://offboarding-proof.onrender.com"
   },
   {
@@ -35,7 +35,7 @@ const products = [
     outcome: "Move from vendor answers to a consistent, explainable risk decision.",
     capabilities: ["Guided assessment", "Risk scoring", "Review trail"],
     accent: "violet",
-    status: "LIVE",
+    status: "Pilot",
     href: "https://tpra.onrender.com"
   },
   {
@@ -47,7 +47,7 @@ const products = [
     outcome: "Keep assessments, risks, BAAs, and training evidence in one workspace.",
     capabilities: ["Security assessment", "Risk register", "BAA & training"],
     accent: "aqua",
-    status: "LIVE",
+    status: "Pilot",
     href: "https://hipaa-g37n.onrender.com"
   },
   {
@@ -61,6 +61,17 @@ const products = [
     accent: "amber",
     status: "Coming Soon",
     href: null
+  },
+  {
+    number: "05",
+    name: "Authority Atlas",
+    category: "AI-agent authority",
+    description: "Review agent permissions against contract and insurance evidence, with explainable findings for human review.",
+    outcome: "Identify structural gaps before delegating authority to an agent.",
+    capabilities: ["Authority profiles", "Evidence-linked findings", "Review workflow"],
+    accent: "violet",
+    status: "Private Preview",
+    href: "/contact"
   }
 ];
 

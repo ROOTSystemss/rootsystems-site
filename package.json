@@ -9,6 +9,7 @@
     "dev": "node --watch src/server.js",
     "build:legal": "node scripts/build-legal-data.js"
   },
+  "overrides": { "qs": "6.16.0" },
   "dependencies": {
     "dotenv": "^17.4.2",
     "ejs": "^3.1.10",

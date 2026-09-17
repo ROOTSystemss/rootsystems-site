@@ -30,14 +30,15 @@
             "Offboarding Proof": "/images/products/offboarding-proof.svg",
             "TPRA — Vendor Risk": "/images/products/tpra.svg",
             "HIPAA Compliance Tool": "/images/products/hipaa.svg",
-            "AI Compliance Readiness": "/images/products/ai-readiness.svg"
+            "AI Compliance Readiness": "/images/products/ai-readiness.svg",
+            "Authority Atlas": "/images/products/ai-readiness.svg"
           }; products.forEach(function (product) { const tag = product.href ? "a" : "article"; %>
             <<%= tag %> class="simple-product simple-product--<%= product.accent %> reveal"<% if(product.href){ %> href="<%= product.href %>"<% } %>>
               <div class="simple-product__top"><img class="simple-product__logo" src="<%= logos[product.name] %>" alt=""><span class="status-tag status-tag--<%= product.status.toLowerCase().replace(/\s+/g, '-') %>"><% if(product.status === "LIVE"){ %><span class="live-dot"></span><% } %><%= product.status %></span></div>
               <span class="simple-product__category"><%= product.category %></span>
               <h3><%= product.name %></h3>
               <p><%= product.description %></p>
-              <% if(product.href){ %><span class="simple-product__link">Open product <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span><% } %>
+              <% if(product.href){ %><span class="simple-product__link"><%= product.status === 'Private Preview' ? 'Ask about a preview' : 'Open product' %> <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span><% } %>
             </<%= tag %>>
           <% }); %>
         </div>
