@@ -48,6 +48,88 @@
   --shadow-sm: 0 1px 2px rgba(10, 31, 68, 0.06), 0 1px 3px rgba(10, 31, 68, 0.08);
   --shadow-md: 0 8px 24px rgba(10, 31, 68, 0.12);
   --shadow-lg: 0 20px 48px rgba(10, 31, 68, 0.18);
+
+  /* Floor system — the three product-section accent colors (Part 3 palette).
+     Namespaced as --floor-* rather than reusing --saffron/--green/--violet
+     directly: those existing tokens already carry unrelated meaning
+     elsewhere (CTA accent, verified/trust signal, one product's card
+     accent) and overwriting them would recolor things this restructure
+     never asked to touch. */
+  --floor-saffron-core: #d97706;
+  --floor-saffron: #ff9933;
+  --floor-saffron-rgb: 255, 153, 51;
+  --floor-green-core: #15803d;
+  --floor-green: #138808;
+  --floor-green-rgb: 19, 136, 8;
+  --floor-violet-core: #6d28d9;
+  --floor-violet: #6a0dad;
+  --floor-violet-rgb: 106, 13, 173;
+}
+
+/* ---------- dark mode ----------
+   Same token set, repointed. Every component below reads color exclusively
+   through these custom properties, so nothing needs a second, hardcoded
+   dark styling pass - flipping the tokens is the whole theme. */
+:root[data-theme="dark"] {
+  --navy: #eef1f7;
+  --navy-deep: #060d1c;
+  --navy-mid: #1b3c6e;
+  --navy-tint: #10203d;
+
+  --paper: #0a1120;
+  --surface: #0f1a2e;
+  --surface-tint: #142238;
+
+  --ink: #e7ecf5;
+  --ink-muted: #aab8cf;
+  --ink-faint: #7c8ba5;
+
+  --border: #22304b;
+  --border-strong: #32456a;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --navy: #eef1f7;
+    --navy-deep: #060d1c;
+    --navy-mid: #1b3c6e;
+    --navy-tint: #10203d;
+
+    --paper: #0a1120;
+    --surface: #0f1a2e;
+    --surface-tint: #142238;
+
+    --ink: #e7ecf5;
+    --ink-muted: #aab8cf;
+    --ink-faint: #7c8ba5;
+
+    --border: #22304b;
+    --border-strong: #32456a;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.35);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.5);
+  }
+}
+
+html {
+  transition: background-color 0.25s ease;
+}
+
+body,
+.site-header,
+.product-card,
+.simple-product,
+.pricing-card,
+.pricing-tier,
+.trust-card,
+.field-card,
+.floor__lead {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 }
 
 * {
@@ -1510,4 +1592,346 @@ a.resource-item__name:hover {
     padding-left: 20px;
     padding-right: 20px;
   }
+}
+
+/* ---------- theme toggle ---------- */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--navy);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--floor-saffron);
+  transform: translateY(-1px);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-toggle__sun { display: none; }
+:root[data-theme="dark"] .theme-toggle__moon { display: none; }
+:root[data-theme="dark"] .theme-toggle__sun { display: block; }
+
+.site-header__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ---------- product floors ---------- */
+
+.floor {
+  margin-top: 64px;
+}
+
+.floor:first-of-type {
+  margin-top: 0;
+}
+
+.floor__heading {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid var(--border);
+}
+
+.floor__label {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--floor-color);
+}
+
+.floor__lead {
+  margin: 0;
+  color: var(--ink-faint);
+  font-size: 0.86rem;
+}
+
+.floor--saffron { --floor-color: var(--floor-saffron-core); }
+.floor--green { --floor-color: var(--floor-green-core); }
+.floor--violet { --floor-color: var(--floor-violet-core); }
+
+:root[data-theme="dark"] .floor--saffron { --floor-color: var(--floor-saffron); }
+:root[data-theme="dark"] .floor--green { --floor-color: var(--floor-green); }
+:root[data-theme="dark"] .floor--violet { --floor-color: var(--floor-violet); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .floor--saffron { --floor-color: var(--floor-saffron); }
+  :root:not([data-theme="light"]) .floor--green { --floor-color: var(--floor-green); }
+  :root:not([data-theme="light"]) .floor--violet { --floor-color: var(--floor-violet); }
+}
+
+/* Floor accent applied as a left border + badge/label color only - the
+   card body stays the normal neutral surface, never a full color wash. */
+.simple-product--floor-saffron { border-left: 3px solid var(--floor-saffron); }
+.simple-product--floor-green { border-left: 3px solid var(--floor-green); }
+.simple-product--floor-violet { border-left: 3px solid var(--floor-violet); }
+.simple-product--floor-saffron::before,
+.simple-product--floor-green::before,
+.simple-product--floor-violet::before {
+  display: none;
+}
+.simple-product--floor-saffron .simple-product__category { color: var(--floor-saffron-core); }
+.simple-product--floor-green .simple-product__category { color: var(--floor-green-core); }
+.simple-product--floor-violet .simple-product__category { color: var(--floor-violet-core); }
+:root[data-theme="dark"] .simple-product--floor-saffron .simple-product__category { color: var(--floor-saffron); }
+:root[data-theme="dark"] .simple-product--floor-green .simple-product__category { color: var(--floor-green); }
+:root[data-theme="dark"] .simple-product--floor-violet .simple-product__category { color: var(--floor-violet); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .simple-product--floor-saffron .simple-product__category { color: var(--floor-saffron); }
+  :root:not([data-theme="light"]) .simple-product--floor-green .simple-product__category { color: var(--floor-green); }
+  :root:not([data-theme="light"]) .simple-product--floor-violet .simple-product__category { color: var(--floor-violet); }
+}
+
+.status-tag--early-stage {
+  color: #6d28d9;
+  background: #f2e9ff;
+}
+
+:root[data-theme="dark"] .status-tag--early-stage,
+:root[data-theme="dark"] .status-tag--coming-soon,
+:root[data-theme="dark"] .status-tag--in-progress,
+:root[data-theme="dark"] .status-tag--pilot,
+:root[data-theme="dark"] .status-tag--private-preview,
+:root[data-theme="dark"] .status-tag--live {
+  filter: brightness(1.15) saturate(1.05);
+}
+
+@media (max-width: 780px) {
+  .floor { margin-top: 48px; }
+}
+
+/* ---------- entrance motion (hero, header) ---------- */
+/* Staggered fade/slide-up on load: header, then hero kicker, headline,
+   subtext, actions. Runs once on paint; content is fully present in the
+   DOM the whole time, so nothing blocks readability or scroll while the
+   animation plays. */
+
+@keyframes enter-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.site-header,
+.hero__flag,
+.hero__title,
+.hero__subhead,
+.hero__actions {
+  animation: enter-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.site-header { animation-delay: 0ms; }
+.hero__flag { animation-delay: 80ms; }
+.hero__title { animation-delay: 150ms; }
+.hero__subhead { animation-delay: 220ms; }
+.hero__actions { animation-delay: 290ms; }
+
+/* .hero-art already has its own infinite idle float (hero-art-float,
+   defined earlier) - added as a second comma-separated animation here
+   rather than overriding that declaration, so the entrance plays once
+   and the float keeps going afterward instead of replacing it. */
+.hero-art {
+  animation: enter-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) 200ms both,
+    hero-art-float 9s ease-in-out 700ms infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .hero__flag,
+  .hero__title,
+  .hero__subhead,
+  .hero__actions,
+  .hero-art {
+    animation: none;
+  }
+}
+
+/* ---------- dark-mode component overrides ---------- */
+/* Everything else on the page already reads color through the tokens above
+   and repaints for free. These are the handful of places that used a flat
+   hardcoded hex for a light decorative surface, which needs an explicit
+   dark counterpart so it doesn't stay a bright-white patch inside an
+   otherwise-dark page. */
+
+:root[data-theme="dark"] .site-header,
+:root[data-theme="dark"] .site-nav.is-open,
+:root[data-theme="dark"] .products.section-shell,
+:root[data-theme="dark"] .products,
+:root[data-theme="dark"] .trust,
+:root[data-theme="dark"] .method-section,
+:root[data-theme="dark"] .simple-product,
+:root[data-theme="dark"] .pricing-notice,
+:root[data-theme="dark"] .legal__notice,
+:root[data-theme="dark"] .studio-strip,
+:root[data-theme="dark"] .about,
+:root[data-theme="dark"] .about__manifesto,
+:root[data-theme="dark"] .form-field input,
+:root[data-theme="dark"] .form-field select,
+:root[data-theme="dark"] .form-field textarea,
+:root[data-theme="dark"] .choice-card,
+:root[data-theme="dark"] .pricing-flow-list {
+  background: var(--surface);
+}
+
+:root[data-theme="dark"] .site-header { background: rgba(15, 26, 46, 0.9); }
+:root[data-theme="dark"] .products.section-shell,
+:root[data-theme="dark"] .products { background: linear-gradient(180deg, var(--paper), var(--surface)); }
+:root[data-theme="dark"] .trust { background: var(--navy-tint); }
+:root[data-theme="dark"] .method-section { background: var(--surface-tint); }
+:root[data-theme="dark"] .pricing-notice,
+:root[data-theme="dark"] .legal__notice { border-color: rgba(var(--floor-saffron-rgb), 0.4); background: rgba(var(--floor-saffron-rgb), 0.08); }
+:root[data-theme="dark"] .studio-strip,
+:root[data-theme="dark"] .about { background: linear-gradient(150deg, var(--surface-tint), var(--surface)); }
+:root[data-theme="dark"] .form-field input,
+:root[data-theme="dark"] .form-field select,
+:root[data-theme="dark"] .form-field textarea { border-color: var(--border-strong); color: var(--ink); }
+:root[data-theme="dark"] .cta-panel { background: linear-gradient(150deg, var(--surface-tint), var(--surface)); }
+:root[data-theme="dark"] .hero-art::after { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .site-header,
+  :root:not([data-theme="light"]) .site-nav.is-open,
+  :root:not([data-theme="light"]) .products.section-shell,
+  :root:not([data-theme="light"]) .products,
+  :root:not([data-theme="light"]) .trust,
+  :root:not([data-theme="light"]) .method-section,
+  :root:not([data-theme="light"]) .simple-product,
+  :root:not([data-theme="light"]) .pricing-notice,
+  :root:not([data-theme="light"]) .legal__notice,
+  :root:not([data-theme="light"]) .studio-strip,
+  :root:not([data-theme="light"]) .about,
+  :root:not([data-theme="light"]) .about__manifesto,
+  :root:not([data-theme="light"]) .form-field input,
+  :root:not([data-theme="light"]) .form-field select,
+  :root:not([data-theme="light"]) .form-field textarea,
+  :root:not([data-theme="light"]) .choice-card,
+  :root:not([data-theme="light"]) .pricing-flow-list {
+    background: var(--surface);
+  }
+
+  :root:not([data-theme="light"]) .site-header { background: rgba(15, 26, 46, 0.9); }
+  :root:not([data-theme="light"]) .products.section-shell,
+  :root:not([data-theme="light"]) .products { background: linear-gradient(180deg, var(--paper), var(--surface)); }
+  :root:not([data-theme="light"]) .trust { background: var(--navy-tint); }
+  :root:not([data-theme="light"]) .method-section { background: var(--surface-tint); }
+  :root:not([data-theme="light"]) .pricing-notice,
+  :root:not([data-theme="light"]) .legal__notice { border-color: rgba(var(--floor-saffron-rgb), 0.4); background: rgba(var(--floor-saffron-rgb), 0.08); }
+  :root:not([data-theme="light"]) .studio-strip,
+  :root:not([data-theme="light"]) .about { background: linear-gradient(150deg, var(--surface-tint), var(--surface)); }
+  :root:not([data-theme="light"]) .form-field input,
+  :root:not([data-theme="light"]) .form-field select,
+  :root:not([data-theme="light"]) .form-field textarea { border-color: var(--border-strong); color: var(--ink); }
+  :root:not([data-theme="light"]) .cta-panel { background: linear-gradient(150deg, var(--surface-tint), var(--surface)); }
+  :root:not([data-theme="light"]) .hero-art::after { display: none; }
+}
+
+/* ---------- pricing: progressive disclosure ---------- */
+
+.pricing-choice {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-bottom: 56px;
+}
+
+.choice-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 32px 26px;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.choice-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+.choice-card[aria-pressed="true"] {
+  border-color: var(--floor-saffron);
+  box-shadow: 0 0 0 3px rgba(var(--floor-saffron-rgb), 0.16);
+}
+
+.choice-card__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--navy);
+  margin: 0;
+}
+
+.choice-card__desc {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.pricing-flow-panel {
+  display: none;
+}
+
+.pricing-flow-panel.is-active {
+  display: block;
+  animation: enter-up 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.pricing-flow-heading {
+  margin: 0 0 28px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--navy);
+}
+
+.pricing-flow-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  padding-bottom: 40px;
+}
+
+.pricing-contact-note {
+  display: block;
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+  color: var(--ink-faint);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 780px) {
+  .pricing-choice { grid-template-columns: 1fr; }
+  .pricing-flow-list { grid-template-columns: 1fr; }
 }

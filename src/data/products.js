@@ -1,78 +1,121 @@
-// Add future products here — the numbered-row grid on the homepage renders
-// directly off this array, so new entries need no template changes.
+// Homepage product listing, grouped into three "floors" by domain. Each floor
+// has its own accent color (see :root tokens in style.css) applied as a
+// left-border/badge/label accent — never a full background wash.
 //
-// `href`: leave null until the product is actually reachable somewhere real. Two ways that
-// happens, both valid - use whichever's actually true for a given product right now:
-//   1. A direct link straight to that product's own deployed Render URL - the simple,
-//      immediately-workable option, used below for Offboarding Proof/TPRA/HIPAA as of tonight
-//      (each has a real, confirmed-successful Dodo test payment, so each is actually sellable -
-//      the link just needs to exist). AI Compliance Readiness stays null: no Dodo product/
-//      pricing exists for it yet, so there's nothing to actually sell there.
-//   2. Once/if it's worth the infra work, the product's own Express app mounted at a subfolder
-//      path on this domain instead (see the routing comment block in src/app.js) - set href to
-//      that path (e.g. "/offboarding-proof") instead of the external URL, and everything else
-//      here (this file, home.ejs) needs no change either way - the template already renders a
-//      real <a> whenever href is set, external or internal.
+// `status` must be the literal truth, not marketing aspiration:
+//   LIVE            — real product, reachable, sellable today
+//   Private Preview — real product, works, not open for self-serve signup yet
+//   Coming Soon     — announced, not yet built/reachable
+//   Early Stage     — exploratory/prototype work, no committed timeline
+//
+// `href`: same convention as before — null/`/contact` until something real
+// exists to send a visitor to; a live product's own deployed URL otherwise.
+const sections = [
+  {
+    slug: "grc",
+    label: "Standards & GRC",
+    lead: "Prove the compliance work actually happened.",
+    color: "saffron"
+  },
+  {
+    slug: "engineering",
+    label: "Engineering & Infra",
+    lead: "Decision intelligence for the systems compliance work runs on top of.",
+    color: "green"
+  },
+  {
+    slug: "ai-governance",
+    label: "AI Governance & Trust",
+    lead: "Accountability for what AI agents are actually authorized to do.",
+    color: "violet"
+  }
+];
+
 const products = [
   {
-    number: "01",
+    section: "grc",
     name: "Offboarding Proof",
     category: "Identity & access",
     description:
-      "Verifiable proof that departing employees actually lost access - on the day it happened, not weeks later.",
+      "Employee left. Google + Slack + GitHub access revoked. Auditor asking for evidence.",
     outcome: "Turn every departure into a defensible access-removal record.",
     capabilities: ["Access evidence", "Connector checks", "Proof bundle"],
     accent: "coral",
-    status: "Pilot",
+    status: "LIVE",
     href: "https://offboarding-proof.onrender.com"
   },
   {
-    number: "02",
+    section: "grc",
     name: "TPRA — Vendor Risk",
     category: "Third-party risk",
     description:
-      "Third-party risk assessment for the vendors and partners that touch your data, scored deterministically.",
+      "Clients asking: who approved this vendor? Need proof of risk assessment.",
     outcome: "Move from vendor answers to a consistent, explainable risk decision.",
     capabilities: ["Guided assessment", "Risk scoring", "Review trail"],
     accent: "violet",
-    status: "Pilot",
+    status: "LIVE",
     href: "https://tpra.onrender.com"
   },
   {
-    number: "03",
+    section: "grc",
     name: "HIPAA Compliance Tool",
     category: "Healthcare compliance",
     description:
-      "A guided risk assessment built around what HIPAA actually requires you to show, not generic checkbox theater.",
+      "HIPAA audit in 14 days. Needs risk assessment + gap analysis + tamper-evident report.",
     outcome: "Keep assessments, risks, BAAs, and training evidence in one workspace.",
     capabilities: ["Security assessment", "Risk register", "BAA & training"],
     accent: "aqua",
-    status: "Pilot",
+    status: "LIVE",
     href: "https://hipaa-g37n.onrender.com"
   },
   {
-    number: "04",
+    section: "engineering",
+    name: "Authority Atlas / Supply Atlas",
+    category: "Supply chain intelligence",
+    description:
+      "Needs adaptive supply chain decision intelligence. Data cannot leave India.",
+    outcome: "Identify structural supply-chain gaps without the data leaving the country.",
+    capabilities: ["Adaptive optimization", "Local-first deployment", "Explainable findings"],
+    accent: "amber",
+    status: "Private Preview",
+    href: "/contact"
+  },
+  {
+    section: "ai-governance",
     name: "AI Compliance Readiness",
     category: "AI governance",
     description:
-      "ISO 42001 gap analysis and EU AI Act incident classification, with deterministic legal deadlines a model never touches.",
+      "EU AI Act enforcement approaching. Needs ISO 42001 readiness + serious-incident classification.",
     outcome: "Translate AI governance obligations into a concrete readiness path.",
     capabilities: ["ISO 42001 gaps", "Incident triage", "Deadline logic"],
     accent: "amber",
     status: "Coming Soon",
-    href: null
+    href: "/contact"
   },
   {
-    number: "05",
-    name: "Authority Atlas",
-    category: "AI-agent authority",
-    description: "Review agent permissions against contract and insurance evidence, with explainable findings for human review.",
-    outcome: "Identify structural gaps before delegating authority to an agent.",
-    capabilities: ["Authority profiles", "Evidence-linked findings", "Review workflow"],
+    section: "ai-governance",
+    name: "Trust Proof / Accountability Signatures",
+    category: "AI governance",
+    description:
+      "Need to prove WHICH named human approved a compliance decision — independently verifiable.",
+    outcome: "Give every automated decision a signed, independently checkable human owner.",
+    capabilities: ["Cryptographic signing", "Independent verification", "Decision trail"],
     accent: "violet",
-    status: "Private Preview",
+    status: "Early Stage",
+    href: "/contact"
+  },
+  {
+    section: "ai-governance",
+    name: "Agent Contract Gap",
+    category: "AI-agent authority",
+    description:
+      "Our AI agent signs contracts autonomously. Does our insurance actually cover that authority?",
+    outcome: "Identify structural gaps before delegating contract authority to an agent.",
+    capabilities: ["Authority profiles", "Insurance-gap analysis", "Evidence-linked findings"],
+    accent: "violet",
+    status: "Early Stage",
     href: "/contact"
   }
 ];
 
-module.exports = products;
+module.exports = { sections, products };

@@ -1,4 +1,4 @@
-const products = require("../data/products");
+const { sections, products } = require("../data/products");
 const resources = require("../data/resources");
 const pricing = require("../data/pricing");
 const { loadLegalDoc } = require("../utils/markdown");
@@ -15,6 +15,7 @@ function home(req, res) {
 
   res.render("pages/home", {
     title: "RootSystems — Proof, not paperwork.",
+    sections,
     products,
     resources,
     stats: {
@@ -101,7 +102,10 @@ async function submitContact(req, res, next) {
 function pricingPage(req, res) {
   res.render("pages/pricing", {
     title: "Pricing — RootSystems",
-    pricing
+    sections,
+    tools: pricing.tools,
+    bundles: pricing.bundles,
+    everything: pricing.everything
   });
 }
 

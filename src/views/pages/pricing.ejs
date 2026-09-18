@@ -12,50 +12,81 @@
         <p class="eyebrow eyebrow--on-dark">Pricing</p>
         <h1 class="hero__title">Simple pricing, <span class="hero__title-accent">per product.</span></h1>
         <p class="hero__subhead">
-          Each RootSystems product is priced and billed on its own — use
-          one, or all four.
+          Each RootSystems product is priced and billed on its own. Choose how you want to see it.
         </p>
       </div>
     </section>
 
     <section class="products">
       <div class="wrap">
-        <% var pendingProducts = pricing.filter(function (p) { return p.tiers.some(function (t) { return t.price === "XX"; }); }); %>
-        <% if (pendingProducts.length) { %>
-          <div class="pricing-notice">
-            <svg class="pricing-notice__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <div>
-              <p class="pricing-notice__title">
-                <%= pendingProducts.map(function (p) { return p.name; }).join(", ") %> pricing is still pending
-              </p>
-              <p class="pricing-notice__body">
-                Every other price on this page is live and bookable. Tier names and structure for
-                <%= pendingProducts.map(function (p) { return p.name; }).join(", ") %> are set, but the dollar
-                amounts ("$XX") aren't final yet — don't treat those specific tiers as bookable until they're confirmed.
-              </p>
+        <div class="pricing-choice" role="group" aria-label="Choose how to view pricing">
+          <button type="button" class="choice-card reveal" data-choice="tools" aria-pressed="false">
+            <h2 class="choice-card__name">Just one tool</h2>
+            <p class="choice-card__desc">Pick a single product and pay only for that one.</p>
+          </button>
+          <button type="button" class="choice-card reveal" data-choice="bundles" aria-pressed="false" style="transition-delay:90ms">
+            <h2 class="choice-card__name">A bundle</h2>
+            <p class="choice-card__desc">Group the products on one floor together.</p>
+          </button>
+          <button type="button" class="choice-card reveal" data-choice="everything" aria-pressed="false" style="transition-delay:180ms">
+            <h2 class="choice-card__name">Everything</h2>
+            <p class="choice-card__desc">All seven RootSystems products on one combined plan.</p>
+          </button>
+        </div>
+
+        <div class="pricing-flow-panel" data-panel="tools">
+          <h2 class="pricing-flow-heading">Pick a tool</h2>
+          <div class="pricing-flow-list">
+            <% tools.forEach(function (tool) { %>
+              <div class="pricing-card reveal">
+                <h3 class="pricing-card__name"><%= tool.name %></h3>
+                <p class="pricing-card__blurb"><%= tool.blurb %></p>
+                <% if (tool.tiers) { %>
+                  <div class="pricing-tiers">
+                    <% tool.tiers.forEach(function (tier) { %>
+                      <div class="pricing-tier">
+                        <p class="pricing-tier__name"><%= tier.name %></p>
+                        <p class="pricing-tier__price">$<%= tier.price %><span>/<%= tier.period %></span></p>
+                        <p class="pricing-tier__note"><%= tier.note %></p>
+                      </div>
+                    <% }); %>
+                  </div>
+                  <a class="btn btn-primary pricing-card__cta" href="<%= tool.href %>">Get started with <%= tool.name %></a>
+                <% } else { %>
+                  <span class="pricing-contact-note">No pricing set yet — contact for early access.</span>
+                  <a class="btn btn-ghost btn-ghost--on-light pricing-card__cta" href="/contact">Contact for early access</a>
+                <% } %>
+              </div>
+            <% }); %>
+          </div>
+        </div>
+
+        <div class="pricing-flow-panel" data-panel="bundles">
+          <h2 class="pricing-flow-heading">Bundle by floor</h2>
+          <div class="pricing-flow-list">
+            <% bundles.forEach(function (bundle) { %>
+              <div class="pricing-card reveal">
+                <h3 class="pricing-card__name"><%= bundle.name %></h3>
+                <p class="pricing-card__blurb"><%= bundle.blurb %></p>
+                <p class="pricing-tier__note">Includes: <%= bundle.includes.join(", ") %></p>
+                <span class="pricing-contact-note">Bundle pricing hasn't been decided yet — contact us.</span>
+                <a class="btn btn-ghost btn-ghost--on-light pricing-card__cta" href="/contact">Contact us</a>
+              </div>
+            <% }); %>
+          </div>
+        </div>
+
+        <div class="pricing-flow-panel" data-panel="everything">
+          <h2 class="pricing-flow-heading">Everything, one plan</h2>
+          <div class="pricing-flow-list">
+            <div class="pricing-card reveal">
+              <h3 class="pricing-card__name"><%= everything.name %></h3>
+              <p class="pricing-card__blurb"><%= everything.blurb %></p>
+              <p class="pricing-tier__note">Includes: <%= everything.includes.join(", ") %></p>
+              <span class="pricing-contact-note">Combined pricing hasn't been decided yet — contact us.</span>
+              <a class="btn btn-primary pricing-card__cta" href="/contact">Contact us</a>
             </div>
           </div>
-        <% } %>
-
-        <div class="pricing-grid">
-          <% pricing.forEach(function (product) { %>
-            <div class="pricing-card">
-              <h2 class="pricing-card__name"><%= product.name %></h2>
-              <p class="pricing-card__blurb"><%= product.blurb %></p>
-              <div class="pricing-tiers">
-                <% product.tiers.forEach(function (tier) { %>
-                  <div class="pricing-tier">
-                    <p class="pricing-tier__name"><%= tier.name %></p>
-                    <p class="pricing-tier__price">$<%= tier.price %><span>/<%= tier.period %></span></p>
-                    <p class="pricing-tier__note"><%= tier.note %></p>
-                  </div>
-                <% }); %>
-              </div>
-              <% if (product.href) { %>
-                <a class="btn btn-primary pricing-card__cta" href="<%= product.href %>">Get started with <%= product.name %></a>
-              <% } %>
-            </div>
-          <% }); %>
         </div>
       </div>
     </section>

@@ -145,9 +145,100 @@
     });
   }
 
+  // ---------- dark mode toggle ----------
+  // Persists to localStorage under "rs-theme" - the same key head.ejs's
+  // inline pre-paint script reads, so a saved choice survives navigation
+  // and reload without a flash of the other theme.
+  function initThemeToggle() {
+    var toggle = document.querySelector(".theme-toggle");
+    if (!toggle) return;
+
+    function systemPrefersDark() {
+      return (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      );
+    }
+
+    function currentTheme() {
+      var attr = document.documentElement.getAttribute("data-theme");
+      if (attr === "dark" || attr === "light") return attr;
+      return systemPrefersDark() ? "dark" : "light";
+    }
+
+    function applyLabel() {
+      var isDark = currentTheme() === "dark";
+      toggle.setAttribute(
+        "aria-label",
+        isDark ? "Switch to light theme" : "Switch to dark theme"
+      );
+    }
+
+    applyLabel();
+
+    toggle.addEventListener("click", function () {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem("rs-theme", next);
+      } catch (e) {}
+      applyLabel();
+    });
+  }
+
+  // ---------- staggered card reveal ----------
+  // Cards inside a shared container (product floors, pricing lists) fade/
+  // slide in one after another rather than all at once, using each card's
+  // index within its own parent to compute the delay. Skipped entirely
+  // under reduced motion (handled already by initReveal/CSS above).
+  function initStagger() {
+    document.querySelectorAll(".product-grid--simple, .pricing-flow-list").forEach(function (group) {
+      var cards = group.querySelectorAll(".reveal");
+      cards.forEach(function (card, index) {
+        if (!card.style.transitionDelay) {
+          card.style.transitionDelay = index * 90 + "ms";
+        }
+      });
+    });
+  }
+
+  // ---------- pricing: progressive disclosure ----------
+  // Nothing below the three choice cards is visible until one is picked -
+  // selecting a card shows only its matching panel and swaps the others
+  // out, rather than the page dumping every price on load.
+  function initPricingFlow() {
+    var choices = document.querySelectorAll(".choice-card");
+    var panels = document.querySelectorAll(".pricing-flow-panel");
+    if (!choices.length || !panels.length) return;
+
+    choices.forEach(function (choice) {
+      choice.addEventListener("click", function () {
+        var target = choice.getAttribute("data-choice");
+
+        choices.forEach(function (c) {
+          c.setAttribute("aria-pressed", c === choice ? "true" : "false");
+        });
+
+        panels.forEach(function (panel) {
+          var isMatch = panel.getAttribute("data-panel") === target;
+          panel.classList.toggle("is-active", isMatch);
+          if (isMatch) {
+            panel.querySelectorAll(".reveal").forEach(function (el) {
+              el.classList.add("is-visible");
+            });
+            panel.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+          }
+        });
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initReveal();
     initCountUp();
     initMobileNav();
+    initThemeToggle();
+    initStagger();
+    initPricingFlow();
   });
 })();

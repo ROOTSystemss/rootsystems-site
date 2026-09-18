@@ -6,7 +6,20 @@
   content="RootSystems builds focused compliance and security products that turn operational work into clear, verifiable evidence."
 />
 <meta name="theme-color" content="#071735" />
-<meta name="color-scheme" content="light" />
+<meta name="color-scheme" content="light dark" />
+<script>
+  // Applies the saved/preferred theme before first paint, so there is no
+  // flash of the wrong theme. Kept inline (not in site.js) specifically so
+  // it runs synchronously ahead of CSS/paint rather than after DOMContentLoaded.
+  (function () {
+    try {
+      var saved = localStorage.getItem("rs-theme");
+      if (saved === "dark" || saved === "light") {
+        document.documentElement.setAttribute("data-theme", saved);
+      }
+    } catch (e) {}
+  })();
+</script>
 <%# Favicon - same sprout-on-orange mark as the header logo
     (public/images/logo.svg), inlined here so the tab icon matches the
     header instead of the old unrelated navy-shield placeholder. If the real

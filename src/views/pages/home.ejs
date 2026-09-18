@@ -22,26 +22,38 @@
       <div class="wrap">
         <div class="section-heading reveal">
           <div><p class="eyebrow">Products</p><h2 class="section-title">Small, focused tools for specific compliance work.</h2></div>
-          <p class="section-heading__body">Choose the workspace that matches the job. Each product stays independent and easy to understand.</p>
+          <p class="section-heading__body">Organized by floor — Standards &amp; GRC, Engineering &amp; Infra, AI Governance &amp; Trust. Each product stays independent and easy to understand.</p>
         </div>
 
-        <div class="product-grid product-grid--simple">
-          <% var logos = {
-            "Offboarding Proof": "/images/products/offboarding-proof.svg",
-            "TPRA — Vendor Risk": "/images/products/tpra.svg",
-            "HIPAA Compliance Tool": "/images/products/hipaa.svg",
-            "AI Compliance Readiness": "/images/products/ai-readiness.svg",
-            "Authority Atlas": "/images/products/ai-readiness.svg"
-          }; products.forEach(function (product) { const tag = product.href ? "a" : "article"; %>
-            <<%= tag %> class="simple-product simple-product--<%= product.accent %> reveal"<% if(product.href){ %> href="<%= product.href %>"<% } %>>
-              <div class="simple-product__top"><img class="simple-product__logo" src="<%= logos[product.name] %>" alt=""><span class="status-tag status-tag--<%= product.status.toLowerCase().replace(/\s+/g, '-') %>"><% if(product.status === "LIVE"){ %><span class="live-dot"></span><% } %><%= product.status %></span></div>
-              <span class="simple-product__category"><%= product.category %></span>
-              <h3><%= product.name %></h3>
-              <p><%= product.description %></p>
-              <% if(product.href){ %><span class="simple-product__link"><%= product.status === 'Private Preview' ? 'Ask about a preview' : 'Open product' %> <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span><% } %>
-            </<%= tag %>>
-          <% }); %>
-        </div>
+        <% var logos = {
+          "Offboarding Proof": "/images/products/offboarding-proof.svg",
+          "TPRA — Vendor Risk": "/images/products/tpra.svg",
+          "HIPAA Compliance Tool": "/images/products/hipaa.svg",
+          "AI Compliance Readiness": "/images/products/ai-readiness.svg",
+          "Authority Atlas / Supply Atlas": "/images/products/ai-readiness.svg",
+          "Trust Proof / Accountability Signatures": "/images/products/ai-readiness.svg",
+          "Agent Contract Gap": "/images/products/ai-readiness.svg"
+        }; %>
+
+        <% sections.forEach(function (section) { %>
+          <div class="floor floor--<%= section.color %>">
+            <div class="floor__heading reveal">
+              <span class="floor__label"><%= section.label %></span>
+              <p class="floor__lead"><%= section.lead %></p>
+            </div>
+            <div class="product-grid product-grid--simple">
+              <% var i = 0; products.filter(function (p) { return p.section === section.slug; }).forEach(function (product) { const tag = product.href ? "a" : "article"; i++; %>
+                <<%= tag %> class="simple-product simple-product--floor-<%= section.color %> reveal" style="transition-delay:<%= (i - 1) * 90 %>ms"<% if(product.href){ %> href="<%= product.href %>"<% } %>>
+                  <div class="simple-product__top"><img class="simple-product__logo" src="<%= logos[product.name] %>" alt=""><span class="status-tag status-tag--<%= product.status.toLowerCase().replace(/\s+/g, '-') %>"><% if(product.status === "LIVE"){ %><span class="live-dot"></span><% } %><%= product.status %></span></div>
+                  <span class="simple-product__category"><%= product.category %></span>
+                  <h3><%= product.name %></h3>
+                  <p><%= product.description %></p>
+                  <% if(product.href){ %><span class="simple-product__link"><%= product.status === 'LIVE' ? 'Open product' : (product.href === '/contact' ? 'Contact us' : 'Open product') %> <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span><% } %>
+                </<%= tag %>>
+              <% }); %>
+            </div>
+          </div>
+        <% }); %>
       </div>
     </section>
 
