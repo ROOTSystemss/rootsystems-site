@@ -1,7 +1,7 @@
 // Pricing data for the progressive-disclosure /pricing page (three entry
 // choices — one tool / a bundle / everything — each revealing its own list).
 //
-// `tools` mirrors products.js 1:1. Offboarding Proof/TPRA/HIPAA carry
+// `tools` mirrors products.js except Trust Proof, which has no interface yet and is not sold. Offboarding Proof/TPRA/HIPAA carry
 // CONFIRMED, real tier numbers — they match each app's own billingLib.js
 // plan definitions and the actual Dodo Payments products each app's
 // checkout uses. Every other tool has no `tiers` and is marked
@@ -63,13 +63,6 @@ const tools = [
     contactOnly: true
   },
   {
-    slug: "trust-proof",
-    name: "Trust Proof / Accountability Signatures",
-    section: "ai-governance",
-    blurb: "Prove which named human approved a compliance decision — independently verifiable.",
-    contactOnly: true
-  },
-  {
     slug: "agent-contract-gap",
     name: "Agent Contract Gap",
     section: "ai-governance",
@@ -97,16 +90,21 @@ const bundles = [
     slug: "ai-governance-bundle",
     name: "AI Governance bundle",
     section: "ai-governance",
-    blurb: "AI Compliance Readiness, Trust Proof, and Agent Contract Gap together.",
-    includes: ["AI Compliance Readiness", "Trust Proof / Accountability Signatures", "Agent Contract Gap"]
+    blurb: "AI Compliance Readiness and Agent Contract Gap together.",
+    includes: ["AI Compliance Readiness", "Agent Contract Gap"],
+    // Not offered yet: neither product has real pricing, so there is nothing to bundle.
+    unavailable: "Not available yet. Neither product has pricing, so this floor can't be bought as a bundle. Ask about early access to a single tool instead."
   }
 ];
 
+// "Everything" covers only products that have real pricing. Floor 3 joins once
+// AI Compliance Readiness and Agent Contract Gap are priced; Trust Proof has no
+// interface yet and is not for sale at all.
 const everything = {
   slug: "everything",
   name: "Everything",
-  blurb: "Every RootSystems product, across all three floors, on one combined plan.",
-  includes: tools.map(function (t) { return t.name; })
+  blurb: "Every priced RootSystems product on one combined plan. Floor 3 (AI Governance) products join once they have pricing.",
+  includes: tools.filter(function (t) { return t.tiers; }).map(function (t) { return t.name; })
 };
 
 module.exports = { tools, bundles, everything };

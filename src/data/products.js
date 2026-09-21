@@ -6,6 +6,7 @@
 //   LIVE            — real product, reachable, sellable today
 //   Private Preview — real product, works, not open for self-serve signup yet
 //   Coming Soon     — announced, not yet built/reachable
+//   In development  — being built, no usable interface yet
 //   Early Stage     — exploratory/prototype work, no committed timeline
 //
 // `href`: same convention as before — null/`/contact` until something real
@@ -101,8 +102,8 @@ const products = [
     outcome: "Give every automated decision a signed, independently checkable human owner.",
     capabilities: ["Cryptographic signing", "Independent verification", "Decision trail"],
     accent: "violet",
-    status: "Early Stage",
-    href: "/contact"
+    status: "In development",
+    href: null
   },
   {
     section: "ai-governance",

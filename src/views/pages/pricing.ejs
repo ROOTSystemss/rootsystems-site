@@ -30,7 +30,7 @@
           </button>
           <button type="button" class="choice-card reveal" data-choice="everything" aria-pressed="false" style="transition-delay:180ms">
             <h2 class="choice-card__name">Everything</h2>
-            <p class="choice-card__desc">All seven RootSystems products on one combined plan.</p>
+            <p class="choice-card__desc">Every priced product on one combined plan.</p>
           </button>
         </div>
 
@@ -69,8 +69,12 @@
                 <h3 class="pricing-card__name"><%= bundle.name %></h3>
                 <p class="pricing-card__blurb"><%= bundle.blurb %></p>
                 <p class="pricing-tier__note">Includes: <%= bundle.includes.join(", ") %></p>
-                <span class="pricing-contact-note">Bundle pricing hasn't been decided yet — contact us.</span>
-                <a class="btn btn-ghost btn-ghost--on-light pricing-card__cta" href="/contact">Contact us</a>
+                <% if (bundle.unavailable) { %>
+                  <span class="pricing-contact-note"><%= bundle.unavailable %></span>
+                <% } else { %>
+                  <span class="pricing-contact-note">Bundle pricing hasn't been decided yet — contact us.</span>
+                  <a class="btn btn-ghost btn-ghost--on-light pricing-card__cta" href="/contact">Contact us</a>
+                <% } %>
               </div>
             <% }); %>
           </div>

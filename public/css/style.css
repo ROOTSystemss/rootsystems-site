@@ -689,7 +689,8 @@ a.product-card:hover {
   background: var(--green-tint);
 }
 
-.status-tag--in-progress {
+.status-tag--in-progress,
+.status-tag--in-development {
   color: #8a5a00;
   background: #fef3de;
 }
@@ -1715,6 +1716,7 @@ a.resource-item__name:hover {
 :root[data-theme="dark"] .status-tag--early-stage,
 :root[data-theme="dark"] .status-tag--coming-soon,
 :root[data-theme="dark"] .status-tag--in-progress,
+:root[data-theme="dark"] .status-tag--in-development,
 :root[data-theme="dark"] .status-tag--pilot,
 :root[data-theme="dark"] .status-tag--private-preview,
 :root[data-theme="dark"] .status-tag--live {
