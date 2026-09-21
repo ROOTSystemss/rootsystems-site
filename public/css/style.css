@@ -256,11 +256,9 @@ a {
 }
 
 .brand__mark {
-  height: 30px;
-  width: 30px;
+  height: 36px;
+  width: 36px;
   object-fit: contain;
-  border-radius: 7px;
-  box-shadow: var(--shadow-sm);
 }
 
 .brand__word {
