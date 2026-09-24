@@ -46,4 +46,19 @@ async function saveContactSubmission(values) {
   await fs.rename(temporaryFile, submissionsFile);
 }
 
-module.exports = { saveContactSubmission };
+// Drop submissions past the retention window. Also runs at startup and daily (see server.js),
+// so old messages are removed even when nobody submits a new one. Returns how many were removed.
+async function purgeExpiredSubmissions() {
+  const submissions = await readSubmissions();
+  const cutoff = Date.now() - RETENTION_DAYS * 24 * 60 * 60 * 1000;
+  const kept = submissions.filter((entry) => !(Date.parse(entry.createdAt) < cutoff));
+  const removed = submissions.length - kept.length;
+  if (removed > 0) {
+    const temporaryFile = submissionsFile + ".tmp";
+    await fs.writeFile(temporaryFile, JSON.stringify(kept, null, 2) + "\n", "utf8");
+    await fs.rename(temporaryFile, submissionsFile);
+  }
+  return removed;
+}
+
+module.exports = { saveContactSubmission, purgeExpiredSubmissions };

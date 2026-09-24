@@ -52,21 +52,17 @@ Visit http://localhost:4300
 
 ## Logo
 
-**Placeholder, not the final art.** `public/images/logo.svg` is a
-hand-recreated approximation (sprout + root fan, cream on a saffron
-gradient) of the real "THE ROOT" logo, built because the actual logo file
-has only ever existed as an image pasted into chat, not a file anyone has
-saved to disk. It's referenced by both:
+The RootSystems tree-and-roots mark lives in `public/images/`:
 
-- `src/views/partials/header.ejs` (the `<img class="brand__mark">`)
-- `src/views/partials/head.ejs` (the favicon `<link rel="icon">`, inlined
-  as a matching data-URI so the browser tab matches the header)
+- `rs-mark-orange.png`: transparent orange mark, used in the header and footer
+  (`src/views/partials/header.ejs`, `footer.ejs`)
+- `rs-mark-cream.png`: transparent cream mark for dark backgrounds
+- `favicon-32.png`, `favicon-64.png`, `apple-touch-icon.png`: browser and app icons
+  (linked from `src/views/partials/head.ejs`)
 
-Once you have the real logo file (SVG preferred, PNG fine), overwrite
-`public/images/logo.svg` — or save it under a different name and update the
-one `src`/`href` in each of those two files to match. The header's
-`onerror` handler hides the `<img>` rather than showing a broken image icon
-if the file is ever missing, so nothing looks broken in the meantime.
+The wordmark is live text spelled **RootSystems** (one word, capital R and S),
+never an image.
+
 
 ## Domain / routing
 
