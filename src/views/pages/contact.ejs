@@ -9,10 +9,7 @@
         <div>
           <p class="eyebrow">Contact RootSystems</p>
           <h1>Bring us the problem, not a polished brief.</h1>
-          <p>Share a product question, recommendation, or idea. A clear note is enough to start.</p>
-        </div>
-        <div class="contact-hero__signal" aria-hidden="true">
-          <span>01</span><i></i><span>Listen</span><i></i><span>Build</span>
+          <p>Share a product question or suggestion. A clear note is enough to start.</p>
         </div>
       </div>
     </section>
@@ -56,10 +53,8 @@
               <span>What is this about?</span>
               <select name="requestType" aria-invalid="<%= errors.requestType ? 'true' : 'false' %>" required>
                 <option value="">Choose one</option>
-                <option value="suggestion" <%= values.requestType === 'suggestion' ? 'selected' : '' %>>Product suggestion</option>
-                <option value="recommendation" <%= values.requestType === 'recommendation' ? 'selected' : '' %>>Recommendation</option>
-                <option value="product-question" <%= values.requestType === 'product-question' ? 'selected' : '' %>>Product question</option>
-                <option value="other" <%= values.requestType === 'other' ? 'selected' : '' %>>Something else</option>
+                <option value="product-question" <%= values.requestType === 'product-question' ? 'selected' : '' %>>Question</option>
+                <option value="suggestion" <%= values.requestType === 'suggestion' ? 'selected' : '' %>>Suggestion</option>
               </select>
               <% if (errors.requestType) { %><small class="form-error"><%= errors.requestType %></small><% } %>
             </label>
