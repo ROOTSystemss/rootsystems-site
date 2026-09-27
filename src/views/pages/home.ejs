@@ -1,81 +1,108 @@
 <!doctype html>
 <html lang="en">
 <head><%- include("../partials/head") %></head>
-<body>
+<body class="page-home">
   <%- include("../partials/header") %>
   <main>
-    <section class="hero hero--home hero--quiet">
-      <div class="hero__aurora hero__aurora--one" aria-hidden="true"></div>
-      <div class="wrap hero__grid">
-        <div class="hero__content">
-          <div class="hero__flag"><span class="hero__flag-dot"></span>Independent compliance software studio</div>
-          <h1 class="hero__title hero__title--home">Clear tools for accountable work.</h1>
-          <p class="hero__subhead">RootSystems builds focused software for access governance, vendor risk, healthcare compliance, and AI governance.</p>
-          <div class="hero__actions"><a class="btn btn-primary" href="#products">View the products <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></a></div>
-        </div>
 
-        <figure class="hero-art hero-art--video">
-          <video class="hero-art__video" autoplay muted loop playsinline preload="metadata" poster="/images/rootsystems_glow_poster.jpg" aria-label="The RootSystems tree logo lighting up, its roots drawn as circuit traces">
-            <source src="/images/rootsystems_glow.mp4" type="video/mp4">
-            <img src="/images/rootsystems_glow_poster.jpg" alt="The RootSystems tree logo, its roots drawn as circuit traces">
-          </video>
-        </figure>
+    <section class="rs-hero">
+      <div class="rs-hero__media" aria-hidden="true">
+        <video class="rs-hero__video" autoplay muted loop playsinline preload="metadata" disablepictureinpicture disableremoteplayback tabindex="-1" poster="/images/rootsystems_glow_poster.jpg">
+          <source src="/images/rootsystems_glow.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="wrap rs-hero__inner">
+        <p class="rs-kicker"><span class="rs-kicker__dot"></span>Compliance software that produces evidence</p>
+        <h1 class="rs-hero__title">Proof that <em>holds up.</em></h1>
+        <p class="rs-hero__lead">When an auditor, a client or a regulator asks <em>“can you prove it?”</em>, RootSystems gives you a report that answers, signed so anyone can check it without trusting us.</p>
+        <div class="rs-hero__actions">
+          <a class="rs-btn rs-btn--solid" href="/pricing">See plans and pricing</a>
+          <a class="rs-btn rs-btn--line" href="#products">Browse the products</a>
+        </div>
+        <ul class="rs-proofline" aria-label="Security standards">
+          <li><strong>ML-DSA-65</strong> post-quantum signatures (NIST FIPS 204)</li>
+          <li><strong>SHA-512</strong> fingerprints</li>
+          <li><strong>AES-256</strong> encryption at rest</li>
+        </ul>
       </div>
     </section>
 
-    <section id="products" class="products section-shell">
+    <section id="products" class="rs-products">
       <div class="wrap">
-        <div class="section-heading reveal">
-          <div><p class="eyebrow">Products</p><h2 class="section-title">Small, focused tools for specific compliance work.</h2></div>
-          <p class="section-heading__body">Organized by floor — Standards &amp; GRC, Engineering &amp; Infra, AI Governance &amp; Trust. Each product stays independent and easy to understand.</p>
-        </div>
+        <header class="rs-section-head">
+          <p class="rs-eyebrow">Products</p>
+          <h2 class="rs-h2">Start with the question<br>you keep being asked.</h2>
+        </header>
 
-        <% var logos = {
-          "Offboarding Proof": "/images/products/offboarding-proof.svg",
-          "TPRA — Vendor Risk": "/images/products/tpra.svg",
-          "HIPAA Compliance Tool": "/images/products/hipaa.svg",
-          "AI Compliance Readiness": "/images/products/ai-readiness.svg",
-          "Authority Atlas / Supply Atlas": "/images/products/ai-readiness.svg",
-          "Trust Proof / Accountability Signatures": "/images/products/ai-readiness.svg",
-          "Agent Contract Gap": "/images/products/ai-readiness.svg"
-        }; %>
-
-        <% sections.forEach(function (section) { %>
-          <div class="floor floor--<%= section.color %>">
-            <div class="floor__heading reveal">
-              <span class="floor__label"><%= section.label %></span>
-              <p class="floor__lead"><%= section.lead %></p>
+        <% sections.forEach(function (section, si) { %>
+          <div class="rs-floor rs-floor--<%= section.color %>">
+            <div class="rs-floor__head">
+              <span class="rs-floor__index">0<%= si + 1 %></span>
+              <div>
+                <h3 class="rs-floor__label"><%= section.label %></h3>
+                <p class="rs-floor__lead"><%= section.lead %></p>
+              </div>
             </div>
-            <div class="product-grid product-grid--simple">
-              <% var i = 0; products.filter(function (p) { return p.section === section.slug; }).forEach(function (product) { const tag = product.href ? "a" : "article"; i++; %>
-                <<%= tag %> class="simple-product simple-product--floor-<%= section.color %> reveal" style="transition-delay:<%= (i - 1) * 90 %>ms"<% if(product.href){ %> href="<%= product.href %>"<% } %>>
-                  <div class="simple-product__top"><img class="simple-product__logo" src="<%= logos[product.name] %>" alt=""><span class="status-tag status-tag--<%= product.status.toLowerCase().replace(/\s+/g, '-') %>"><% if(product.status === "LIVE"){ %><span class="live-dot"></span><% } %><%= product.status %></span></div>
-                  <span class="simple-product__category"><%= product.category %></span>
-                  <h3><%= product.name %></h3>
-                  <p><%= product.description %></p>
-                  <% if(product.href){ %><span class="simple-product__link"><%= product.status === 'LIVE' ? 'Open product' : (product.href === '/contact' ? 'Contact us' : 'Open product') %> <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span><% } %>
-                </<%= tag %>>
+            <ol class="rs-list">
+              <% products.filter(function (p) { return p.section === section.slug; }).forEach(function (p) { %>
+                <li class="rs-item reveal">
+                  <a class="rs-item__link" href="<%= p.href %>">
+                    <span class="rs-item__name"><%= p.name %></span>
+                    <span class="rs-item__question"><%= p.question %></span>
+                    <span class="rs-item__desc"><%= p.description %></span>
+                    <span class="rs-item__meta">
+                      <span class="rs-tag rs-tag--<%= p.buy %>"><%= p.buy === "self-serve" ? "Start free" : (p.status === "PILOT" ? "Pilot" : (p.status === "SERVICE" ? "Report" : "By invoice")) %></span>
+                      <span class="rs-item__price"><%= p.price %></span>
+                      <span class="rs-item__go"><%= p.buy === "self-serve" ? "Sign up" : "Talk to us" %> <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span>
+                    </span>
+                  </a>
+                </li>
               <% }); %>
-            </div>
+            </ol>
           </div>
         <% }); %>
       </div>
     </section>
 
-    <section id="standard" class="method-section section-shell">
-      <div class="wrap method-section__grid">
+    <section id="verify" class="rs-verify">
+      <div class="wrap rs-verify__grid">
         <div>
-          <p class="eyebrow">About RootSystems</p>
-          <h2 class="section-title">Useful first. Explainable always.</h2>
-          <p class="method-section__lead">RootSystems is an independent product studio building narrow software for high-accountability compliance and operations. We favor clear workflows and visible logic over broad platforms and mystery scores.</p>
+          <p class="rs-eyebrow rs-eyebrow--on-dark">How verification works</p>
+          <h2 class="rs-h2 rs-h2--on-dark">Don’t take our word for it. Check the signature.</h2>
+          <ol class="rs-steps">
+            <li><span>1</span><div><strong>Every report is signed.</strong><p>Each report is signed with ML-DSA-65, the post-quantum signature standard NIST published in 2024, and fingerprinted with SHA-512.</p></div></li>
+            <li><span>2</span><div><strong>The key is public.</strong><p>Every product publishes its signing key at a fixed address. Anyone can fetch it and check a report, even offline, with our free verifier.</p></div></li>
+            <li><span>3</span><div><strong>Change one character and it fails.</strong><p>An edited report no longer matches its signature. It proves the report came from us and is unchanged, today and after quantum computers arrive.</p></div></li>
+          </ol>
         </div>
-        <div class="method-list">
-          <div><span>01</span><div><strong>Focused</strong><p>One product solves one recognizable operational problem.</p></div></div>
-          <div><span>02</span><div><strong>Understandable</strong><p>Users can follow how an input became a result.</p></div></div>
-          <div><span>03</span><div><strong>Evidence-aware</strong><p>Important work can be exported and reviewed later.</p></div></div>
+        <figure class="rs-code" aria-label="The live Offboarding Proof signing key">
+          <figcaption><span class="rs-code__live"></span>Live now: Offboarding Proof’s published key</figcaption>
+<pre><code><span class="c-mute">GET</span> offboarding-proof.onrender.com
+    <span class="c-mute">/.well-known/rootsystems-signing-key.json</span>
+
+{
+  <span class="c-key">"configured"</span>: <span class="c-val">true</span>,
+  <span class="c-key">"algorithm"</span>:  <span class="c-str">"ML-DSA-65"</span>,
+  <span class="c-key">"standard"</span>:   <span class="c-str">"NIST FIPS 204"</span>,
+  <span class="c-key">"keyId"</span>:      <span class="c-str">"a46b6270385f02a6aa7ee057c8614e2d"</span>,
+  <span class="c-key">"publicKey"</span>:  <span class="c-mute">"… 1,952 bytes …"</span>
+}</code></pre>
+          <a class="rs-code__link" href="https://offboarding-proof.onrender.com/.well-known/rootsystems-signing-key.json" rel="noopener">Open the real key <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></a>
+        </figure>
+      </div>
+    </section>
+
+    <section class="rs-close">
+      <div class="wrap rs-close__inner">
+        <img class="rs-close__mark" src="/images/rs-logo.svg" alt="" width="72" height="75">
+        <h2 class="rs-h2">Built by one independent studio,<br>to be verified rather than believed.</h2>
+        <div class="rs-hero__actions">
+          <a class="rs-btn rs-btn--solid" href="/pricing">See plans and pricing</a>
+          <a class="rs-btn rs-btn--line-dark" href="/contact">Talk to us</a>
         </div>
       </div>
     </section>
+
   </main>
   <%- include("../partials/footer") %>
   <script src="/js/site.js"></script>

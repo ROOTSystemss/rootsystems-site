@@ -12,7 +12,7 @@
   // ---------- hero video ----------
   // With reduced motion the video stays on its poster frame instead of looping.
   function initHeroVideo() {
-    var video = document.querySelector(".hero-art__video");
+    var video = document.querySelector(".rs-hero__video");
     if (!video || !reduceMotion) return;
     video.removeAttribute("autoplay");
     video.pause();

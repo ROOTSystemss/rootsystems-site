@@ -1,120 +1,124 @@
-// Homepage product listing, grouped into three "floors" by domain. Each floor
-// has its own accent color (see :root tokens in style.css) applied as a
-// left-border/badge/label accent — never a full background wash.
+// Homepage product listing, grouped by how a customer can buy today.
 //
 // `status` must be the literal truth, not marketing aspiration:
-//   LIVE            — real product, reachable, sellable today
-//   Private Preview — real product, works, not open for self-serve signup yet
-//   Coming Soon     — announced, not yet built/reachable
-//   In development  — being built, no usable interface yet
-//   Early Stage     — exploratory/prototype work, no committed timeline
+//   LIVE     — deployed and working today
+//   PILOT    — deployed and working; sold as a guided pilot, invoiced
+//   SERVICE  — delivered by us as a report, invoiced
 //
-// `href`: same convention as before — null/`/contact` until something real
-// exists to send a visitor to; a live product's own deployed URL otherwise.
+// `buy` says how a visitor gets it today:
+//   "self-serve" — sign up, then pay in the app (Dodo checkout)
+//   "invoice"    — contact us; we invoice
+//
+// `question` is the question a buyer is being asked (by an auditor, a client, a
+// regulator, a broker). Each product is introduced by that question.
 const sections = [
   {
-    slug: "grc",
-    label: "Standards & GRC",
-    lead: "Prove the compliance work actually happened.",
+    slug: "compliance",
+    label: "Compliance proof",
+    lead: "Sign up and start today. Every report is signed so anyone can check it.",
     color: "saffron"
   },
   {
-    slug: "engineering",
-    label: "Engineering & Infra",
-    lead: "Decision intelligence for the systems compliance work runs on top of.",
-    color: "green"
+    slug: "agents",
+    label: "AI agent governance",
+    lead: "For teams letting AI agents spend money or sign things. Sold as guided pilots.",
+    color: "violet"
   },
   {
-    slug: "ai-governance",
-    label: "AI Governance & Trust",
-    lead: "Accountability for what AI agents are actually authorized to do.",
-    color: "violet"
+    slug: "quantum",
+    label: "Post-quantum readiness",
+    lead: "Find the cryptography a quantum computer will break, and the patch that fixes it.",
+    color: "teal"
   }
 ];
 
 const products = [
   {
-    section: "grc",
+    section: "compliance",
     name: "Offboarding Proof",
-    category: "Identity & access",
+    question: "Did everyone who left actually lose access?",
     description:
-      "Employee left. Google + Slack + GitHub access revoked. Auditor asking for evidence.",
-    outcome: "Turn every departure into a defensible access-removal record.",
-    capabilities: ["Access evidence", "Connector checks", "Proof bundle"],
-    accent: "coral",
+      "Checks Google Workspace, Microsoft 365, Slack, GitHub, Okta, AWS and more after each departure, and produces a signed record: fully revoked, or exactly what is still open.",
+    price: "From $39/mo",
     status: "LIVE",
-    href: "https://offboarding-proof.onrender.com"
+    buy: "self-serve",
+    href: "https://offboarding-proof.onrender.com/signup"
   },
   {
-    section: "grc",
+    section: "compliance",
+    name: "HIPAA Compliance",
+    question: "Could you show a regulator your risk analysis today?",
+    description:
+      "Guided Security Rule risk assessment, a risk register that flags overdue and unowned fixes, and a signed report you can hand over.",
+    price: "From $59/mo",
+    status: "LIVE",
+    buy: "self-serve",
+    href: "https://hipaa-g37n.onrender.com/signup"
+  },
+  {
+    section: "compliance",
     name: "TPRA — Vendor Risk",
-    category: "Third-party risk",
+    question: "Who approved this vendor, and on what basis?",
     description:
-      "Clients asking: who approved this vendor? Need proof of risk assessment.",
-    outcome: "Move from vendor answers to a consistent, explainable risk decision.",
-    capabilities: ["Guided assessment", "Risk scoring", "Review trail"],
-    accent: "violet",
+      "Consistent vendor risk assessments with a review trail, so the answer is on record before a client asks.",
+    price: "From $29/mo",
     status: "LIVE",
-    href: "https://tpra.onrender.com"
+    buy: "self-serve",
+    href: "https://tpra.onrender.com/signup"
   },
   {
-    section: "grc",
-    name: "HIPAA Compliance Tool",
-    category: "Healthcare compliance",
-    description:
-      "HIPAA audit in 14 days. Needs risk assessment + gap analysis + tamper-evident report.",
-    outcome: "Keep assessments, risks, BAAs, and training evidence in one workspace.",
-    capabilities: ["Security assessment", "Risk register", "BAA & training"],
-    accent: "aqua",
-    status: "LIVE",
-    href: "https://hipaa-g37n.onrender.com"
-  },
-  {
-    section: "engineering",
-    name: "Authority Atlas / Supply Atlas",
-    category: "Supply chain intelligence",
-    description:
-      "Needs adaptive supply chain decision intelligence. Data cannot leave India.",
-    outcome: "Identify structural supply-chain gaps without the data leaving the country.",
-    capabilities: ["Adaptive optimization", "Local-first deployment", "Explainable findings"],
-    accent: "amber",
-    status: "Private Preview",
-    href: "/contact"
-  },
-  {
-    section: "ai-governance",
+    section: "compliance",
     name: "AI Compliance Readiness",
-    category: "AI governance",
+    question: "Are you ready for ISO 42001 and EU AI Act Article 50?",
     description:
-      "EU AI Act enforcement approaching. Needs ISO 42001 readiness + serious-incident classification.",
-    outcome: "Translate AI governance obligations into a concrete readiness path.",
-    capabilities: ["ISO 42001 gaps", "Incident triage", "Deadline logic"],
-    accent: "amber",
-    status: "Coming Soon",
+      "Readiness assessment for ISO 42001 and the Article 50 transparency duties that apply from August 2026, plus AI incident tracking.",
+    price: "From $99/mo",
+    status: "LIVE",
+    buy: "invoice",
     href: "/contact"
   },
   {
-    section: "ai-governance",
-    name: "Trust Proof / Accountability Signatures",
-    category: "AI governance",
+    section: "agents",
+    name: "Authority Atlas",
+    question: "What is this AI agent allowed to do?",
     description:
-      "Need to prove WHICH named human approved a compliance decision — independently verifiable.",
-    outcome: "Give every automated decision a signed, independently checkable human owner.",
-    capabilities: ["Cryptographic signing", "Independent verification", "Decision trail"],
-    accent: "violet",
-    status: "In development",
-    href: null
+      "Issue each agent a signed certificate: its permissions, spending limit and expiry. Anyone can check it; you can revoke it at once.",
+    price: "Pilot from $299/mo",
+    status: "PILOT",
+    buy: "invoice",
+    href: "/contact"
   },
   {
-    section: "ai-governance",
-    name: "Agent Contract Gap",
-    category: "AI-agent authority",
+    section: "agents",
+    name: "Trust Proof",
+    question: "Did the agent stay inside its authority?",
     description:
-      "Our AI agent signs contracts autonomously. Does our insurance actually cover that authority?",
-    outcome: "Identify structural gaps before delegating contract authority to an agent.",
-    capabilities: ["Authority profiles", "Insurance-gap analysis", "Evidence-linked findings"],
-    accent: "violet",
-    status: "Early Stage",
+      "Checks every agent action against its certificate, blocks forged, over-limit or revoked ones, and keeps a ledger nobody can quietly edit.",
+    price: "Included in the pilot",
+    status: "PILOT",
+    buy: "invoice",
+    href: "/contact"
+  },
+  {
+    section: "agents",
+    name: "Agent Contract Gap",
+    question: "Does your insurance cover what your agent can do?",
+    description:
+      "Compares an agent's authority with your contracts and insurance, including the AI exclusions insurers added in 2026, and issues a signed Assurance Pack for your broker.",
+    price: "$199 per analysis",
+    status: "PILOT",
+    buy: "invoice",
+    href: "/contact"
+  },
+  {
+    section: "quantum",
+    name: "PQC Forge",
+    question: "Which of your systems will a quantum computer break?",
+    description:
+      "Scans code and servers for RSA and elliptic-curve cryptography, generates the migration patch, and signs the evidence. We run it on our own products on every change.",
+    price: "$499 readiness report",
+    status: "SERVICE",
+    buy: "invoice",
     href: "/contact"
   }
 ];

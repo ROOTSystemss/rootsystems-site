@@ -5,20 +5,15 @@
   name="description"
   content="RootSystems builds focused compliance and security products that turn operational work into clear, verifiable evidence."
 />
-<meta name="theme-color" content="#071735" />
-<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#070a12" />
+<meta name="color-scheme" content="light" />
 <script>
-  // Applies the saved/preferred theme before first paint, so there is no
-  // flash of the wrong theme. Kept inline (not in site.js) specifically so
-  // it runs synchronously ahead of CSS/paint rather than after DOMContentLoaded.
-  (function () {
-    try {
-      var saved = localStorage.getItem("rs-theme");
-      if (saved === "dark" || saved === "light") {
-        document.documentElement.setAttribute("data-theme", saved);
-      }
-    } catch (e) {}
-  })();
+  // One designed look: the site no longer has a dark/light switch. Pinning
+  // data-theme="light" before first paint keeps the old dark-scheme CSS rules
+  // (guarded by :root:not([data-theme="light"])) from applying, including for
+  // visitors who saved "dark" with the old toggle.
+  document.documentElement.setAttribute("data-theme", "light");
+  try { localStorage.removeItem("rs-theme"); } catch (e) {}
 </script>
 <%# Favicon: the RootSystems tree mark on orange (public/images/favicon-*.png). %>
 <link rel="icon" type="image/png" sizes="64x64" href="/images/favicon-64.png">
@@ -26,8 +21,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
   rel="stylesheet"
 />
 <link rel="stylesheet" href="/css/style.css" />
 <link rel="stylesheet" href="/css/usability.css" />
+<link rel="stylesheet" href="/css/brand.css" />
