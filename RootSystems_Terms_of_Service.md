@@ -1,6 +1,6 @@
 # Terms of Service
 
-**Last updated: August 12, 2026**
+**Last updated: September 27, 2026**
 
 These Terms of Service ("Terms") govern your access to and use of RootSystems' products and services, including Offboarding Proof, TPRA, the HIPAA Compliance Tool, and AI Compliance Readiness (collectively, the "Services"), provided by RootSystems ("we," "us," or "our"). By creating an account or using any of our Services, you agree to these Terms.
 
@@ -58,7 +58,7 @@ We may update these Terms from time to time. If we make material changes, we'll 
 
 ## 11. Governing Law
 
-These Terms are governed by the laws of India, without regard to conflict of law principles.
+These Terms are governed by the laws of the State of Tennessee, United States, without regard to conflict of law principles.
 
 ## 12. Contact Us
 

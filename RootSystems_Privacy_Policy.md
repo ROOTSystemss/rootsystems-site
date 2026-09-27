@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Last updated: August 12, 2026**
+**Last updated: September 27, 2026**
 
 This Privacy Policy explains how RootSystems ("we," "us," or "our") collects, uses, and protects information when you use our products, including Offboarding Proof, TPRA, the HIPAA Compliance Tool, and AI Compliance Readiness (collectively, the "Services").
 
@@ -44,7 +44,7 @@ Depending on your location, you may have rights to access, correct, delete, or e
 
 ## 7. International Data Transfers
 
-Our Services may involve transferring data across borders, including to and from the United States and India, depending on where our infrastructure and our customers are located. We take reasonable steps to ensure data is protected consistent with this Policy regardless of where it is processed.
+Our Services are hosted in the United States. If you use them from outside the United States, your data is transferred to and processed in the United States. We take reasonable steps to ensure data is protected consistent with this Policy wherever it is processed.
 
 ## 8. Cookies and Tracking
 
@@ -64,4 +64,4 @@ If you have questions about this Privacy Policy or how we handle your data, cont
 
 ---
 
-*This document is a working draft. Please have it reviewed by a qualified attorney before publishing, particularly regarding data protection law applicable to your specific customer base (e.g. GDPR for EU customers, HIPAA-related data handling commitments, and Indian data protection requirements given your operating location).*
+*This document is a working draft. Please have it reviewed by a qualified attorney before publishing, particularly regarding data protection law applicable to your specific customer base (e.g. GDPR for EU customers, HIPAA-related data handling commitments).*
