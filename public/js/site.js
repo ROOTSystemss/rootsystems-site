@@ -9,6 +9,15 @@
     window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // ---------- hero video ----------
+  // With reduced motion the video stays on its poster frame instead of looping.
+  function initHeroVideo() {
+    var video = document.querySelector(".hero-art__video");
+    if (!video || !reduceMotion) return;
+    video.removeAttribute("autoplay");
+    video.pause();
+  }
+
   // ---------- scroll reveal ----------
   // Adds .is-visible to each .reveal element the first time it enters the
   // viewport. If IntersectionObserver isn't available, or the user prefers
@@ -234,6 +243,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    initHeroVideo();
     initReveal();
     initCountUp();
     initMobileNav();

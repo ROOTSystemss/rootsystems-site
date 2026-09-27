@@ -17,7 +17,7 @@ const tools = [
     name: "Offboarding Proof",
     section: "grc",
     blurb: "Verifiable proof that departing employees actually lost access — on the day it happened, not weeks later.",
-    href: "https://offboarding-proof.onrender.com",
+    href: "https://offboarding-proof.onrender.com/signup",
     tiers: [
       { name: "Free", price: "0", period: "mo", note: "Up to 5 employees monitored, core connectors" },
       { name: "Starter", price: "39", period: "mo", note: "Up to 25 employees, all connectors, tamper-evident reports" },
@@ -29,7 +29,7 @@ const tools = [
     name: "TPRA — Vendor Risk",
     section: "grc",
     blurb: "Third-party risk assessment for the vendors and partners that touch your data, scored deterministically.",
-    href: "https://tpra.onrender.com",
+    href: "https://tpra.onrender.com/signup",
     tiers: [
       { name: "Free", price: "0", period: "mo", note: "1 vendor assessment" },
       { name: "Starter", price: "29", period: "mo", note: "Core questionnaire, tamper-evident reports" },
@@ -41,7 +41,7 @@ const tools = [
     name: "HIPAA Compliance Tool",
     section: "grc",
     blurb: "A guided risk assessment built around what HIPAA actually requires you to show, not generic checkbox theater.",
-    href: "https://hipaa-g37n.onrender.com",
+    href: "https://hipaa-g37n.onrender.com/signup",
     tiers: [
       { name: "Free", price: "0", period: "mo", note: "1 assessment" },
       { name: "Starter", price: "59", period: "mo", note: "Security Rule assessment, risk register" },

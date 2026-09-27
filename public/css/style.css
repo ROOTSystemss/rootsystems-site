@@ -1935,3 +1935,9 @@ a.resource-item__name:hover {
   .pricing-choice { grid-template-columns: 1fr; }
   .pricing-flow-list { grid-template-columns: 1fr; }
 }
+
+/* Home hero: looping logo video (muted, inline). Same frame and edge fade as the
+   still hero image; the logo is centred in the video, so it is framed centre. */
+.hero-art--video video,
+.hero-art--video img { display:block; width:100%; aspect-ratio:1.38/1; object-fit:cover; object-position:center 40%; }
+@media (max-width:700px) { .hero-art--video video, .hero-art--video img { aspect-ratio:16/10; } }
