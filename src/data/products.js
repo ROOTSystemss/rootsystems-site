@@ -71,7 +71,7 @@ const products = [
     name: "Compliance Readiness",
     question: "Would you pass a SOC 2, ISO 27001 or PCI DSS audit today?",
     description:
-      "Readiness checks for SOC 2, ISO 27001, PCI DSS, NIST CSF 2.0, GDPR, ISO 42001 and EU AI Act Article 50. Unanswered controls count against you, and every report is signed.",
+      "Readiness checks for 12 standards, including SOC 2, ISO 27001, PCI DSS, CMMC Level 2, NIS2, DORA, GDPR, CCPA and the AI standards. Attach evidence to each control, and every report says how much is proven. Unanswered controls count against you, and every report is signed.",
     price: "From $59/mo per standard",
     status: "LIVE",
     buy: "self-serve",

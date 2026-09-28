@@ -52,12 +52,12 @@ const tools = [
     slug: "compliance-readiness",
     name: "Compliance Readiness",
     section: "grc",
-    blurb: "SOC 2, ISO 27001, PCI DSS, NIST CSF 2.0, GDPR, ISO 42001 and EU AI Act Article 50 readiness, each with a signed report. Priced per standard.",
+    blurb: "Readiness for 12 standards: SOC 2, ISO 27001, PCI DSS, NIST CSF 2.0, GDPR, CCPA/CPRA, CMMC Level 2, NIS2, DORA, ISO 42001, EU AI Act Article 50 and NIST AI RMF. Attach evidence to each control; every report is signed. Priced per standard.",
     href: "https://ai-compliance-readiness.onrender.com/signup",
     tiers: [
       { name: "Free", price: "0", period: "mo", note: "Your first assessment, on any standard" },
-      { name: "Per standard", price: "59", period: "mo", note: "From $59 (NIST CSF, GDPR) to $99 (SOC 2, ISO 27001, AI standards)" },
-      { name: "Every standard", price: "249", period: "mo", note: "All seven standards for one workspace" }
+      { name: "Per standard", price: "59", period: "mo", note: "From $59 (NIST CSF, GDPR, CCPA) to $99 (SOC 2, ISO 27001, CMMC, DORA, ISO 42001)" },
+      { name: "Every standard", price: "249", period: "mo", note: "All 12 standards for one workspace" }
     ]
   },
   {
