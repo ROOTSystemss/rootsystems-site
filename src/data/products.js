@@ -21,7 +21,7 @@ const sections = [
   {
     slug: "agents",
     label: "AI agent governance",
-    lead: "For teams letting AI agents spend money or sign things. Sold as guided pilots.",
+    lead: "For teams letting AI agents spend money or sign things. One console for all three; start with a free trial.",
     color: "violet"
   },
   {
@@ -68,14 +68,14 @@ const products = [
   },
   {
     section: "compliance",
-    name: "AI Compliance Readiness",
-    question: "Are you ready for ISO 42001 and EU AI Act Article 50?",
+    name: "Compliance Readiness",
+    question: "Would you pass a SOC 2, ISO 27001 or PCI DSS audit today?",
     description:
-      "Readiness assessment for ISO 42001 and the Article 50 transparency duties that apply from August 2026, plus AI incident tracking.",
-    price: "From $99/mo",
+      "Readiness checks for SOC 2, ISO 27001, PCI DSS, NIST CSF 2.0, GDPR, ISO 42001 and EU AI Act Article 50. Unanswered controls count against you, and every report is signed.",
+    price: "From $59/mo per standard",
     status: "LIVE",
-    buy: "invoice",
-    href: "/contact"
+    buy: "self-serve",
+    href: "https://ai-compliance-readiness.onrender.com/signup"
   },
   {
     section: "agents",
@@ -83,10 +83,10 @@ const products = [
     question: "What is this AI agent allowed to do?",
     description:
       "Issue each agent a signed certificate: its permissions, spending limit and expiry. Anyone can check it; you can revoke it at once.",
-    price: "Pilot from $299/mo",
-    status: "PILOT",
-    buy: "invoice",
-    href: "/contact"
+    price: "Console from $299/mo",
+    status: "LIVE",
+    buy: "self-serve",
+    href: "https://agent-contract-gap.onrender.com/console"
   },
   {
     section: "agents",
@@ -94,10 +94,10 @@ const products = [
     question: "Did the agent stay inside its authority?",
     description:
       "Checks every agent action against its certificate, blocks forged, over-limit or revoked ones, and keeps a ledger nobody can quietly edit.",
-    price: "Included in the pilot",
-    status: "PILOT",
-    buy: "invoice",
-    href: "/contact"
+    price: "Included in the console",
+    status: "LIVE",
+    buy: "self-serve",
+    href: "https://agent-contract-gap.onrender.com/console"
   },
   {
     section: "agents",
@@ -105,10 +105,10 @@ const products = [
     question: "Does your insurance cover what your agent can do?",
     description:
       "Compares an agent's authority with your contracts and insurance, including the AI exclusions insurers added in 2026, and issues a signed Assurance Pack for your broker.",
-    price: "$199 per analysis",
-    status: "PILOT",
-    buy: "invoice",
-    href: "/contact"
+    price: "Included in the console",
+    status: "LIVE",
+    buy: "self-serve",
+    href: "https://agent-contract-gap.onrender.com/console"
   },
   {
     section: "quantum",

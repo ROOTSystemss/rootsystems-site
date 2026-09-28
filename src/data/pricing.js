@@ -49,25 +49,28 @@ const tools = [
     ]
   },
   {
-    slug: "authority-atlas",
-    name: "Authority Atlas / Supply Atlas",
-    section: "engineering",
-    blurb: "Adaptive supply chain decision intelligence — data cannot leave India.",
-    contactOnly: true
+    slug: "compliance-readiness",
+    name: "Compliance Readiness",
+    section: "grc",
+    blurb: "SOC 2, ISO 27001, PCI DSS, NIST CSF 2.0, GDPR, ISO 42001 and EU AI Act Article 50 readiness, each with a signed report. Priced per standard.",
+    href: "https://ai-compliance-readiness.onrender.com/signup",
+    tiers: [
+      { name: "Free", price: "0", period: "mo", note: "Your first assessment, on any standard" },
+      { name: "Per standard", price: "59", period: "mo", note: "From $59 (NIST CSF, GDPR) to $99 (SOC 2, ISO 27001, AI standards)" },
+      { name: "Every standard", price: "249", period: "mo", note: "All seven standards for one workspace" }
+    ]
   },
   {
-    slug: "ai-compliance",
-    name: "AI Compliance Readiness",
-    section: "ai-governance",
-    blurb: "ISO 42001 gap analysis and EU AI Act incident classification, with deterministic legal deadlines a model never touches.",
-    contactOnly: true
-  },
-  {
-    slug: "agent-contract-gap",
-    name: "Agent Contract Gap",
-    section: "ai-governance",
-    blurb: "Check whether your insurance actually covers the authority your AI agent has been given to sign contracts.",
-    contactOnly: true
+    slug: "agent-governance",
+    name: "Agent Governance console",
+    section: "grc",
+    blurb: "Authority Atlas, Trust Proof and Agent Contract Gap in one console: signed agent certificates, a live action ledger, named sign-off and insurance coverage.",
+    href: "https://agent-contract-gap.onrender.com/console",
+    tiers: [
+      { name: "Trial", price: "0", period: "mo", note: "Up to 2 active agents" },
+      { name: "Team", price: "299", period: "mo", note: "Up to 10 active agents, approvals, coverage" },
+      { name: "Business", price: "999", period: "mo", note: "Up to 100 active agents, priority support" }
+    ]
   }
 ];
 
@@ -78,32 +81,14 @@ const bundles = [
     section: "grc",
     blurb: "Offboarding Proof, TPRA, and the HIPAA Compliance Tool together.",
     includes: ["Offboarding Proof", "TPRA — Vendor Risk", "HIPAA Compliance Tool"]
-  },
-  {
-    slug: "engineering-bundle",
-    name: "Engineering & Infra bundle",
-    section: "engineering",
-    blurb: "Authority Atlas / Supply Atlas, and future engineering-floor products as they ship.",
-    includes: ["Authority Atlas / Supply Atlas"]
-  },
-  {
-    slug: "ai-governance-bundle",
-    name: "AI Governance bundle",
-    section: "ai-governance",
-    blurb: "AI Compliance Readiness and Agent Contract Gap together.",
-    includes: ["AI Compliance Readiness", "Agent Contract Gap"],
-    // Not offered yet: neither product has real pricing, so there is nothing to bundle.
-    unavailable: "Not available yet. Neither product has pricing, so this floor can't be bought as a bundle. Ask about early access to a single tool instead."
   }
 ];
 
-// "Everything" covers only products that have real pricing. Floor 3 joins once
-// AI Compliance Readiness and Agent Contract Gap are priced; Trust Proof has no
-// interface yet and is not for sale at all.
+// "Everything" covers only products that have real pricing (every tool with tiers).
 const everything = {
   slug: "everything",
   name: "Everything",
-  blurb: "Every priced RootSystems product on one combined plan. Floor 3 (AI Governance) products join once they have pricing.",
+  blurb: "Every priced RootSystems product on one combined plan.",
   includes: tools.filter(function (t) { return t.tiers; }).map(function (t) { return t.name; })
 };
 
