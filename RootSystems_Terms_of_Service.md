@@ -2,7 +2,7 @@
 
 **Last updated: September 27, 2026**
 
-These Terms of Service ("Terms") govern your access to and use of RootSystems' products and services, including Offboarding Proof, TPRA, the HIPAA Compliance Tool, and AI Compliance Readiness (collectively, the "Services"), provided by RootSystems ("we," "us," or "our"). By creating an account or using any of our Services, you agree to these Terms.
+These Terms of Service ("Terms") govern your access to and use of RootSystems' products and services, including Offboarding Proof, HIPAA Compliance, TPRA, AI Compliance Readiness, Authority Atlas, Trust Proof, Agent Contract Gap, and PQC Forge (collectively, the "Services"), provided by RootSystems ("we," "us," or "our"). By creating an account or using any of our Services, you agree to these Terms.
 
 ## 1. Who We Are
 
@@ -32,7 +32,7 @@ Payments are processed by a third-party payment provider. By subscribing, you al
 
 ## 5. Your Data
 
-You retain ownership of the data you submit to our Services. We use your data to provide, maintain, and improve the Services, and we do not sell your data to third parties. For details on how we collect, use, and protect your data, see our Privacy Policy.
+You retain ownership of the data you submit to our Services. We use it only to provide and support the Services for you, and we never sell it. Our [Privacy Policy](/privacy) explains what we collect and why. Where we process personal data on your behalf, our [Data Processing Agreement](/dpa) forms part of these Terms and applies automatically.
 
 If your use of our Services involves regulated data (such as protected health information under HIPAA), you are responsible for ensuring you have the appropriate agreements in place with us where legally required, and for using the Service in a manner consistent with your own regulatory obligations.
 

@@ -7,7 +7,8 @@ const {
   pricingPage,
   terms,
   privacy,
-  refund
+  refund,
+  dpa
 } = require("../controllers/siteController");
 
 const router = Router();
@@ -22,6 +23,7 @@ router.get("/pricing", pricingPage);
 router.get("/terms", terms);
 router.get("/privacy", privacy);
 router.get("/refund", refund);
+router.get("/dpa", dpa);
 
 // Future top-level pages get added the same way, e.g.:
 // router.get("/blog", blogIndex);

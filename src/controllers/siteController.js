@@ -134,5 +134,6 @@ module.exports = {
   pricingPage,
   terms: legalPage("Terms of Service", "RootSystems_Terms_of_Service.md"),
   privacy: legalPage("Privacy Policy", "RootSystems_Privacy_Policy.md"),
-  refund: legalPage("Refund Policy", "RootSystems_Refund_Policy.md")
+  refund: legalPage("Refund Policy", "RootSystems_Refund_Policy.md"),
+  dpa: legalPage("Data Processing Agreement", "RootSystems_Data_Processing_Agreement.md")
 };

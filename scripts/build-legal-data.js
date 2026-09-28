@@ -32,6 +32,7 @@ const FILES = [
   "RootSystems_Terms_of_Service.md",
   "RootSystems_Privacy_Policy.md",
   "RootSystems_Refund_Policy.md",
+  "RootSystems_Data_Processing_Agreement.md",
 ];
 
 const repoRoot = path.join(__dirname, "..");

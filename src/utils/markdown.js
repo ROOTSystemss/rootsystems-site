@@ -17,6 +17,12 @@ function escapeHtml(str) {
 function inline(text) {
   var html = escapeHtml(text);
   html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  // [text](url): only site-relative paths or https links, so a document can
+  // never produce a javascript: or data: link.
+  html = html.replace(
+    /\[([^\]]+)\]\((\/[^)\s]*|https:\/\/[^)\s]+)\)/g,
+    '<a href="$2">$1</a>'
+  );
   html = html.replace(
     /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
     '<a href="mailto:$1">$1</a>'
@@ -30,10 +36,20 @@ function parseLegalMarkdown(raw) {
   var blocks = [];
   var listBuffer = null;
 
+  var listType = "ul";
+  var tableRows = null;
+
   function flushList() {
     if (listBuffer) {
-      blocks.push({ type: "ul", items: listBuffer });
+      blocks.push({ type: listType, items: listBuffer });
       listBuffer = null;
+    }
+  }
+
+  function flushTable() {
+    if (tableRows) {
+      blocks.push({ type: "table", head: tableRows[0], rows: tableRows.slice(1) });
+      tableRows = null;
     }
   }
 
@@ -52,6 +68,20 @@ function parseLegalMarkdown(raw) {
       continue;
     }
 
+    // "| a | b |" table rows; the "|---|---|" separator row is skipped.
+    if (line.startsWith("|")) {
+      flushList();
+      if (/^\|[\s:|-]+\|$/.test(line)) continue;
+      if (!tableRows) tableRows = [];
+      tableRows.push(
+        line.replace(/^\||\|$/g, "").split("|").map(function (cell) {
+          return inline(cell.trim());
+        })
+      );
+      continue;
+    }
+    flushTable();
+
     if (line.startsWith("## ")) {
       flushList();
       blocks.push({ type: "h2", html: inline(line.slice(3)) });
@@ -59,8 +89,17 @@ function parseLegalMarkdown(raw) {
     }
 
     if (line.startsWith("- ")) {
-      if (!listBuffer) listBuffer = [];
+      if (listBuffer && listType !== "ul") flushList();
+      if (!listBuffer) { listBuffer = []; listType = "ul"; }
       listBuffer.push(inline(line.slice(2)));
+      continue;
+    }
+
+    var ordered = line.match(/^\d+\.\s+(.*)$/);
+    if (ordered) {
+      if (listBuffer && listType !== "ol") flushList();
+      if (!listBuffer) { listBuffer = []; listType = "ol"; }
+      listBuffer.push(inline(ordered[1]));
       continue;
     }
 
@@ -68,6 +107,7 @@ function parseLegalMarkdown(raw) {
     blocks.push({ type: "p", html: inline(line) });
   }
   flushList();
+  flushTable();
 
   return { lastUpdated: lastUpdated, blocks: blocks };
 }

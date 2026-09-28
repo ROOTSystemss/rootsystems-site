@@ -300,3 +300,12 @@
   .rs-item__meta { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 10px 16px; padding-top: 10px; text-align: left; }
   .rs-floor__index { font-size: 1.9rem; }
 }
+
+/* ---------- legal documents: tables and numbered lists ---------- */
+.legal-doc__table-wrap { overflow-x: auto; margin: 6px 0 22px; border: 1px solid var(--border, #dfe5f0); border-radius: 12px; }
+.legal-doc__table { width: 100%; border-collapse: collapse; font-size: 0.9rem; line-height: 1.55; }
+.legal-doc__table th, .legal-doc__table td { padding: 11px 14px; border-bottom: 1px solid var(--border, #dfe5f0); text-align: left; vertical-align: top; }
+.legal-doc__table th { background: #f6f3ec; font-weight: 700; }
+.legal-doc__table tr:last-child td { border-bottom: 0; }
+ol.legal-doc__list { list-style: decimal; padding-left: 1.4em; }
+.legal-doc a { color: var(--rs-saffron-deep); text-decoration: underline; text-underline-offset: 2px; }

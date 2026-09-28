@@ -24,12 +24,23 @@
             <% doc.blocks.forEach(function (block) { %>
               <% if (block.type === "h2") { %>
                 <h2 class="legal-doc__h2"><%- block.html %></h2>
-              <% } else if (block.type === "ul") { %>
-                <ul class="legal-doc__list">
+              <% } else if (block.type === "ul" || block.type === "ol") { %>
+                <<%= block.type %> class="legal-doc__list">
                   <% block.items.forEach(function (item) { %>
                     <li><%- item %></li>
                   <% }) %>
-                </ul>
+                </<%= block.type %>>
+              <% } else if (block.type === "table") { %>
+                <div class="legal-doc__table-wrap">
+                  <table class="legal-doc__table">
+                    <thead><tr><% block.head.forEach(function (cell) { %><th><%- cell %></th><% }) %></tr></thead>
+                    <tbody>
+                      <% block.rows.forEach(function (row) { %>
+                        <tr><% row.forEach(function (cell) { %><td><%- cell %></td><% }) %></tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
+                </div>
               <% } else { %>
                 <p class="legal-doc__p"><%- block.html %></p>
               <% } %>
