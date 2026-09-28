@@ -7,17 +7,14 @@
   <%- include("../partials/header") %>
 
   <main>
-    <section class="hero hero--compact">
-      <div class="wrap">
-        <p class="eyebrow eyebrow--on-dark">404</p>
-        <h1 class="hero__title">This page doesn't exist yet.</h1>
-        <div class="hero__actions">
-          <a class="btn btn-primary" href="/">Back home <span class="btn__arrow">&rarr;</span></a>
-        </div>
-      </div>
-    </section>
+    <%- include("../partials/page-hero", {
+      eyebrow: "404",
+      title: "This page <em>doesn’t exist.</em>",
+      lead: "The link may be old. Try the <a href=\"/\">home page</a>, the <a href=\"/standards\">standards</a> or the <a href=\"/learn\">guides</a>."
+    }) %>
   </main>
 
   <%- include("../partials/footer") %>
+  <script src="/js/site.js"></script>
 </body>
 </html>

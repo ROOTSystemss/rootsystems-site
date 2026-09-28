@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include("../partials/head") %>
+</head>
+<body class="page-guide">
+  <%- include("../partials/header") %>
+
+  <main>
+    <%- include("../partials/page-hero", {
+      eyebrow: guide.kind + " · " + guide.minutes + " min read",
+      title: guide.title,
+      lead: guide.summary,
+      compact: true
+    }) %>
+
+    <section class="rs-article">
+      <div class="wrap rs-article__wrap">
+        <article class="rs-article__body">
+          <% guide.sections.forEach(function (s) { %>
+            <h2><%= s.h %></h2>
+            <% s.p.forEach(function (para) { %><p><%= para %></p><% }); %>
+          <% }); %>
+          <p class="rs-article__back"><a href="/learn">&larr; All guides</a></p>
+        </article>
+        <aside class="rs-article__aside">
+          <p class="rs-eyebrow">Keep going</p>
+          <% others.forEach(function (o) { %>
+            <a class="rs-article__next" href="/learn/<%= o.slug %>"><span><%= o.kind %></span><%= o.title %></a>
+          <% }); %>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <%- include("../partials/footer") %>
+  <script src="/js/site.js"></script>
+</body>
+</html>

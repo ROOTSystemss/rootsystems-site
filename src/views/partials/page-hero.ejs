@@ -1,0 +1,14 @@
+<%# Inner-page hero: same ink, serif and glowing tree as the home page, at a smaller scale.
+    Params: eyebrow, title (may contain <em>), lead (optional), compact (optional). %>
+<section class="rs-page-hero<%= typeof compact !== "undefined" && compact ? " rs-page-hero--compact" : "" %>">
+  <div class="rs-page-hero__media" aria-hidden="true">
+    <video class="rs-page-hero__video" autoplay muted loop playsinline preload="metadata" disablepictureinpicture disableremoteplayback tabindex="-1" poster="/images/rootsystems_tree_small_poster.jpg">
+      <source src="/images/rootsystems_tree_small.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="wrap rs-page-hero__inner">
+    <p class="rs-kicker"><span class="rs-kicker__dot"></span><%= eyebrow %></p>
+    <h1 class="rs-page-hero__title"><%- title %></h1>
+    <% if (typeof lead !== "undefined" && lead) { %><p class="rs-hero__lead rs-page-hero__lead"><%- lead %></p><% } %>
+  </div>
+</section>

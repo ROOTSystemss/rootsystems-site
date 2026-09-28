@@ -1,6 +1,8 @@
 const { sections, products } = require("../data/products");
 const resources = require("../data/resources");
 const pricing = require("../data/pricing");
+const standardsData = require("../data/standards");
+const { guides, bySlug } = require("../data/guides");
 const { loadLegalDoc } = require("../utils/markdown");
 const { saveContactSubmission } = require("../services/contactService");
 const { sendContactEmail } = require("../services/emailService");
@@ -103,10 +105,43 @@ function pricingPage(req, res) {
   res.render("pages/pricing", {
     title: "Pricing — RootSystems",
     sections,
+    products,
     tools: pricing.tools,
     bundles: pricing.bundles,
-    everything: pricing.everything
+    everything: pricing.everything,
+    standards: standardsData
   });
+}
+
+function standardsPage(req, res) {
+  res.render("pages/standards", { title: "Standards — RootSystems", standards: standardsData });
+}
+
+function securityPage(req, res) {
+  res.render("pages/security", { title: "Security — RootSystems" });
+}
+
+function learnPage(req, res) {
+  res.render("pages/learn", { title: "Learn — RootSystems", guides });
+}
+
+function guidePage(req, res, next) {
+  const guide = bySlug(req.params.slug);
+  if (!guide) return next();
+  const others = guides.filter(function (g) { return g.slug !== guide.slug; }).slice(0, 3);
+  res.render("pages/guide", { title: guide.title + " — RootSystems", guide, others });
+}
+
+// Where to report a vulnerability (RFC 9116). Expires must be refreshed yearly.
+function securityTxt(req, res) {
+  res.type("text/plain").send([
+    "Contact: mailto:therootsystems.ops@gmail.com",
+    "Expires: 2027-09-28T00:00:00.000Z",
+    "Preferred-Languages: en",
+    "Canonical: https://rootsystems.app/.well-known/security.txt",
+    "Policy: https://rootsystems.app/security",
+    ""
+  ].join("\n"));
 }
 
 // One shared template for all three legal pages - only the title/slug/source
@@ -132,6 +167,11 @@ module.exports = {
   contactPage,
   submitContact,
   pricingPage,
+  standardsPage,
+  securityPage,
+  learnPage,
+  guidePage,
+  securityTxt,
   terms: legalPage("Terms of Service", "RootSystems_Terms_of_Service.md"),
   privacy: legalPage("Privacy Policy", "RootSystems_Privacy_Policy.md"),
   refund: legalPage("Refund Policy", "RootSystems_Refund_Policy.md"),

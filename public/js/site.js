@@ -12,10 +12,11 @@
   // ---------- hero video ----------
   // With reduced motion the video stays on its poster frame instead of looping.
   function initHeroVideo() {
-    var video = document.querySelector(".rs-hero__video");
-    if (!video || !reduceMotion) return;
-    video.removeAttribute("autoplay");
-    video.pause();
+    if (!reduceMotion) return;
+    document.querySelectorAll(".rs-hero__video, .rs-page-hero__video").forEach(function (video) {
+      video.removeAttribute("autoplay");
+      video.pause();
+    });
   }
 
   // ---------- scroll reveal ----------
@@ -42,7 +43,7 @@
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.01, rootMargin: "0px 0px -24px 0px" }
     );
 
     els.forEach(function (el) {

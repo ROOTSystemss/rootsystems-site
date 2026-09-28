@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include("../partials/head") %>
+</head>
+<body class="page-security">
+  <%- include("../partials/header") %>
+
+  <main>
+    <%- include("../partials/page-hero", {
+      eyebrow: "Security",
+      title: "We keep as little as we can, <em>and lock the rest.</em>",
+      lead: "A compliance vendor should be the easiest vendor you ever review. Here is exactly how the RootSystems products treat your data."
+    }) %>
+
+    <section class="rs-sec">
+      <div class="wrap">
+        <div class="rs-sec__grid">
+          <article class="rs-sec__card rs-sec__card--saffron reveal">
+            <p class="rs-sec__tag">Data minimization</p>
+            <h2 class="rs-sec__title">Your documents never reach us</h2>
+            <p>Evidence files you attach are fingerprinted with SHA-256 and discarded; we keep the fingerprint, name and size. Report files can be set to expire while their fingerprints stay, so you can still prove a report is genuine.</p>
+          </article>
+          <article class="rs-sec__card rs-sec__card--teal reveal">
+            <p class="rs-sec__tag">Encryption</p>
+            <h2 class="rs-sec__title">Encrypted at rest, in transit</h2>
+            <p>Stored data and connector credentials are encrypted with AES-256-GCM, and every product is served only over HTTPS. Passwords are never stored, only salted hashes (bcrypt or scrypt).</p>
+          </article>
+          <article class="rs-sec__card rs-sec__card--violet reveal">
+            <p class="rs-sec__tag">Separation</p>
+            <h2 class="rs-sec__title">Every workspace is its own</h2>
+            <p>Each customer's records are scoped to their own workspace, and every request is checked against it. Signing up gives access to your workspace only, never to anyone else's.</p>
+          </article>
+          <article class="rs-sec__card rs-sec__card--saffron reveal">
+            <p class="rs-sec__tag">Signatures</p>
+            <h2 class="rs-sec__title">Post-quantum signed reports</h2>
+            <p>Every report is fingerprinted with SHA-512 and signed with ML-DSA-65 (NIST FIPS 204). The public keys are published, so anyone can check a report without trusting us. <a href="/learn/verify-a-report">How to check one</a>.</p>
+          </article>
+          <article class="rs-sec__card rs-sec__card--teal reveal">
+            <p class="rs-sec__tag">Payments</p>
+            <h2 class="rs-sec__title">We never see your card</h2>
+            <p>Dodo Payments is the merchant of record and processes every payment. Card numbers never touch RootSystems systems.</p>
+          </article>
+          <article class="rs-sec__card rs-sec__card--violet reveal">
+            <p class="rs-sec__tag">Our own code</p>
+            <h2 class="rs-sec__title">We run our own gate</h2>
+            <p>Every change to every RootSystems product runs through the PQC Forge gate, which fails the build if new quantum-vulnerable cryptography appears. Sign-in forms are rate-limited and check where requests come from.</p>
+          </article>
+        </div>
+
+        <div class="rs-sec__report reveal">
+          <div>
+            <p class="rs-eyebrow rs-eyebrow--on-dark">Found a problem?</p>
+            <p class="rs-bundle__title">Report a vulnerability</p>
+            <p class="rs-bundle__lead">Email <a href="mailto:therootsystems.ops@gmail.com">therootsystems.ops@gmail.com</a> with the steps to reproduce it. Every report is read by a person. Our <a href="/.well-known/security.txt">security.txt</a> has the details.</p>
+          </div>
+        </div>
+
+        <p class="rs-note">Where your data is processed, and by which providers, is listed in the <a href="/privacy">privacy policy</a> and the <a href="/dpa">data processing agreement</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <%- include("../partials/footer") %>
+  <script src="/js/site.js"></script>
+</body>
+</html>

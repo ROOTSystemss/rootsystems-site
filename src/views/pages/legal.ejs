@@ -7,12 +7,7 @@
   <%- include("../partials/header") %>
 
   <main>
-    <section class="hero hero--compact">
-      <div class="wrap">
-        <p class="eyebrow eyebrow--on-dark">Legal</p>
-        <h1 class="hero__title"><%= pageName %></h1>
-      </div>
-    </section>
+    <%- include("../partials/page-hero", { eyebrow: "Legal", title: pageName, compact: true }) %>
 
     <section class="legal">
       <div class="wrap">

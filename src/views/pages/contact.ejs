@@ -4,15 +4,12 @@
 <body>
   <%- include("../partials/header") %>
   <main class="contact-page">
-    <section class="contact-hero">
-      <div class="wrap contact-hero__grid">
-        <div>
-          <p class="eyebrow">Contact RootSystems</p>
-          <h1>Bring us the problem, not a polished brief.</h1>
-          <p>Share a product question or suggestion. A clear note is enough to start.</p>
-        </div>
-      </div>
-    </section>
+    <%- include("../partials/page-hero", {
+      eyebrow: "Contact RootSystems",
+      title: "Bring us the problem, <em>not a polished brief.</em>",
+      lead: "A product question, a suggestion, or a compliance problem that deserves a focused tool. A clear note is enough to start.",
+      compact: true
+    }) %>
 
     <section class="contact-section">
       <div class="wrap contact-grid">

@@ -3,47 +3,91 @@
 <head>
   <%- include("../partials/head") %>
 </head>
-<body>
+<body class="page-pricing">
   <%- include("../partials/header") %>
 
   <main>
-    <section class="hero hero--compact">
-      <div class="wrap">
-        <p class="eyebrow eyebrow--on-dark">Pricing</p>
-        <h1 class="hero__title">Simple pricing, <span class="hero__title-accent">per product.</span></h1>
-        <p class="hero__subhead">
-          Each RootSystems product is priced and billed on its own. Direct software, no hidden charges.
-        </p>
+    <%- include("../partials/page-hero", {
+      eyebrow: "Pricing",
+      title: "Pay for the proof <em>you need.</em>",
+      lead: "Every product is priced on its own and starts free. Monthly plans, cancel any time, and payments run through Dodo Payments, so we never see your card."
+    }) %>
+
+    <nav class="rs-jump" aria-label="Jump to a product">
+      <div class="wrap rs-jump__inner">
+        <% tools.forEach(function (tool) { %><a class="rs-jump__link" href="#<%= tool.slug %>"><%= tool.name %></a><% }); %>
+        <a class="rs-jump__link" href="#by-invoice">PQC Forge</a>
+      </div>
+    </nav>
+
+    <section class="rs-plans">
+      <div class="wrap rs-plans__wrap">
+        <% var accents = { "offboarding-proof": "saffron", "tpra": "teal", "hipaa": "violet", "compliance-readiness": "saffron", "agent-governance": "violet" }; %>
+        <% tools.forEach(function (tool) { %>
+          <article id="<%= tool.slug %>" class="rs-plan rs-plan--<%= accents[tool.slug] || "saffron" %> reveal">
+            <header class="rs-plan__head">
+              <h2 class="rs-plan__name"><%= tool.name %></h2>
+              <p class="rs-plan__blurb"><%= tool.blurb %></p>
+            </header>
+
+            <div class="rs-plan__tiers">
+              <% tool.tiers.forEach(function (tier, i) { %>
+                <div class="rs-tier<%= i === 1 ? " rs-tier--lit" : "" %>">
+                  <p class="rs-tier__name"><%= tier.name %></p>
+                  <p class="rs-tier__price"><span class="rs-tier__cur">$</span><%= tier.price %><span class="rs-tier__per">/<%= tier.period %></span></p>
+                  <p class="rs-tier__note"><%= tier.note %></p>
+                </div>
+              <% }); %>
+            </div>
+
+            <% if (tool.slug === "compliance-readiness") { %>
+              <div class="rs-plan__standards">
+                <p class="rs-plan__sub">Each standard is its own plan</p>
+                <ul class="rs-chips">
+                  <% standards.standards.forEach(function (s) { %>
+                    <li><a class="rs-chip" href="/standards#<%= s.id %>"><%= s.name %> <span>$<%= s.price %></span></a></li>
+                  <% }); %>
+                </ul>
+                <p class="rs-plan__fine">Or all 12 standards for $<%= standards.BUNDLE_USD %>/mo. Your first assessment is free on any standard.</p>
+              </div>
+            <% } %>
+
+            <div class="rs-plan__foot">
+              <a class="rs-btn rs-btn--solid" href="<%= tool.href %>"><%= tool.slug === "agent-governance" ? "Open the console" : "Start free" %></a>
+              <% if (tool.slug === "compliance-readiness") { %><a class="rs-btn rs-btn--line" href="/standards">See all 12 standards</a><% } %>
+            </div>
+          </article>
+        <% }); %>
+
+        <article id="by-invoice" class="rs-plan rs-plan--teal reveal">
+          <header class="rs-plan__head">
+            <h2 class="rs-plan__name">PQC Forge</h2>
+            <p class="rs-plan__blurb">Finds the RSA and elliptic-curve cryptography a quantum computer will break, proposes the patch, and signs the evidence. Today it is delivered as a readiness report.</p>
+          </header>
+          <div class="rs-plan__tiers rs-plan__tiers--one">
+            <div class="rs-tier rs-tier--lit">
+              <p class="rs-tier__name">Readiness report</p>
+              <p class="rs-tier__price"><span class="rs-tier__cur">$</span>499<span class="rs-tier__per"> once</span></p>
+              <p class="rs-tier__note">We scan your repositories and servers and hand over a signed report. Invoiced.</p>
+            </div>
+          </div>
+          <div class="rs-plan__foot"><a class="rs-btn rs-btn--line" href="/contact">Talk to us</a></div>
+        </article>
       </div>
     </section>
 
-    <section class="products">
-      <div class="wrap">
-        <div class="pricing-grid-container">
-          <div class="pricing-flow-list">
-            <% tools.filter(function (tool) { return tool.slug !== "trust-proof" && !tool.name.toLowerCase().includes("trust proof"); }).forEach(function (tool) { %>
-              <div class="pricing-card reveal">
-                <h3 class="pricing-card__name"><%= tool.name %></h3>
-                <p class="pricing-card__blurb"><%= tool.blurb %></p>
-                <% if (tool.section === "ai-governance" || !tool.tiers) { %>
-                  <span class="pricing-contact-note">Floor 3 / Early access — contact for early access.</span>
-                  <a class="btn btn-ghost btn-ghost--on-light pricing-card__cta" href="/contact">Contact for early access</a>
-                <% } else { %>
-                  <div class="pricing-tiers">
-                    <% tool.tiers.forEach(function (tier) { %>
-                      <div class="pricing-tier">
-                        <p class="pricing-tier__name"><%= tier.name %></p>
-                        <p class="pricing-tier__price">$<%= tier.price %><span>/<%= tier.period %></span></p>
-                        <p class="pricing-tier__note"><%= tier.note %></p>
-                      </div>
-                    <% }); %>
-                  </div>
-                  <a class="btn btn-primary pricing-card__cta" href="<%= tool.href %>">Get started with <%= tool.name %></a>
-                <% } %>
-              </div>
-            <% }); %>
-          </div>
+    <section class="rs-faq">
+      <div class="wrap rs-faq__grid">
+        <div>
+          <p class="rs-eyebrow">Good to know</p>
+          <h2 class="rs-h2">Straight answers about paying us.</h2>
         </div>
+        <dl class="rs-faq__list">
+          <div><dt>Who handles payment?</dt><dd>Dodo Payments is the merchant of record. It takes the payment and handles sales tax, and we never see or store card numbers.</dd></div>
+          <div><dt>Can I cancel?</dt><dd>Yes, any time from your account. You keep access until the end of the period you paid for. See the <a href="/refund">refund policy</a>.</dd></div>
+          <div><dt>What does free include?</dt><dd>Each product has a free start: a small number of employees, one vendor, one assessment or a two-agent trial, so you can see a real signed report before paying.</dd></div>
+          <div><dt>Is my data safe when I sign up?</dt><dd>Each workspace is separate, passwords are stored only as hashes, and sensitive data is encrypted at rest. Read the <a href="/security">security page</a>.</dd></div>
+        </dl>
       </div>
     </section>
   </main>
@@ -52,4 +96,3 @@
   <script src="/js/site.js"></script>
 </body>
 </html>
-
