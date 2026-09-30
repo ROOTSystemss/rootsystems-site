@@ -95,6 +95,7 @@
 @media (prefers-reduced-motion: reduce) { .rs-hero__glow { animation: none; } }
 .rs-hero__inner { z-index: 2; }
 .rs-hero__lead { max-width: 30em; }
+.rs-hero__scope { max-width: 32em; margin: -8px 0 18px; color: var(--rs-saffron); font-size: 1.02rem; font-weight: 500; line-height: 1.5; }
 .rs-hero__title, .rs-hero__lead { text-shadow: 0 2px 24px rgba(7, 10, 18, 0.6); }
 @media (max-width: 1080px) and (min-width: 761px) {
   .rs-hero__img { left: 72%; opacity: 0.8; }
