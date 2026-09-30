@@ -10,13 +10,13 @@
     <%- include("../partials/page-hero", {
       eyebrow: "Pricing",
       title: "Pay for the proof <em>you need.</em>",
-      lead: "Every product is priced on its own and starts free. Monthly plans, cancel any time, and payments run through Dodo Payments, so we never see your card."
+      lead: "Every product is priced on its own and starts free. Monthly plans, cancel any time, and payments run through Dodo Payments, so we never see your card.",
+      noVideo: true
     }) %>
 
     <nav class="rs-jump" aria-label="Jump to a product">
       <div class="wrap rs-jump__inner">
         <% tools.forEach(function (tool) { %><a class="rs-jump__link" href="#<%= tool.slug %>"><%= tool.name %></a><% }); %>
-        <a class="rs-jump__link" href="#by-invoice">PQC Forge</a>
       </div>
     </nav>
 
@@ -30,15 +30,25 @@
               <p class="rs-plan__blurb"><%= tool.blurb %></p>
             </header>
 
-            <div class="rs-plan__tiers">
-              <% tool.tiers.forEach(function (tier, i) { %>
-                <div class="rs-tier<%= i === 1 ? " rs-tier--lit" : "" %>">
-                  <p class="rs-tier__name"><%= tier.name %></p>
-                  <p class="rs-tier__price"><span class="rs-tier__cur">$</span><%= tier.price %><span class="rs-tier__per">/<%= tier.period %></span></p>
-                  <p class="rs-tier__note"><%= tier.note %></p>
+            <% if (tool.tiers) { %>
+              <div class="rs-plan__tiers">
+                <% tool.tiers.forEach(function (tier, i) { %>
+                  <div class="rs-tier<%= i === 1 ? " rs-tier--lit" : "" %>">
+                    <p class="rs-tier__name"><%= tier.name %></p>
+                    <p class="rs-tier__price"><span class="rs-tier__cur">$</span><%= tier.price %><span class="rs-tier__per">/<%= tier.period %></span></p>
+                    <p class="rs-tier__note"><%= tier.note %></p>
+                  </div>
+                <% }); %>
+              </div>
+            <% } else if (tool.contactOnly) { %>
+              <div class="rs-plan__tiers rs-plan__tiers--one">
+                <div class="rs-tier rs-tier--lit">
+                  <p class="rs-tier__name">Early access</p>
+                  <p class="rs-tier__price">Contact us</p>
+                  <p class="rs-tier__note">Currently onboarding pilot customers. Reach out to discuss your use case.</p>
                 </div>
-              <% }); %>
-            </div>
+              </div>
+            <% } %>
 
             <% if (tool.slug === "compliance-readiness") { %>
               <div class="rs-plan__standards">
@@ -53,13 +63,17 @@
             <% } %>
 
             <div class="rs-plan__foot">
-              <a class="rs-btn rs-btn--solid" href="<%= tool.href %>"><%= tool.slug === "agent-governance" ? "Open the console" : "Start free" %></a>
+              <% if (tool.contactOnly) { %>
+                <a class="rs-btn rs-btn--line" href="<%= tool.href %>">Contact for early access</a>
+              <% } else { %>
+                <a class="rs-btn rs-btn--solid" href="<%= tool.href %>">Start free</a>
+              <% } %>
               <% if (tool.slug === "compliance-readiness") { %><a class="rs-btn rs-btn--line" href="/standards">See all 12 standards</a><% } %>
             </div>
           </article>
         <% }); %>
 
-        <article id="by-invoice" class="rs-plan rs-plan--teal reveal">
+        <article id="by-invoice" class="rs-plan rs-plan--teal reveal" style="display:none;">
           <header class="rs-plan__head">
             <h2 class="rs-plan__name">PQC Forge</h2>
             <p class="rs-plan__blurb">Finds the RSA and elliptic-curve cryptography a quantum computer will break, proposes the patch, and signs the evidence. Today it is delivered as a readiness report.</p>

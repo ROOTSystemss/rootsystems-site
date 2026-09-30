@@ -37,10 +37,8 @@
         <% sections.forEach(function (section, si) { %>
           <div class="rs-floor rs-floor--<%= section.color %>">
             <div class="rs-floor__head">
-              <span class="rs-floor__index">0<%= si + 1 %></span>
               <div>
                 <h3 class="rs-floor__label"><%= section.label %></h3>
-                <p class="rs-floor__lead"><%= section.lead %></p>
               </div>
             </div>
             <ol class="rs-list">
@@ -51,7 +49,7 @@
                     <span class="rs-item__question"><%= p.question %></span>
                     <span class="rs-item__desc"><%= p.description %></span>
                     <span class="rs-item__meta">
-                      <span class="rs-tag rs-tag--<%= p.buy %>"><%= p.buy === "self-serve" ? "Start free" : (p.status === "PILOT" ? "Pilot" : (p.status === "SERVICE" ? "Report" : "By invoice")) %></span>
+                      <span class="rs-tag rs-tag--<%= p.buy %>"><%= p.status === "LIVE" ? "Live" : (p.status === "PILOT" ? "In development" : (p.status === "SERVICE" ? "Live" : "Coming soon")) %></span>
                       <span class="rs-item__price"><%= p.price %></span>
                       <span class="rs-item__go"><%= p.buy === "self-serve" ? "Sign up" : "Talk to us" %> <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span>
                     </span>
@@ -61,6 +59,26 @@
             </ol>
           </div>
         <% }); %>
+      </div>
+    </section>
+
+    <section id="approach" class="rs-approach">
+      <div class="wrap">
+        <div class="rs-approach__grid">
+          <div>
+            <h2 class="rs-h2">Our approach</h2>
+            <p>RootSystems is a small, independent software studio building technical guardrails for an AI-native world. We don't believe in security theater or black-box compliance.</p>
+            <p>Every tool we build is deterministic, mathematically verifiable, and designed to fail closed. We rely on public-key cryptography and timestamping rather than asking for your blind trust.</p>
+          </div>
+          <div>
+            <h3 class="rs-h3">Core principles</h3>
+            <ul class="rs-list">
+              <li><strong>Verifiable:</strong> Tamper-evident reports signed with post-quantum cryptography.</li>
+              <li><strong>Deterministic:</strong> Rules-based scoring. Zero AI hallucination in compliance decisions.</li>
+              <li><strong>Proactive:</strong> Automated checks that run without needing a human to click a button.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 

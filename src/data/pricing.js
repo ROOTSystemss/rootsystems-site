@@ -65,12 +65,8 @@ const tools = [
     name: "Agent Governance console",
     section: "grc",
     blurb: "Authority Atlas, Trust Proof and Agent Contract Gap in one console: signed agent certificates, a live action ledger, named sign-off and insurance coverage.",
-    href: "https://agent-contract-gap.onrender.com/console",
-    tiers: [
-      { name: "Trial", price: "0", period: "mo", note: "Up to 2 active agents" },
-      { name: "Team", price: "299", period: "mo", note: "Up to 10 active agents, approvals, coverage" },
-      { name: "Business", price: "999", period: "mo", note: "Up to 100 active agents, priority support" }
-    ]
+    href: "/contact",
+    contactOnly: true
   }
 ];
 
