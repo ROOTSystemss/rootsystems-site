@@ -7,9 +7,11 @@
 
     <section class="rs-hero">
       <div class="rs-hero__media" aria-hidden="true">
-        <video class="rs-hero__video" autoplay muted loop playsinline preload="metadata" disablepictureinpicture disableremoteplayback tabindex="-1" poster="/images/rootsystems_tree_poster.jpg">
-          <source src="/images/rootsystems_tree.mp4" type="video/mp4">
-        </video>
+        <picture>
+          <source srcset="/images/rootsystems-tree-hero.webp" type="image/webp">
+          <img class="rs-hero__img" src="/images/rootsystems-tree-hero.jpg" alt="" width="1280" height="668" fetchpriority="high" decoding="async">
+        </picture>
+        <span class="rs-hero__glow"></span>
       </div>
       <div class="wrap rs-hero__inner">
         <p class="rs-kicker"><span class="rs-kicker__dot"></span>Compliance software that produces evidence</p>
@@ -17,7 +19,7 @@
         <p class="rs-hero__lead">When an auditor, a client or a regulator asks <em>“can you prove it?”</em>, RootSystems gives you a report that answers, signed so anyone can check it without trusting us.</p>
         <div class="rs-hero__actions">
           <a class="rs-btn rs-btn--solid" href="/pricing">See plans and pricing</a>
-          <a class="rs-btn rs-btn--line" href="#products">Browse the products</a>
+          <a class="rs-btn rs-btn--line" href="#verify">How verification works</a>
         </div>
         <ul class="rs-proofline" aria-label="Security standards">
           <li><strong>ML-DSA-65</strong> post-quantum signatures (NIST FIPS 204)</li>
@@ -27,57 +29,31 @@
       </div>
     </section>
 
-    <section id="products" class="rs-products">
+    <section id="floors" class="rs-floors">
       <div class="wrap">
         <header class="rs-section-head">
-          <p class="rs-eyebrow">Products</p>
-          <h2 class="rs-h2">Start with the question<br>you keep being asked.</h2>
+          <p class="rs-eyebrow">Three floors</p>
+          <h2 class="rs-h2">One building. Every floor<br>answers a different question.</h2>
         </header>
-
-        <% sections.forEach(function (section, si) { %>
-          <div class="rs-floor rs-floor--<%= section.color %>">
-            <div class="rs-floor__head">
-              <div>
-                <h3 class="rs-floor__label"><%= section.label %></h3>
-              </div>
-            </div>
-            <ol class="rs-list">
-              <% products.filter(function (p) { return p.section === section.slug; }).forEach(function (p) { %>
-                <li class="rs-item reveal">
-                  <a class="rs-item__link" href="<%= p.href %>">
-                    <span class="rs-item__name"><%= p.name %></span>
-                    <span class="rs-item__question"><%= p.question %></span>
-                    <span class="rs-item__desc"><%= p.description %></span>
-                    <span class="rs-item__meta">
-                      <span class="rs-tag rs-tag--<%= p.buy %>"><%= p.status === "LIVE" ? "Live" : (p.status === "PILOT" ? "In development" : (p.status === "SERVICE" ? "Live" : "Coming soon")) %></span>
-                      <span class="rs-item__price"><%= p.price %></span>
-                      <span class="rs-item__go"><%= p.buy === "self-serve" ? "Sign up" : "Talk to us" %> <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span>
-                    </span>
-                  </a>
-                </li>
-              <% }); %>
-            </ol>
-          </div>
-        <% }); %>
-      </div>
-    </section>
-
-    <section id="approach" class="rs-approach">
-      <div class="wrap">
-        <div class="rs-approach__grid">
-          <div>
-            <h2 class="rs-h2">Our approach</h2>
-            <p>RootSystems is a small, independent software studio building technical guardrails for an AI-native world. We don't believe in security theater or black-box compliance.</p>
-            <p>Every tool we build is deterministic, mathematically verifiable, and designed to fail closed. We rely on public-key cryptography and timestamping rather than asking for your blind trust.</p>
-          </div>
-          <div>
-            <h3 class="rs-h3">Core principles</h3>
-            <ul class="rs-list">
-              <li><strong>Verifiable:</strong> Tamper-evident reports signed with post-quantum cryptography.</li>
-              <li><strong>Deterministic:</strong> Rules-based scoring. Zero AI hallucination in compliance decisions.</li>
-              <li><strong>Proactive:</strong> Automated checks that run without needing a human to click a button.</li>
-            </ul>
-          </div>
+        <div class="rs-floors__grid">
+          <a class="rs-floorcard rs-floorcard--saffron reveal" href="/pricing#offboarding-proof">
+            <span class="rs-floorcard__num">Floor 1</span>
+            <h3 class="rs-floorcard__title">Compliance proof</h3>
+            <p class="rs-floorcard__text">Offboarding, vendor risk, HIPAA and readiness for twelve standards. Evidence an auditor can check.</p>
+            <span class="rs-floorcard__go">See the tools <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span>
+          </a>
+          <a class="rs-floorcard rs-floorcard--green reveal" href="/pricing#by-invoice">
+            <span class="rs-floorcard__num">Floor 2</span>
+            <h3 class="rs-floorcard__title">Post-quantum readiness</h3>
+            <p class="rs-floorcard__text">Find the cryptography a quantum computer will break, and the patch that fixes it.</p>
+            <span class="rs-floorcard__go">See the tools <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span>
+          </a>
+          <a class="rs-floorcard rs-floorcard--violet reveal" href="/pricing#agent-governance">
+            <span class="rs-floorcard__num">Floor 3</span>
+            <h3 class="rs-floorcard__title">AI agent governance</h3>
+            <p class="rs-floorcard__text">Signed agent authority, a ledger of every action, and a check against your contracts and insurance.</p>
+            <span class="rs-floorcard__go">See the tools <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span>
+          </a>
         </div>
       </div>
     </section>

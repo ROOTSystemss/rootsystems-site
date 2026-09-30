@@ -28,7 +28,7 @@ const sections = [
     slug: "quantum",
     label: "Post-quantum readiness",
     lead: "Find the cryptography a quantum computer will break, and the patch that fixes it.",
-    color: "teal"
+    color: "green"
   }
 ];
 

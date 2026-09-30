@@ -10,7 +10,7 @@
     <%- include("../partials/page-hero", {
       eyebrow: "Compliance Readiness",
       title: "Twelve standards. <em>One way to prove them.</em>",
-      lead: "The same readiness check, evidence fingerprints and signed report for every standard. Pay only for the standards you need, and your first assessment is free."
+      lead: "The same readiness check, evidence fingerprints and signed report for every standard. Pick only the standards you need, and your first assessment is free."
     }) %>
 
     <section class="rs-standards">
@@ -29,7 +29,6 @@
                 <article id="<%= s.id %>" class="rs-std reveal">
                   <header class="rs-std__head">
                     <h3 class="rs-std__name"><%= s.name %></h3>
-                    <p class="rs-std__price">$<%= s.price %><span>/mo</span></p>
                   </header>
                   <dl class="rs-std__facts">
                     <dt>Who needs it</dt><dd><%= s.who %></dd>
@@ -48,10 +47,13 @@
         <div class="rs-bundle reveal">
           <div>
             <p class="rs-eyebrow rs-eyebrow--on-dark">Every standard</p>
-            <p class="rs-bundle__title">All 12 standards for <span>$<%= standards.BUNDLE_USD %>/mo</span></p>
-            <p class="rs-bundle__lead">One workspace, every check, every signed report. HIPAA has its own tool, the <a href="/pricing#hipaa">HIPAA Compliance Tool</a>.</p>
+            <p class="rs-bundle__title">All 12 standards in <span>one workspace</span></p>
+            <p class="rs-bundle__lead">Every check, every signed report. Pay per standard or take them all; the plans are on the <a href="/pricing#compliance-readiness">pricing page</a>. HIPAA has its own tool, the <a href="/pricing#hipaa">HIPAA Compliance Tool</a>.</p>
           </div>
-          <a class="rs-btn rs-btn--solid" href="<%= standards.signupHref %>">Start free</a>
+          <div class="rs-hero__actions">
+            <a class="rs-btn rs-btn--solid" href="<%= standards.signupHref %>">Start free</a>
+            <a class="rs-btn rs-btn--line" href="/pricing#compliance-readiness">See pricing</a>
+          </div>
         </div>
 
         <p class="rs-note">Readiness checks, not certifications. Only a licensed CPA firm can issue a SOC 2 report, only an accredited body can certify ISO 27001 or ISO 42001, and only an authorized assessor can grant CMMC certification. <a href="/learn/readiness-vs-certification">Why a readiness check still matters</a>.</p>

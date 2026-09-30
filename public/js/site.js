@@ -202,7 +202,7 @@
   // index within its own parent to compute the delay. Skipped entirely
   // under reduced motion (handled already by initReveal/CSS above).
   function initStagger() {
-    document.querySelectorAll(".product-grid--simple, .pricing-flow-list").forEach(function (group) {
+    document.querySelectorAll(".product-grid--simple, .pricing-flow-list, .rs-floors__grid").forEach(function (group) {
       var cards = group.querySelectorAll(".reveal");
       cards.forEach(function (card, index) {
         if (!card.style.transitionDelay) {

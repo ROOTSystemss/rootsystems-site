@@ -17,12 +17,13 @@
     <nav class="rs-jump" aria-label="Jump to a product">
       <div class="wrap rs-jump__inner">
         <% tools.forEach(function (tool) { %><a class="rs-jump__link" href="#<%= tool.slug %>"><%= tool.name %></a><% }); %>
+        <a class="rs-jump__link" href="#by-invoice">PQC Forge</a>
       </div>
     </nav>
 
     <section class="rs-plans">
       <div class="wrap rs-plans__wrap">
-        <% var accents = { "offboarding-proof": "saffron", "tpra": "teal", "hipaa": "violet", "compliance-readiness": "saffron", "agent-governance": "violet" }; %>
+        <% var accents = { "offboarding-proof": "saffron", "tpra": "saffron", "hipaa": "saffron", "compliance-readiness": "saffron", "agent-governance": "violet" }; %>
         <% tools.forEach(function (tool) { %>
           <article id="<%= tool.slug %>" class="rs-plan rs-plan--<%= accents[tool.slug] || "saffron" %> reveal">
             <header class="rs-plan__head">
@@ -73,7 +74,7 @@
           </article>
         <% }); %>
 
-        <article id="by-invoice" class="rs-plan rs-plan--teal reveal" style="display:none;">
+        <article id="by-invoice" class="rs-plan rs-plan--green reveal">
           <header class="rs-plan__head">
             <h2 class="rs-plan__name">PQC Forge</h2>
             <p class="rs-plan__blurb">Finds the RSA and elliptic-curve cryptography a quantum computer will break, proposes the patch, and signs the evidence. Today it is delivered as a readiness report.</p>

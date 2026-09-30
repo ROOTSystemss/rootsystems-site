@@ -5,7 +5,7 @@ const APP = "https://ai-compliance-readiness.onrender.com";
 
 const groups = [
   { slug: "security", label: "Security & trust", color: "saffron", lead: "The frameworks customers and auditors ask for first." },
-  { slug: "privacy", label: "Privacy", color: "teal", lead: "Personal data laws in the EU, UK and California." },
+  { slug: "privacy", label: "Privacy", color: "green", lead: "Personal data laws in the EU, UK and California." },
   { slug: "regulated", label: "Regulated sectors", color: "violet", lead: "Defense contractors, essential services and financial firms." },
   { slug: "ai", label: "AI governance", color: "saffron", lead: "How you manage, test and disclose AI." }
 ];
