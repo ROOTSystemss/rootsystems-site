@@ -63,4 +63,15 @@ app.use((req, res) => {
   });
 });
 
+// Vercel treats an unhandled throw as FUNCTION_INVOCATION_FAILED. Keep a
+// last-resort HTML response so a missing template cannot take the function down.
+app.use((err, req, res, next) => {
+  console.error("[site]", err && err.stack ? err.stack : err);
+  if (res.headersSent) return next(err);
+  res.status(500).type("html").send(
+    "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>Error — RootSystems</title></head>" +
+      "<body><p>This page is unavailable. Please try again shortly.</p></body></html>"
+  );
+});
+
 module.exports = app;
