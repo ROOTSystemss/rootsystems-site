@@ -7,6 +7,7 @@ const siteRoutes = require("./routes/siteRoutes");
 // const blogRoutes = require("./routes/blogRoutes");
 
 const app = express();
+app.set('trust proxy', 1);
 app.disable("x-powered-by");
 require("./utils/security").installSecurity(app, { sessions: false });
 
