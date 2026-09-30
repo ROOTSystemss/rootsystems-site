@@ -7,7 +7,12 @@
   <%- include("../partials/header") %>
 
   <main>
-    <%- include("../partials/page-hero", { eyebrow: "Legal", title: pageName, compact: true }) %>
+    <%- include("../partials/page-hero", {
+      eyebrow: "Legal",
+      title: pageName,
+      compact: true,
+      noVideo: true
+    }) %>
 
     <section class="legal">
       <div class="wrap">
