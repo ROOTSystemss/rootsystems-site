@@ -5,29 +5,7 @@ function installSecurity(app, { sessions = true } = {}) {
   if (sessions && process.env.NODE_ENV === "production") {
     const secret = process.env.SESSION_SECRET || "";
     if (secret.length < 32 || /dev-secret|change.this|replace|your.secret/i.test(secret)) {
-      throw new Error("Production requires a non-placeholder SESSION_SECRET of at least 32 characters.");
-    }
-  }
-  app.disable("x-powered-by");
-  const attempts = new Map();
-  app.use((req, res, next) => {
-    res.set({
-      "X-Content-Type-Options": "nosniff",
-      "X-Frame-Options": "DENY",
-      "Referrer-Policy": "no-referrer",
-      "Content-Security-Policy": "frame-ancestors 'none'; object-src 'none'; base-uri 'self'",
-      "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
-    });
-    if (!/\.(css|js|svg|png|jpg|webp|woff2?)$/i.test(req.path)) res.set("Cache-Control", "no-store");
-    const unsafe = !["GET", "HEAD", "OPTIONS"].includes(req.method);
-    // Payment callbacks authenticate their own raw body with the provider signature.
-    if (unsafe && req.path !== "/billing/webhook") {
-      let source, target;
-      try {
-        source = new URL(req.get("origin") || req.get("referer") || "");
-        target = new URL(process.env.APP_URL || req.protocol + "://" + req.get("host"));
-      } catch {
-        return res.status(403).type("text").send("Request origin could not be verified. Reload this page and try again.");
+      throw new Error("Production requires.status(403).send('<html style="background:#070a12;color:#fff;padding:40px;text-align:center"><h2 style="color:#fff">Session Expired</h2><button onclick="window.history.back()" style="padding:10px 20px;background:#FF9933;border:none;border-radius:6px;font-weight:bold;cursor:pointer">Go Back</button></html>');
       }
       if (source.origin !== target.origin || req.get("sec-fetch-site") === "cross-site") {
         return res.status(403).type("text").send("Cross-site form submissions are not allowed.");
