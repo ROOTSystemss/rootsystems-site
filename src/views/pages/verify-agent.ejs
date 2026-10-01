@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head><%- include("../partials/head") %></head>
+<body class="page-verify-agent">
+  <%- include("../partials/header") %>
+  <main class="contact-page">
+    <%- include("../partials/page-hero", {
+      eyebrow: "Authority Atlas",
+      title: "Check what an AI agent <em>is allowed to do.</em>",
+      lead: "Paste an agent certificate. We ask Authority Atlas whether it is genuine, still in date and not revoked, and show the authority it records.",
+      compact: true,
+      noVideo: true
+    }) %>
+
+    <section class="contact-section verify-agent">
+      <div class="wrap contact-grid">
+        <div class="contact-intro">
+          <h2>A signed statement, checked live.</h2>
+          <p>An agent certificate is a signed statement from the organization that runs the agent: what it may do, its spending limits and when the statement ends. The issuer can revoke it at any time, so every check here asks Authority Atlas again.</p>
+          <div class="contact-note">
+            <strong>Nothing you paste is stored.</strong>
+            <span>The certificate is sent to Authority Atlas for this one check and is not kept by this site.</span>
+          </div>
+        </div>
+
+        <div class="verify-agent__main">
+          <form class="contact-form" method="post" action="/verify-agent">
+            <% if (error) { %><div class="form-alert" role="alert"><%= error %></div><% } %>
+            <label class="form-field">
+              <span>Agent certificate</span>
+              <textarea name="certificate" rows="6" maxlength="8000" spellcheck="false" autocomplete="off" placeholder="eyJhbGciOi…" required><%= value %></textarea>
+            </label>
+            <div class="contact-form__footer">
+              <button class="btn btn-primary" type="submit">Check certificate</button>
+              <span>The first check after a quiet spell can take up to a minute.</span>
+            </div>
+          </form>
+
+          <% if (result) { %>
+            <% const cert = result.certificate; %>
+            <article class="agent-result agent-result--<%= result.valid ? 'valid' : 'invalid' %>" aria-live="polite">
+              <header class="agent-result__head">
+                <span class="agent-result__mark" aria-hidden="true"><%= result.valid ? '✓' : '!' %></span>
+                <div>
+                  <p class="agent-result__state"><%= result.valid ? 'Valid certificate' : 'Not valid' %></p>
+                  <p class="agent-result__sub"><%= result.valid ? 'Genuine, in date and not revoked, as of this check.' : result.message %></p>
+                </div>
+              </header>
+
+              <% if (cert) { %>
+                <dl class="agent-result__facts">
+                  <div><dt>Agent</dt><dd><%= cert.agentName %><% if (cert.agentId && cert.agentId !== cert.agentName) { %> <code><%= cert.agentId %></code><% } %></dd></div>
+                  <% if (cert.organization) { %><div><dt>Issued by</dt><dd><%= cert.organization %></dd></div><% } %>
+                  <% if (cert.issued) { %><div><dt>Issued</dt><dd><%= cert.issued %></dd></div><% } %>
+                  <% if (cert.expiry) { %><div><dt>Validity</dt><dd><%= cert.expiry %></dd></div><% } %>
+                </dl>
+
+                <div class="agent-result__block">
+                  <p class="agent-result__label">Permissions</p>
+                  <% if (cert.permissions.length) { %>
+                    <ul class="agent-result__chips">
+                      <% cert.permissions.forEach(function (p) { %><li><code><%= p %></code></li><% }) %>
+                    </ul>
+                    <% if (cert.permissions.includes('*')) { %><p class="agent-result__broad">This certificate grants everything (*).</p><% } %>
+                  <% } else { %>
+                    <p class="agent-result__muted">None recorded.</p>
+                  <% } %>
+                </div>
+
+                <div class="agent-result__block">
+                  <p class="agent-result__label">Limits</p>
+                  <% if (cert.limits.length) { %>
+                    <ul class="agent-result__limits"><% cert.limits.forEach(function (l) { %><li><%= l %></li><% }) %></ul>
+                  <% } else { %>
+                    <p class="agent-result__muted">No limits recorded.</p>
+                  <% } %>
+                </div>
+              <% } %>
+
+              <p class="agent-result__note">The organization name is the issuer's own claim and is not independently verified. A valid certificate shows what the issuer declared, not what the agent actually did. Not legal or insurance advice.</p>
+            </article>
+          <% } %>
+        </div>
+      </div>
+    </section>
+  </main>
+  <%- include("../partials/footer") %>
+  <script src="/js/site.js"></script>
+</body>
+</html>

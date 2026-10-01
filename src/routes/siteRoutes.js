@@ -15,6 +15,7 @@ const {
   refund,
   dpa
 } = require("../controllers/siteController");
+const { verifyAgentPage, verifyAgentSubmit } = require("../controllers/verifyAgentController");
 
 const router = Router();
 
@@ -27,6 +28,8 @@ router.post("/contact", submitContact);
 router.get("/pricing", pricingPage);
 router.get("/standards", standardsPage);
 router.get("/security", securityPage);
+router.get("/verify-agent", verifyAgentPage);
+router.post("/verify-agent", verifyAgentSubmit);
 router.get("/learn", learnPage);
 router.get("/learn/:slug", guidePage);
 router.get("/.well-known/security.txt", securityTxt);

@@ -17,7 +17,7 @@ function installSecurity(app, { sessions = true } = {}) {
       return res.status(403).type("text").send("Cross-site form submissions are not allowed.");
     }
 
-    if (req.method === "POST" && /^\/(login|signup|forgot-password|reset-password|contact)$/.test(req.path)) {
+    if (req.method === "POST" && /^\/(login|signup|forgot-password|reset-password|contact|verify-agent)$/.test(req.path)) {
       const now = Date.now();
       for (const [key, value] of attempts) {
         if (value.until <= now) attempts.delete(key);
