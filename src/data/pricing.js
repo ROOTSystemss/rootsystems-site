@@ -1,12 +1,13 @@
 // Pricing data for the progressive-disclosure /pricing page (three entry
 // choices — one tool / a bundle / everything — each revealing its own list).
 //
-// `tools` mirrors products.js except Trust Proof, which has no interface yet and is not sold. Offboarding Proof/TPRA/HIPAA carry
-// CONFIRMED, real tier numbers — they match each app's own billingLib.js
-// plan definitions and the actual Dodo Payments products each app's
-// checkout uses. Every other tool has no `tiers` and is marked
-// `contactOnly: true` — there is no real number to show yet, so the page
-// renders "Contact for early access" instead of a fabricated one.
+// `tools` mirrors products.js, with Authority Atlas, Trust Proof and Agent
+// Contract Gap sold together as the Agent Governance console. Tier numbers
+// and notes must match each app's own plan definitions (billingLib.js, or
+// src/governance/billing.ts for the console): plans differ by counts, not
+// by features, so notes describe the count each plan allows. A tool without
+// real numbers has no `tiers` and is marked `contactOnly: true`, so the page
+// renders "Contact for early access" instead of a fabricated price.
 //
 // `bundles` and `everything` intentionally carry no prices at all — bundle/
 // combined pricing hasn't been decided, so both route to /contact rather
@@ -19,9 +20,9 @@ const tools = [
     blurb: "Verifiable proof that departing employees actually lost access — on the day it happened, not weeks later.",
     href: "https://offboarding-proof.onrender.com/signup",
     tiers: [
-      { name: "Free", price: "0", period: "mo", note: "Up to 5 employees monitored, core connectors" },
-      { name: "Starter", price: "39", period: "mo", note: "Up to 25 employees, all connectors, tamper-evident reports" },
-      { name: "Pro", price: "149", period: "mo", note: "Unlimited employees, priority support" }
+      { name: "Free", price: "0", period: "mo", note: "Up to 5 employees monitored" },
+      { name: "Starter", price: "39", period: "mo", note: "Up to 25 employees monitored" },
+      { name: "Pro", price: "149", period: "mo", note: "Unlimited employees" }
     ]
   },
   {
@@ -32,8 +33,8 @@ const tools = [
     href: "https://tpra.onrender.com/signup",
     tiers: [
       { name: "Free", price: "0", period: "mo", note: "1 vendor assessment" },
-      { name: "Starter", price: "29", period: "mo", note: "Core questionnaire, tamper-evident reports" },
-      { name: "Pro", price: "79", period: "mo", note: "Persistent risk register, team roles" }
+      { name: "Starter", price: "29", period: "mo", note: "Up to 10 vendor assessments in total" },
+      { name: "Pro", price: "79", period: "mo", note: "Unlimited vendor assessments" }
     ]
   },
   {
@@ -43,9 +44,9 @@ const tools = [
     blurb: "A guided risk assessment built around what HIPAA actually requires you to show, not generic checkbox theater.",
     href: "https://hipaa-g37n.onrender.com/signup",
     tiers: [
-      { name: "Free", price: "0", period: "mo", note: "1 assessment" },
-      { name: "Starter", price: "59", period: "mo", note: "Security Rule assessment, risk register" },
-      { name: "Pro", price: "149", period: "mo", note: "BAA vendor tracking, team roles" }
+      { name: "Free", price: "0", period: "mo", note: "1 risk assessment" },
+      { name: "Starter", price: "59", period: "mo", note: "Up to 3 risk assessments per rolling 12 months" },
+      { name: "Pro", price: "149", period: "mo", note: "Unlimited risk assessments" }
     ]
   },
   {
@@ -65,8 +66,12 @@ const tools = [
     name: "Agent Governance console",
     section: "grc",
     blurb: "Authority Atlas, Trust Proof and Agent Contract Gap in one console: signed agent certificates, a live action ledger, named sign-off and insurance coverage.",
-    href: "/contact",
-    contactOnly: true
+    href: "https://agent-contract-gap.onrender.com/console",
+    tiers: [
+      { name: "Trial", price: "0", period: "mo", note: "Up to 2 active agent certificates" },
+      { name: "Team", price: "299", period: "mo", note: "Up to 10 active agent certificates" },
+      { name: "Business", price: "999", period: "mo", note: "Up to 100 active agent certificates, priority support" }
+    ]
   }
 ];
 

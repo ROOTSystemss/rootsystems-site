@@ -1,8 +1,8 @@
 # Refund Policy
 
-**Last updated: August 12, 2026**
+**Last updated: October 2, 2026**
 
-This Refund Policy explains how refunds work for RootSystems' subscription products, including Offboarding Proof, TPRA, the HIPAA Compliance Tool, and AI Compliance Readiness.
+This Refund Policy explains how refunds work for RootSystems' subscription products, including Offboarding Proof, TPRA, the HIPAA Compliance Tool, AI Compliance Readiness, and the Agent Governance console (Authority Atlas, Trust Proof, and Agent Contract Gap).
 
 ## 1. Free Trials and Free Tiers
 
@@ -16,20 +16,24 @@ Outside of this 14-day window, refunds are considered on a case-by-case basis. W
 
 ## 3. Cancellations
 
-You can cancel your subscription at any time from your account settings. Cancelling stops future billing; you'll continue to have access to the Service through the end of your current paid billing period. We do not provide partial refunds for unused time within a billing period outside of the 14-day window described above.
+You can cancel your subscription at any time by emailing therootsystems.ops@gmail.com from the address on your account. We confirm the cancellation by reply. Cancelling stops future billing; you'll continue to have access to the Service through the end of your current paid billing period. We do not provide partial refunds for unused time within a billing period outside of the 14-day window described above.
 
-## 4. How Refunds Are Processed
+## 4. Invoiced Work
+
+Work we invoice directly, such as a PQC Forge readiness report or a guided pilot, is refunded according to the terms in that invoice or order. If the invoice says nothing about refunds, contact us and we will handle it case by case, in the same spirit as this policy.
+
+## 5. How Refunds Are Processed
 
 Approved refunds are issued to the original payment method used at purchase, through our payment processor. Please allow up to 10 business days for the refund to appear, depending on your bank or card issuer's processing times.
 
-## 5. Non-Refundable Circumstances
+## 6. Non-Refundable Circumstances
 
 We may decline a refund request if:
 - The request falls well outside the 14-day window and there's no service issue on our end
 - The account shows evidence of abuse of the refund policy (e.g. repeated subscribe-refund cycles)
 - The subscription was purchased through a reseller or third party, in which case their refund terms apply
 
-## 6. Contact Us
+## 7. Contact Us
 
 For any billing or refund questions, reach out to us directly at therootsystems.ops@gmail.com. We'd rather have a real conversation and get things right than have you navigate a rigid policy alone.
 

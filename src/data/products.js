@@ -38,7 +38,7 @@ const products = [
     name: "Offboarding Proof",
     question: "Did everyone who left actually lose access?",
     description:
-      "Checks Google Workspace, Microsoft 365, Slack, GitHub, Okta, AWS and more after each departure, and produces a signed record: fully revoked, or exactly what is still open.",
+      "Checks Google Workspace, Microsoft 365, Slack, GitHub and Okta after each departure, and produces a signed record: fully revoked, or exactly what is still open.",
     price: "From $39/mo",
     status: "LIVE",
     buy: "self-serve",

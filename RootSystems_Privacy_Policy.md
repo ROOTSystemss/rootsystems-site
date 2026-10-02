@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Last updated: September 27, 2026**
+**Last updated: October 2, 2026**
 
 This Privacy Policy explains how RootSystems ("we," "us," or "our") collects, uses, and protects personal data when you visit rootsystems.app or use our products: Offboarding Proof, HIPAA Compliance, TPRA, AI Compliance Readiness, Authority Atlas, Trust Proof, Agent Contract Gap, and PQC Forge (together, the "Services"). One policy covers all of them.
 
@@ -17,7 +17,7 @@ RootSystems is an independent software business owned and operated by an individ
 
 **Content you add to the Services**: questionnaire responses, assessment results, risk registers, vendor records, employee and contractor records, AI-agent profiles and certificates, and the reports generated from them.
 
-**Integration data**: when you connect a system (such as Google Workspace, Microsoft 365, Slack, GitHub, Okta, or AWS in Offboarding Proof), we read only what a check needs, such as whether a person's account is still active. We do not use this access for anything else.
+**Integration data**: when you connect a system (such as Google Workspace, Microsoft 365, Slack, GitHub, or Okta in Offboarding Proof), we read only what a check needs, such as whether a person's account is still active. We do not use this access for anything else.
 
 **Usage and security logs**: login times, actions taken in the product, and technical data such as IP address and browser type, kept for security and troubleshooting.
 
