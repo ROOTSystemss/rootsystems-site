@@ -45,11 +45,10 @@
   .site-nav__link::after { display: none; }
 }
 
-/* ---------- home hero: the tree as the backdrop ----------
+/* ---------- home hero: the tree ----------
    A still frame (no zoom) whose dark edges match --rs-ink, so it has no
-   visible frame. It fills the hero height and sits right of centre; a left
-   shade keeps the headline legible and a slow glow breathes over the crown.
-   The image is 1280x668: at the 860px height cap it is scaled at most 1.3x. */
+   visible frame; a slow glow breathes over the crown. Desktop and phone
+   layouts are set in the two media queries below. */
 .rs-hero__media {
   position: absolute;
   inset: 0;
@@ -97,14 +96,40 @@
 .rs-hero__lead { max-width: 30em; }
 .rs-hero__scope { max-width: 32em; margin: -8px 0 18px; color: var(--rs-saffron); font-size: 1.02rem; font-weight: 500; line-height: 1.5; }
 .rs-hero__title, .rs-hero__lead { text-shadow: 0 2px 24px rgba(7, 10, 18, 0.6); }
-@media (max-width: 1080px) and (min-width: 761px) {
-  .rs-hero__img { left: 72%; opacity: 0.8; }
-  .rs-hero__glow { left: 72%; }
-  .rs-hero__media::after { background: linear-gradient(90deg, var(--rs-ink) 0%, rgba(7, 10, 18, 0.9) 34%, rgba(7, 10, 18, 0.45) 60%, rgba(7, 10, 18, 0.1) 80%); }
+/* Desktop: text on the left, the tree on its own on the right - nothing laid
+   over it. The desktop file is the tree cropped from the dark margins (940x668,
+   plus a prepared 2x), and it is never drawn wider than that, so it stays sharp. */
+@media (min-width: 1100px) {
+  .rs-hero__media {
+    left: calc(max(0px, (100vw - 1240px) / 2) + 540px);
+    right: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rs-hero__img {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 940px;
+    height: auto;
+    max-height: calc(100% - 64px);
+    aspect-ratio: 940 / 668;
+    object-fit: contain;
+    transform: none;
+    -webkit-mask-image: radial-gradient(closest-side at 50% 50%, #000 66%, transparent 100%);
+    mask-image: radial-gradient(closest-side at 50% 50%, #000 66%, transparent 100%);
+  }
+  .rs-hero__media::after { display: none; }
+  .rs-hero__glow { top: 50%; left: 50%; width: 100%; transform: translate(-50%, -50%); }
+  .rs-hero__inner > * { max-width: 540px; }
 }
-/* Phones: the tree sits above the text at full width. Showing the frame at
-   150% crops only its dark margins; the tree spans the middle two thirds. */
-@media (max-width: 760px) {
+/* Phones and tablets: the tree sits above the text at full width. Showing the
+   frame at 150% crops only its dark margins; the tree spans the middle two thirds. */
+@media (max-width: 1099px) {
+  .rs-hero { min-height: 0; display: block; }
+  .rs-hero__inner { padding-top: 0; padding-bottom: 72px; }
   .rs-hero__media { position: relative; inset: auto; height: 78vw; max-height: 460px; }
   .rs-hero__img {
     top: 0; left: 50%; height: auto; width: 150%;
@@ -116,7 +141,7 @@
   .rs-hero__glow { top: 4%; left: 50%; width: 110vw; }
   .rs-hero__inner { margin-top: 4px; }
 }
-@media (max-width: 760px) and (min-width: 461px) {
+@media (max-width: 1099px) and (min-width: 461px) {
   .rs-hero__img { width: min(150%, 900px); }
 }
 
