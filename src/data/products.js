@@ -61,7 +61,7 @@ const products = [
     question: "Who approved this vendor, and on what basis?",
     description:
       "Consistent vendor risk assessments with a review trail, so the answer is on record before a client asks.",
-    price: "From $79/mo",
+    price: "From $99/mo",
     status: "LIVE",
     buy: "self-serve",
     href: "https://tpra.onrender.com/signup"
@@ -116,7 +116,7 @@ const products = [
     question: "Which of your systems will a quantum computer break?",
     description:
       "Scans code and servers for RSA and elliptic-curve cryptography, generates the migration patch, and signs the evidence. We run it on our own products on every change.",
-    price: "$1,500 readiness report",
+    price: "$2,500 readiness report",
     status: "SERVICE",
     buy: "invoice",
     href: "/contact"
