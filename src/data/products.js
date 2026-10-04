@@ -83,7 +83,7 @@ const products = [
     question: "What is this AI agent allowed to do?",
     description:
       "Issue each agent a signed certificate: its permissions, spending limit and expiry. Anyone can check it; you can revoke it at once.",
-    price: "From $399/mo",
+    price: "From $249/mo",
     status: "LIVE",
     buy: "self-serve",
     href: "https://agent-contract-gap.onrender.com/console"

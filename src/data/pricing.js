@@ -32,7 +32,7 @@ const tools = [
     blurb: "Third-party risk assessment for the vendors and partners that touch your data, scored deterministically.",
     href: "https://tpra.onrender.com/signup",
     tiers: [
-      { name: "Free", price: "0", period: "mo", note: "1 vendor assessment" },
+      { name: "Free", price: "0", period: "mo", note: "5 vendor assessments" },
       { name: "Team", price: "99", period: "mo", note: "Up to 25 vendor assessments" },
       { name: "Business", price: "299", period: "mo", note: "Up to 100 vendor assessments" }
     ]
@@ -69,7 +69,7 @@ const tools = [
     href: "https://agent-contract-gap.onrender.com/console",
     tiers: [
       { name: "Trial", price: "0", period: "mo", note: "Up to 2 active agent certificates" },
-      { name: "Team", price: "399", period: "mo", note: "Up to 25 active agent certificates" },
+      { name: "Team", price: "249", period: "mo", note: "Up to 25 active agent certificates" },
       { name: "Business", price: "1,199", period: "mo", note: "Up to 100 active agent certificates, priority support" }
     ]
   }
