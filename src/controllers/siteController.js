@@ -1,6 +1,7 @@
 const { sections, products } = require("../data/products");
 const resources = require("../data/resources");
 const pricing = require("../data/pricing");
+const toolkits = require("../data/toolkits");
 const standardsData = require("../data/standards");
 const { guides, bySlug } = require("../data/guides");
 const { loadLegalDoc } = require("../utils/markdown");
@@ -30,11 +31,23 @@ function home(req, res) {
 }
 
 function contactPage(req, res) {
+  // Only plain product names are accepted, so the query string can't inject text into the form.
+  const topic = String(req.query.topic || "").slice(0, 60);
+  const values = /^[A-Za-z0-9 &'-]+$/.test(topic)
+    ? { requestType: "product-question", message: "I'd like to buy the " + topic + ". Please send me a payment link." }
+    : {};
   res.render("pages/contact", {
     title: "Contact — RootSystems",
     submitted: false,
     errors: {},
-    values: {}
+    values
+  });
+}
+
+function toolkitsPage(req, res) {
+  res.render("pages/toolkits", {
+    title: "Toolkits — RootSystems",
+    catalog: toolkits.catalog()
   });
 }
 
@@ -109,6 +122,7 @@ function pricingPage(req, res) {
     tools: pricing.tools,
     bundles: pricing.bundles,
     everything: pricing.everything,
+    toolkitPrices: { single: toolkits.PRICE, bundle: toolkits.BUNDLE_PRICE.toLocaleString("en-US") },
     standards: standardsData
   });
 }
@@ -167,6 +181,7 @@ module.exports = {
   contactPage,
   submitContact,
   pricingPage,
+  toolkitsPage,
   standardsPage,
   securityPage,
   learnPage,

@@ -5,6 +5,7 @@ const {
   contactPage,
   submitContact,
   pricingPage,
+  toolkitsPage,
   standardsPage,
   securityPage,
   learnPage,
@@ -26,6 +27,7 @@ router.post("/contact", submitContact);
 // About/Products/Resources are same-page sections (#about, #products,
 // #resources) on the homepage, not separate routes - see home.ejs.
 router.get("/pricing", pricingPage);
+router.get("/toolkits", toolkitsPage);
 router.get("/standards", standardsPage);
 router.get("/security", securityPage);
 router.get("/verify-agent", verifyAgentPage);

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <%- include("../partials/head") %>
+</head>
+<body class="page-standards page-toolkits">
+  <%- include("../partials/header") %>
+
+  <main>
+    <%- include("../partials/page-hero", {
+      eyebrow: "Toolkits",
+      title: "Run the programme. <em>Not a blank spreadsheet.</em>",
+      lead: "Each toolkit is an Excel workbook and a Word handbook. The requirements are already filled in and numbered to the official text, and the dashboard updates itself as you work. One payment of $" + catalog.toolkits[0].price + ", yours to keep."
+    }) %>
+
+    <section class="rs-standards">
+      <div class="wrap">
+        <% catalog.groups.forEach(function (g, gi) { %>
+          <div class="rs-floor rs-floor--<%= g.color %>">
+            <div class="rs-floor__head">
+              <span class="rs-floor__index">0<%= gi + 1 %></span>
+              <div>
+                <h2 class="rs-floor__label"><%= g.label %></h2>
+                <p class="rs-floor__lead"><%= g.lead %></p>
+              </div>
+            </div>
+            <div class="rs-std-grid">
+              <% catalog.toolkits.filter(function (t) { return t.group === g.slug; }).forEach(function (t) { %>
+                <article id="<%= t.slug %>" class="rs-std reveal">
+                  <header class="rs-std__head">
+                    <h3 class="rs-std__name"><%= t.name %></h3>
+                    <p class="rs-std__price">$<%= t.price %> <span>once</span></p>
+                  </header>
+                  <dl class="rs-std__facts">
+                    <dt>Who it is for</dt><dd><%= t.who %></dd>
+                    <dt>What is inside</dt><dd><%= t.inside %></dd>
+                  </dl>
+                  <footer class="rs-std__foot">
+                    <a class="rs-std__go" href="<%= t.buyHref %>"><%= t.canBuy ? "Buy and download" : "Ask to buy" %> <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></a>
+                    <a class="rs-std__src" href="<%= t.source.url %>" target="_blank" rel="noopener noreferrer">Official source: <%= t.source.label %></a>
+                  </footer>
+                </article>
+              <% }); %>
+            </div>
+          </div>
+        <% }); %>
+
+        <div class="rs-bundle reveal">
+          <div>
+            <p class="rs-eyebrow rs-eyebrow--on-dark">Every toolkit</p>
+            <p class="rs-bundle__title"><%= catalog.bundle.name %> for <span>$<%= catalog.bundle.price.toLocaleString("en-US") %></span></p>
+            <p class="rs-bundle__lead">$<%= catalog.bundle.separately.toLocaleString("en-US") %> if bought one by one. Useful for consultants and teams running several frameworks at once. Want the work done in software instead? The <a href="/standards">Standards Readiness</a> app signs every report.</p>
+          </div>
+          <div class="rs-hero__actions">
+            <a class="rs-btn rs-btn--solid" href="<%= catalog.bundle.buyHref %>"><%= catalog.bundle.canBuy ? "Buy the bundle" : "Ask about the bundle" %></a>
+            <a class="rs-btn rs-btn--line" href="/pricing">See app pricing</a>
+          </div>
+        </div>
+
+        <div class="rs-std-grid rs-toolkit-every">
+          <article class="rs-std">
+            <h3 class="rs-std__name">In every toolkit</h3>
+            <dl class="rs-std__facts">
+              <dt>Workbook</dt><dd>Requirements with suggested actions, evidence tracker, findings, corrective actions, risk register, KPIs, management review log and a 12-month readiness plan with a chart.</dd>
+              <dt>Handbook</dt><dd>Your first week, the critical requirements to tackle first, the evidence to collect, roles, operating rhythm, escalation rules and a 90-day plan.</dd>
+            </dl>
+          </article>
+          <article class="rs-std">
+            <h3 class="rs-std__name">Works where you work</h3>
+            <dl class="rs-std__facts">
+              <dt>Format</dt><dd>Excel (.xlsx) and Word (.docx). Opens in Microsoft 365, Google Sheets and Docs, or LibreOffice.</dd>
+              <dt>Edition</dt><dd>October 2026, checked against the official sources linked on each card.</dd>
+            </dl>
+          </article>
+        </div>
+
+        <p class="rs-note">Toolkits help you organise and track your own readiness work. They are not legal or insurance advice, they do not replace an auditor or assessor, and using one does not by itself mean you meet a standard or law. Requirement wording is our own, numbered to the official sources; we do not reproduce copyrighted standard text. <a href="/learn/readiness-vs-certification">Readiness compared with an audit</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <%- include("../partials/footer") %>
+  <script src="/js/site.js"></script>
+</body>
+</html>
