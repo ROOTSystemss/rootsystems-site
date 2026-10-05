@@ -83,10 +83,13 @@
             <div class="rs-tier rs-tier--lit">
               <p class="rs-tier__name">Readiness report</p>
               <p class="rs-tier__price"><span class="rs-tier__cur">$</span>2,500<span class="rs-tier__per"> once</span></p>
-              <p class="rs-tier__note">We scan your repositories and servers and hand over a signed report. Invoiced.</p>
+              <p class="rs-tier__note">We scan your repositories and servers and hand over a signed report. <%= pqcReportBuyHref ? "Pay online or by invoice." : "Invoiced." %></p>
             </div>
           </div>
-          <div class="rs-plan__foot"><a class="rs-btn rs-btn--line" href="/contact">Talk to us</a></div>
+          <div class="rs-plan__foot">
+            <% if (pqcReportBuyHref) { %><a class="rs-btn rs-btn--solid" href="<%= pqcReportBuyHref %>" rel="noopener">Buy the report</a><% } %>
+            <a class="rs-btn rs-btn--line" href="/contact?topic=<%= encodeURIComponent('PQC Forge readiness report') %>">Talk to us</a>
+          </div>
         </article>
 
         <article id="toolkits" class="rs-plan rs-plan--saffron reveal">

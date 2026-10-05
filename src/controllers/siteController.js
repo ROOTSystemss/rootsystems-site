@@ -123,8 +123,16 @@ function pricingPage(req, res) {
     bundles: pricing.bundles,
     everything: pricing.everything,
     toolkitPrices: { single: toolkits.PRICE, bundle: toolkits.BUNDLE_PRICE.toLocaleString("en-US") },
+    pqcReportBuyHref: pqcReportCheckoutUrl(process.env.PQC_REPORT_CHECKOUT_URL),
     standards: standardsData
   });
+}
+
+// The PQC Forge report is sold online once PQC_REPORT_CHECKOUT_URL holds its Dodo checkout link;
+// without a valid https link the plan keeps only its "Talk to us" button.
+function pqcReportCheckoutUrl(raw) {
+  const url = String(raw || "").trim();
+  return /^https:\/\/[^\s"'<>]+$/.test(url) ? url : null;
 }
 
 function standardsPage(req, res) {
