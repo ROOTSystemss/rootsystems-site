@@ -1,6 +1,6 @@
 # Terms of Service
 
-**Last updated: October 2, 2026**
+**Last updated: October 4, 2026**
 
 These Terms of Service ("Terms") govern your access to and use of RootSystems' products and services, including Offboarding Proof, HIPAA Compliance, TPRA, AI Compliance Readiness, Authority Atlas, Trust Proof, Agent Contract Gap, and PQC Forge (collectively, the "Services"), provided by RootSystems ("we," "us," or "our"). By creating an account or using any of our Services, you agree to these Terms.
 
@@ -26,7 +26,7 @@ Where a Service relies on information you provide (such as questionnaire respons
 
 ## 4. Subscriptions and Payment
 
-Certain Services are offered on a subscription basis. Fees, billing frequency, and available plans are described on our pricing page at the time of purchase. Subscriptions renew automatically unless cancelled before the renewal date. You can cancel at any time by emailing therootsystems.ops@gmail.com; cancellation takes effect at the end of your current billing period unless otherwise stated.
+Certain Services are offered on a subscription basis. Fees, billing frequency, and available plans are described on our pricing page at the time of purchase. Subscriptions renew automatically unless cancelled before the renewal date. You can cancel at any time by emailing hello@rootsystems.app; cancellation takes effect at the end of your current billing period unless otherwise stated.
 
 Payments are processed by a third-party payment provider. By subscribing, you also agree to that provider's applicable terms.
 
@@ -34,7 +34,7 @@ Payments are processed by a third-party payment provider. By subscribing, you al
 
 You retain ownership of the data you submit to our Services. We use it only to provide and support the Services for you, and we never sell it. Our [Privacy Policy](/privacy) explains what we collect and why. Where we process personal data on your behalf, our [Data Processing Agreement](/dpa) forms part of these Terms and applies automatically.
 
-If your use of our Services involves regulated data (such as protected health information under HIPAA), you are responsible for ensuring you have the appropriate agreements in place with us where legally required, and for using the Service in a manner consistent with your own regulatory obligations.
+Our Services are not designed to store protected health information (PHI) as defined by HIPAA, and we do not sign Business Associate Agreements. Do not enter PHI, such as patient names, medical record numbers, dates of birth, or diagnoses, into any Service. The HIPAA Compliance tool records your organization's safeguards, vendors, training, and incidents: describe an incident by the type of data and the number of people involved, never by patient details. If you need to store PHI with us, contact us first. You remain responsible for using the Services in a manner consistent with your own regulatory obligations.
 
 ## 6. Intellectual Property
 
@@ -62,7 +62,7 @@ These Terms are governed by the laws of the State of Tennessee, United States, w
 
 ## 12. Contact Us
 
-If you have questions about these Terms, contact us at therootsystems.ops@gmail.com.
+If you have questions about these Terms, contact us at hello@rootsystems.app.
 
 ---
 

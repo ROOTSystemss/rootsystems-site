@@ -1,10 +1,10 @@
 # Privacy Policy
 
-**Last updated: October 2, 2026**
+**Last updated: October 4, 2026**
 
 This Privacy Policy explains how RootSystems ("we," "us," or "our") collects, uses, and protects personal data when you visit rootsystems.app or use our products: Offboarding Proof, HIPAA Compliance, TPRA, AI Compliance Readiness, Authority Atlas, Trust Proof, Agent Contract Gap, and PQC Forge (together, the "Services"). One policy covers all of them.
 
-RootSystems is an independent software business owned and operated by an individual in Tennessee, United States. Contact: therootsystems.ops@gmail.com.
+RootSystems is an independent software business owned and operated by an individual in Tennessee, United States. Contact: hello@rootsystems.app.
 
 ## 1. Our Role: Controller and Processor
 
@@ -52,6 +52,7 @@ We use a small number of service providers, each bound by contract to protect yo
 | Vercel | Hosts the rootsystems.app website | United States / global edge network |
 | Dodo Payments | Checkout, subscriptions, and tax as merchant of record | See Dodo Payments' own privacy policy |
 | Google | Support email (Gmail) and the fonts used on our website | United States |
+| Cloudflare | Routes email sent to hello@rootsystems.app to our support inbox | United States / global network |
 
 We may also disclose data to **legal authorities** when required by a valid legal process, or to a **successor** in a merger or sale of the business, with notice to you where the law requires. We will update this list before adding a new provider that handles personal data.
 
@@ -84,7 +85,7 @@ Depending on where you live, you have the right to:
 - receive your data in a portable format;
 - withdraw consent at any time, where we rely on consent.
 
-To use these rights, email therootsystems.ops@gmail.com. We will reply within one month. If your data was added to a product by your employer or another organization, we will pass your request to that organization, which controls it, and help it respond.
+To use these rights, email hello@rootsystems.app. We will reply within one month. If your data was added to a product by your employer or another organization, we will pass your request to that organization, which controls it, and help it respond.
 
 If you are in the EU or UK, you may also complain to your local data protection authority (in the UK, the Information Commissioner's Office). We would appreciate the chance to resolve your concern first.
 
@@ -104,7 +105,7 @@ If we make material changes, we will give reasonable notice (by email or in the 
 
 ## 12. Contact Us
 
-Questions about this policy or your data: therootsystems.ops@gmail.com.
+Questions about this policy or your data: hello@rootsystems.app.
 
 ---
 

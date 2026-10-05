@@ -4,7 +4,7 @@
 
 This Data Processing Agreement ("DPA") forms part of the RootSystems [Terms of Service](/terms) between RootSystems ("we," "Processor") and the organization that uses our products ("you," "Customer"). It applies whenever we process personal data on your behalf while providing any RootSystems product: Offboarding Proof, HIPAA Compliance, TPRA, AI Compliance Readiness, Authority Atlas, Trust Proof, Agent Contract Gap, or PQC Forge (the "Services").
 
-It takes effect automatically when you accept the Terms of Service. If you need a countersigned copy for your records, email therootsystems.ops@gmail.com.
+It takes effect automatically when you accept the Terms of Service. If you need a countersigned copy for your records, email hello@rootsystems.app.
 
 ## 1. Roles
 

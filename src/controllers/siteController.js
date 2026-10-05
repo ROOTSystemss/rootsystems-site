@@ -107,7 +107,7 @@ async function submitContact(req, res, next) {
       title: "Contact — RootSystems",
       submitted: false,
       errors: {
-        general: "We couldn’t send your message right now. Please try again shortly or email therootsystems.ops@gmail.com directly."
+        general: "We couldn’t send your message right now. Please try again shortly or email hello@rootsystems.app directly."
       },
       values
     });
@@ -149,7 +149,7 @@ function guidePage(req, res, next) {
 // Where to report a vulnerability (RFC 9116). Expires must be refreshed yearly.
 function securityTxt(req, res) {
   res.type("text/plain").send([
-    "Contact: mailto:therootsystems.ops@gmail.com",
+    "Contact: mailto:hello@rootsystems.app",
     "Expires: 2027-09-28T00:00:00.000Z",
     "Preferred-Languages: en",
     "Canonical: https://rootsystems.app/.well-known/security.txt",

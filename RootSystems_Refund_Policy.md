@@ -10,17 +10,17 @@ Where we offer a free trial or free tier, you can use the Service at no cost dur
 
 ## 2. Subscription Refunds
 
-If you're not satisfied with a paid subscription, contact us at therootsystems.ops@gmail.com within **14 days** of your initial purchase or a renewal charge, and we'll issue a full refund, no questions asked.
+If you're not satisfied with a paid subscription, contact us at hello@rootsystems.app within **14 days** of your initial purchase or a renewal charge, and we'll issue a full refund, no questions asked.
 
 Outside of this 14-day window, refunds are considered on a case-by-case basis. We're happy to discuss your situation directly, our aim is for you to be genuinely satisfied with the value you're getting, not to hold you to a rigid policy if something's gone wrong on our end.
 
 ## 3. Cancellations
 
-You can cancel your subscription at any time by emailing therootsystems.ops@gmail.com from the address on your account. We confirm the cancellation by reply. Cancelling stops future billing; you'll continue to have access to the Service through the end of your current paid billing period. We do not provide partial refunds for unused time within a billing period outside of the 14-day window described above.
+You can cancel your subscription at any time by emailing hello@rootsystems.app from the address on your account. We confirm the cancellation by reply. Cancelling stops future billing; you'll continue to have access to the Service through the end of your current paid billing period. We do not provide partial refunds for unused time within a billing period outside of the 14-day window described above.
 
 ## 4. Toolkit Purchases
 
-Toolkits (a workbook and handbook bought with a single one-time payment, individually or as a bundle) carry the same promise: if you're not satisfied, contact us at therootsystems.ops@gmail.com within **14 days** of purchase and we'll issue a full refund, no questions asked. You don't need to return or prove deletion of the files, though we ask that you stop using them. If a file is damaged or won't open, tell us and we'll send a working copy first.
+Toolkits (a workbook and handbook bought with a single one-time payment, individually or as a bundle) carry the same promise: if you're not satisfied, contact us at hello@rootsystems.app within **14 days** of purchase and we'll issue a full refund, no questions asked. You don't need to return or prove deletion of the files, though we ask that you stop using them. If a file is damaged or won't open, tell us and we'll send a working copy first.
 
 ## 5. Invoiced Work
 
@@ -39,7 +39,7 @@ We may decline a refund request if:
 
 ## 8. Contact Us
 
-For any billing or refund questions, reach out to us directly at therootsystems.ops@gmail.com. We'd rather have a real conversation and get things right than have you navigate a rigid policy alone.
+For any billing or refund questions, reach out to us directly at hello@rootsystems.app. We'd rather have a real conversation and get things right than have you navigate a rigid policy alone.
 
 ---
 
