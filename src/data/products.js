@@ -12,8 +12,11 @@
 // `question` is the question a buyer is being asked (by an auditor, a client, a
 // regulator, a broker). Each product is introduced by that question.
 //
-// Starting prices match Master Plan Stage 1 (Appendix A). App checkout plans
-// may lag until ROOT updates processor prices.
+// Starting prices match Master Plan Stage 1 (Appendix A).
+// PQC Forge href defaults to the intended Render host; set PQC_FORGE_PUBLIC_URL
+// on the marketing site when the hosted forge URL differs.
+const forgePublicUrl = String(process.env.PQC_FORGE_PUBLIC_URL || "https://pqc-forge.onrender.com").replace(/\/+$/, "");
+
 const sections = [
   {
     slug: "compliance",
@@ -118,12 +121,12 @@ const products = [
     name: "PQC Forge",
     question: "Which of your systems will a quantum computer break?",
     description:
-      "Scans code and servers for RSA and elliptic-curve cryptography, generates the migration patch, and signs the evidence. We run it on our own products on every change.",
-    price: "From $79/repo · Report $1,500",
-    status: "SERVICE",
-    buy: "invoice",
-    href: "/contact"
+      "Scans code and servers for RSA and elliptic-curve cryptography, generates the migration patch, and signs the evidence. Start free on Community; upgrade to Pro or Team in the app.",
+    price: "From $79/repo · Team $599/mo",
+    status: "LIVE",
+    buy: "self-serve",
+    href: forgePublicUrl
   }
 ];
 
-module.exports = { sections, products };
+module.exports = { sections, products, forgePublicUrl };
