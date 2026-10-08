@@ -8,15 +8,18 @@ function fromParts(){
   const tail=fs.readFileSync(path.join(dir,'part3c'),'utf8');
   return head+mid+bridge+tail;
 }
-function fromHeadTail(){
-  const tailPath=path.join(dir,'tail_14500');
-  if(!fs.existsSync(dest)||!fs.existsSync(tailPath)) return null;
+function fromHeadSufs(){
+  if(!fs.existsSync(dest)) return null;
   const head=fs.readFileSync(dest,'utf8');
-  const tail=fs.readFileSync(tailPath,'utf8');
-  if(head.length===14500 && tail.length===20112) return head+tail;
-  return null;
+  if(head.length!==17306) return null;
+  const names=['suf_17306_20000','suf_20000_23000','suf_23000_25959','suf_25959_31138'];
+  if(!names.every(n=>fs.existsSync(path.join(dir,n)))) return null;
+  const mid=names.map(n=>fs.readFileSync(path.join(dir,n),'utf8')).join('');
+  const bridge=String.fromCharCode(110,112,122);
+  const tail=fs.readFileSync(path.join(dir,'part3c'),'utf8');
+  return head+mid+bridge+tail;
 }
-const out=fromParts();
-if(out.length!==34612) process.exit(2);
+const out=fromParts() || fromHeadSufs();
+if(!out || out.length!==34612) { console.error('bad len', out&&out.length); process.exit(2); }
 fs.writeFileSync(dest,out);
 console.log('wrote',dest,out.length);
