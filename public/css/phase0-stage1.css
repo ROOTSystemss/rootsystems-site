@@ -1,0 +1,35 @@
+/* Phase 0 Stage 1 pricing additions (keeps pages.css untouched). */
+.rs-founding {
+  padding: 28px 0 8px;
+  background: var(--rs-ink);
+  color: var(--rs-cream);
+  border-bottom: 1px solid var(--rs-ink-line);
+}
+.rs-founding__inner {
+  max-width: 1240px;
+  padding: 22px 26px;
+  border: 1px solid rgba(255, 153, 51, 0.35);
+  background: linear-gradient(135deg, rgba(255, 153, 51, 0.12), rgba(157, 124, 255, 0.08));
+}
+.rs-founding__kicker {
+  margin: 0 0 8px;
+  color: var(--rs-saffron);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.rs-founding__title {
+  margin: 0 0 10px;
+  font: 500 clamp(1.35rem, 2.4vw, 1.85rem)/1.2 var(--rs-serif);
+  letter-spacing: -0.01em;
+}
+.rs-founding__title em { color: var(--rs-saffron); font-style: italic; }
+.rs-founding__lead { margin: 0; max-width: 52em; color: var(--rs-cream-mute); line-height: 1.65; font-size: 0.95rem; }
+.rs-founding__lead a { color: var(--rs-saffron); }
+
+.rs-plan__tiers--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1100px) { .rs-plan__tiers--four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .rs-plan__tiers--four { grid-template-columns: 1fr; } }
+
+#branches { scroll-margin-top: 60px; }
