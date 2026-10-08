@@ -1,1 +1,0 @@
-$file:/tmp/hotfix/FIX_23000.txt
