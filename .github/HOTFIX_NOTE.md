@@ -1,0 +1,1 @@
+# Favicon hotfix in progress
