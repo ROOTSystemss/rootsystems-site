@@ -10,14 +10,24 @@
     <%- include("../partials/page-hero", {
       eyebrow: "Pricing",
       title: "Pay for the proof <em>you need.</em>",
-      lead: "Every product is priced on its own and starts free. Monthly plans, cancel any time, and subscription payments run through Dodo Payments, so we never see your card.",
+      lead: "Every product is priced on its own and starts free. Monthly plans, cancel any time, and subscription payments run through Dodo Payments, so we never see your card. Annual plans are 10× monthly (two months free).",
       noVideo: true
     }) %>
+
+    <section class="rs-founding" aria-label="Founding customer offer">
+      <div class="wrap rs-founding__inner">
+        <p class="rs-founding__kicker">Founding offer</p>
+        <h2 class="rs-founding__title">First 25 customers: <em>40% off</em> for 12 months</h2>
+        <p class="rs-founding__lead">Lock Stage 1 list prices at 40% off for a year in return for feedback and, if you’re happy, a short testimonial. Mention the founding offer when you <a href="/contact?topic=<%= encodeURIComponent('Founding customer offer') %>">contact us</a> or check out — the coupon is applied at payment (no self-serve code on this site).</p>
+      </div>
+    </section>
 
     <nav class="rs-jump" aria-label="Jump to a product">
       <div class="wrap rs-jump__inner">
         <% tools.forEach(function (tool) { %><a class="rs-jump__link" href="#<%= tool.slug %>"><%= tool.name %></a><% }); %>
+        <a class="rs-jump__link" href="#bundles">Bundles</a>
         <a class="rs-jump__link" href="#by-invoice">PQC Forge</a>
+        <a class="rs-jump__link" href="#everything">Complete</a>
       </div>
     </nav>
 
@@ -63,6 +73,21 @@
               </div>
             <% } %>
 
+            <% if (tool.slug === "agent-governance" && agentExtras && agentExtras.length) { %>
+              <div class="rs-plan__standards">
+                <p class="rs-plan__sub">Contract &amp; Insurance Gap</p>
+                <div class="rs-plan__tiers">
+                  <% agentExtras.forEach(function (extra, i) { %>
+                    <div class="rs-tier<%= i === 0 ? " rs-tier--lit" : "" %>">
+                      <p class="rs-tier__name"><%= extra.name %></p>
+                      <p class="rs-tier__price"><span class="rs-tier__cur">$</span><%= extra.price %><span class="rs-tier__per">/<%= extra.period %></span></p>
+                      <p class="rs-tier__note"><%= extra.note %></p>
+                    </div>
+                  <% }); %>
+                </div>
+              </div>
+            <% } %>
+
             <div class="rs-plan__foot">
               <% if (tool.contactOnly) { %>
                 <a class="rs-btn rs-btn--line" href="<%= tool.href %>">Contact for early access</a>
@@ -74,21 +99,77 @@
           </article>
         <% }); %>
 
+        <article id="bundles" class="rs-plan rs-plan--saffron reveal">
+          <header class="rs-plan__head">
+            <h2 class="rs-plan__name">Compliance bundles</h2>
+            <p class="rs-plan__blurb">Packs for common jobs. Listed at Stage 1 prices; ask us to invoice until one-checkout across products ships.</p>
+          </header>
+          <div class="rs-plan__tiers rs-plan__tiers--four">
+            <% bundles.forEach(function (bundle, i) { %>
+              <div class="rs-tier<%= i === 0 ? " rs-tier--lit" : "" %>">
+                <p class="rs-tier__name"><%= bundle.name %></p>
+                <p class="rs-tier__price"><span class="rs-tier__cur">$</span><%= bundle.price %><span class="rs-tier__per">/<%= bundle.period %></span></p>
+                <p class="rs-tier__note"><%= bundle.blurb %><% if (bundle.separately) { %> Separately $<%= bundle.separately %>/mo.<% } %></p>
+                <p class="rs-tier__note"><a href="<%= bundle.href %>">Ask about this pack</a></p>
+              </div>
+            <% }); %>
+          </div>
+        </article>
+
         <article id="by-invoice" class="rs-plan rs-plan--green reveal">
           <header class="rs-plan__head">
             <h2 class="rs-plan__name">PQC Forge</h2>
-            <p class="rs-plan__blurb">Finds the RSA and elliptic-curve cryptography a quantum computer will break, proposes the patch, and signs the evidence. Today it is delivered as a readiness report.</p>
+            <p class="rs-plan__blurb">Finds the RSA and elliptic-curve cryptography a quantum computer will break, proposes the patch, and signs the evidence. Branch 2: Quantum-Safe.</p>
           </header>
-          <div class="rs-plan__tiers rs-plan__tiers--one">
-            <div class="rs-tier rs-tier--lit">
-              <p class="rs-tier__name">Readiness report</p>
-              <p class="rs-tier__price"><span class="rs-tier__cur">$</span>2,500<span class="rs-tier__per"> once</span></p>
-              <p class="rs-tier__note">We scan your repositories and servers and hand over a signed report. <%= pqcReportBuyHref ? "Pay online or by invoice." : "Invoiced." %></p>
+          <div class="rs-plan__tiers rs-plan__tiers--four">
+            <% pqcPlans.forEach(function (tier, i) { %>
+              <div class="rs-tier<%= i === 1 ? " rs-tier--lit" : "" %>">
+                <p class="rs-tier__name"><%= tier.name %></p>
+                <p class="rs-tier__price"><span class="rs-tier__cur">$</span><%= tier.price %><span class="rs-tier__per">/<%= tier.period %></span></p>
+                <p class="rs-tier__note"><%= tier.note %></p>
+              </div>
+            <% }); %>
+          </div>
+          <div class="rs-plan__standards">
+            <p class="rs-plan__sub">Services</p>
+            <div class="rs-plan__tiers">
+              <div class="rs-tier rs-tier--lit">
+                <p class="rs-tier__name">Readiness report</p>
+                <p class="rs-tier__price"><span class="rs-tier__cur">$</span>1,500<span class="rs-tier__per"> once</span></p>
+                <p class="rs-tier__note">Signed findings report and migration order. <%= pqcReportBuyHref ? "Pay online or by invoice." : "Invoiced." %></p>
+              </div>
+              <div class="rs-tier">
+                <p class="rs-tier__name">Migration Pilot</p>
+                <p class="rs-tier__price">From <span class="rs-tier__cur">$</span>7,500</p>
+                <p class="rs-tier__note">4-week fixed-scope hands-on pilot on staging (invoiced).</p>
+              </div>
+              <div class="rs-tier">
+                <p class="rs-tier__name">Self-hosted</p>
+                <p class="rs-tier__price">From <span class="rs-tier__cur">$</span>18,000<span class="rs-tier__per">/yr</span></p>
+                <p class="rs-tier__note">Runs inside your network, offline evidence export.</p>
+              </div>
             </div>
           </div>
           <div class="rs-plan__foot">
             <% if (pqcReportBuyHref) { %><a class="rs-btn rs-btn--solid" href="<%= pqcReportBuyHref %>" rel="noopener">Buy the report</a><% } %>
-            <a class="rs-btn rs-btn--line" href="/contact?topic=<%= encodeURIComponent('PQC Forge readiness report') %>">Talk to us</a>
+            <a class="rs-btn rs-btn--line" href="/contact?topic=<%= encodeURIComponent('PQC Forge') %>">Talk to us</a>
+          </div>
+        </article>
+
+        <article id="everything" class="rs-plan rs-plan--violet reveal">
+          <header class="rs-plan__head">
+            <h2 class="rs-plan__name"><%= everything.name %></h2>
+            <p class="rs-plan__blurb"><%= everything.blurb %> Separately $<%= everything.separately %>/mo.</p>
+          </header>
+          <div class="rs-plan__tiers rs-plan__tiers--one">
+            <div class="rs-tier rs-tier--lit">
+              <p class="rs-tier__name">Canopy</p>
+              <p class="rs-tier__price"><span class="rs-tier__cur">$</span><%= everything.price %><span class="rs-tier__per">/<%= everything.period %></span></p>
+              <p class="rs-tier__note"><%= everything.includes.join(" · ") %></p>
+            </div>
+          </div>
+          <div class="rs-plan__foot">
+            <a class="rs-btn rs-btn--solid" href="<%= everything.href %>">Ask about Complete</a>
           </div>
         </article>
 
@@ -106,7 +187,7 @@
             <div class="rs-tier rs-tier--lit">
               <p class="rs-tier__name">All 11</p>
               <p class="rs-tier__price"><span class="rs-tier__cur">$</span><%= toolkitPrices.bundle %><span class="rs-tier__per"> once</span></p>
-              <p class="rs-tier__note">Every toolkit, for consultants and teams running several frameworks.</p>
+              <p class="rs-tier__note">Every toolkit plus a year of updates, for consultants and teams running several frameworks.</p>
             </div>
           </div>
           <div class="rs-plan__foot"><a class="rs-btn rs-btn--line" href="/toolkits">See the toolkits</a></div>
@@ -123,7 +204,8 @@
         <dl class="rs-faq__list">
           <div><dt>Who handles payment?</dt><dd>For subscriptions, Dodo Payments is the merchant of record. It takes the payment and handles sales tax, and we never see or store card numbers.</dd></div>
           <div><dt>Can I cancel?</dt><dd>Yes, any time: email hello@rootsystems.app from your account address and we confirm by reply. You keep access until the end of the period you paid for. See the <a href="/refund">refund policy</a>.</dd></div>
-          <div><dt>What does free include?</dt><dd>Each product has a free start: a small number of employees, five vendor assessments, one assessment or a two-agent trial, so you can see a real signed report before paying.</dd></div>
+          <div><dt>What does free include?</dt><dd>Each product has a free start: a small number of people, one vendor, one assessment or a two-agent trial, so you can see a real signed report before paying.</dd></div>
+          <div><dt>What is the founding offer?</dt><dd>The first 25 paying customers get 40% off list price for 12 months. Ask us to apply it at checkout — there is no public coupon code on this site.</dd></div>
           <div><dt>Is my data safe when I sign up?</dt><dd>Each workspace is separate, passwords are stored only as hashes, and sensitive data is encrypted at rest. Read the <a href="/security">security page</a>.</dd></div>
         </dl>
       </div>
