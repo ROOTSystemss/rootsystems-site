@@ -197,7 +197,7 @@
   }
 
   // ---------- staggered card reveal ----------
-  // Cards inside a shared container (product floors, pricing lists) fade/
+  // Cards inside a shared container (product branches, pricing lists) fade/
   // slide in one after another rather than all at once, using each card's
   // index within its own parent to compute the delay. Skipped entirely
   // under reduced motion (handled already by initReveal/CSS above).

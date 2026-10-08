@@ -11,6 +11,9 @@
 //
 // `question` is the question a buyer is being asked (by an auditor, a client, a
 // regulator, a broker). Each product is introduced by that question.
+//
+// Starting prices match Master Plan Stage 1 (Appendix A). App checkout plans
+// may lag until ROOT updates processor prices.
 const sections = [
   {
     slug: "compliance",
@@ -39,7 +42,7 @@ const products = [
     question: "Did everyone who left actually lose access?",
     description:
       "Checks Google Workspace, Microsoft 365, Slack, GitHub and Okta after each departure, and produces a signed record: fully revoked, or exactly what is still open.",
-    price: "From $79/mo",
+    price: "From $99/mo",
     status: "LIVE",
     buy: "self-serve",
     href: "https://offboarding-proof.onrender.com/signup"
@@ -50,7 +53,7 @@ const products = [
     question: "Could you show a regulator your risk analysis today?",
     description:
       "Guided Security Rule risk assessment, a risk register that flags overdue and unowned fixes, and a signed report you can hand over.",
-    price: "From $99/mo",
+    price: "From $149/mo",
     status: "LIVE",
     buy: "self-serve",
     href: "https://hipaa-g37n.onrender.com/signup"
@@ -72,7 +75,7 @@ const products = [
     question: "Would you pass a SOC 2, ISO 27001 or PCI DSS audit today?",
     description:
       "Readiness checks for 12 standards, including SOC 2, ISO 27001, PCI DSS, CMMC Level 2, NIS2, DORA, GDPR, CCPA and the AI standards. Attach evidence to each control, and every report says how much is proven. Unanswered controls count against you, and every report is signed.",
-    price: "From $129/mo per standard",
+    price: "From $149/mo per standard",
     status: "LIVE",
     buy: "self-serve",
     href: "https://ai-compliance-readiness.onrender.com/signup"
@@ -83,7 +86,7 @@ const products = [
     question: "What is this AI agent allowed to do?",
     description:
       "Issue each agent a signed certificate: its permissions, spending limit and expiry. Anyone can check it; you can revoke it at once.",
-    price: "From $249/mo",
+    price: "From $499/mo",
     status: "LIVE",
     buy: "self-serve",
     href: "https://agent-contract-gap.onrender.com/console"
@@ -105,7 +108,7 @@ const products = [
     question: "Does your insurance cover what your agent can do?",
     description:
       "Compares an agent's authority with your contracts and insurance, including the AI exclusions insurers added in 2026, and issues a signed Assurance Pack for your broker.",
-    price: "Included in the console",
+    price: "From $499 per analysis",
     status: "LIVE",
     buy: "self-serve",
     href: "https://agent-contract-gap.onrender.com/console"
@@ -116,7 +119,7 @@ const products = [
     question: "Which of your systems will a quantum computer break?",
     description:
       "Scans code and servers for RSA and elliptic-curve cryptography, generates the migration patch, and signs the evidence. We run it on our own products on every change.",
-    price: "$2,500 readiness report",
+    price: "From $79/repo · Report $1,500",
     status: "SERVICE",
     buy: "invoice",
     href: "/contact"

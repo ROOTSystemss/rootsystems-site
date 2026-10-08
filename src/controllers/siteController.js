@@ -122,6 +122,8 @@ function pricingPage(req, res) {
     tools: pricing.tools,
     bundles: pricing.bundles,
     everything: pricing.everything,
+    pqcPlans: pricing.pqcPlans,
+    agentExtras: pricing.agentExtras,
     toolkitPrices: { single: toolkits.PRICE, bundle: toolkits.BUNDLE_PRICE.toLocaleString("en-US") },
     pqcReportBuyHref: pqcReportCheckoutUrl(process.env.PQC_REPORT_CHECKOUT_URL),
     standards: standardsData

@@ -7,8 +7,9 @@
 //   {"hipaa":"https://checkout.dodopayments.com/buy/pdt_...","bundle":"https://..."}
 // A pack without a valid https link falls back to the contact form, so the
 // page never shows a dead button.
-const PRICE = 199;
-const BUNDLE_PRICE = 999;
+// Stage 1 Seeds prices (Master Plan Appendix A).
+const PRICE = 249;
+const BUNDLE_PRICE = 1499;
 
 const groups = [
   { slug: "frameworks", label: "Framework toolkits", color: "saffron", lead: "Every requirement of one framework, pre-loaded and numbered to the official text." },
