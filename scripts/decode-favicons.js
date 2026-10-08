@@ -7,19 +7,21 @@ const srcDir = path.join(root, 'scripts', 'favicon-b64');
 
 function readB64(baseName) {
   const whole = path.join(srcDir, baseName);
-  if (fs.existsSync(whole)) {
-    return fs.readFileSync(whole, 'utf8').trim();
-  }
+  let fromParts = '';
   let i = 0;
-  let out = '';
   while (true) {
     const p = path.join(srcDir, `${baseName}.part${i}`);
     if (!fs.existsSync(p)) break;
-    out += fs.readFileSync(p, 'utf8').trim();
+    fromParts += fs.readFileSync(p, 'utf8').trim();
     i++;
   }
-  if (!out) return null;
-  return out;
+  if (fs.existsSync(whole)) {
+    const w = fs.readFileSync(whole, 'utf8').trim();
+    if (w.length > 100 && (!fromParts || w.length >= fromParts.length)) {
+      return w;
+    }
+  }
+  return fromParts || null;
 }
 
 const mapping = [
