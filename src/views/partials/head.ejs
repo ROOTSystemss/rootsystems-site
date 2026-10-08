@@ -15,9 +15,11 @@
   document.documentElement.setAttribute("data-theme", "light");
   try { localStorage.removeItem("rs-theme"); } catch (e) {}
 </script>
-<%# Favicon: the RootSystems tree mark on orange (public/images/favicon-*.png). %>
-<link rel="icon" type="image/png" sizes="64x64" href="/images/favicon-64.png">
-<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<%# Favicon: matches header mark (public/images/rs-logo.svg → favicon-*.png / favicon.ico). %>
+<link rel="icon" href="/favicon.ico?v=20261008" sizes="any">
+<link rel="icon" type="image/png" sizes="64x64" href="/images/favicon-64.png?v=20261008">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png?v=20261008">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=20261008">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
