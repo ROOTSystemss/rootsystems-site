@@ -18,6 +18,8 @@
       <div class="wrap rs-jump__inner">
         <% tools.forEach(function (tool) { %><a class="rs-jump__link" href="#<%= tool.slug %>"><%= tool.name %></a><% }); %>
         <a class="rs-jump__link" href="#by-invoice">PQC Forge</a>
+        <a class="rs-jump__link" href="#bundles">Bundles</a>
+        <a class="rs-jump__link" href="#proof-plus">Proof+</a>
       </div>
     </nav>
 
@@ -89,6 +91,69 @@
           <div class="rs-plan__foot">
             <% if (pqcReportBuyHref) { %><a class="rs-btn rs-btn--solid" href="<%= pqcReportBuyHref %>" rel="noopener">Buy the report</a><% } %>
             <a class="rs-btn rs-btn--line" href="/contact?topic=<%= encodeURIComponent('PQC Forge readiness report') %>">Talk to us</a>
+          </div>
+          <p class="rs-plan__fine rs-plan__fine--pad">
+            <% if (pqcForgeAppHref) { %>
+              Prefer to run it yourself? <a href="<%= pqcForgeAppHref %>" rel="noopener">Open the PQC Forge app</a>: free for public repositories, with paid plans for private ones shown in the app.
+            <% } else { %>
+              A self-serve PQC Forge app is in early access. <a href="/contact?topic=<%= encodeURIComponent('PQC Forge app early access') %>">Ask to join</a>.
+            <% } %>
+          </p>
+        </article>
+
+        <article id="bundles" class="rs-plan rs-plan--saffron rs-plan--wide reveal">
+          <header class="rs-plan__head">
+            <h2 class="rs-plan__name">Bundles</h2>
+            <p class="rs-plan__blurb">Several products on one bill and one contact. Each card shows what the parts cost separately today; tell us which one fits and we will send the bundle price.</p>
+          </header>
+          <div class="rs-plan__tiers rs-bundles">
+            <% bundles.concat([everything]).forEach(function (b) { %>
+              <div class="rs-tier<%= b.slug === "clinic-proof-pack" ? " rs-tier--lit" : "" %>" id="<%= b.slug %>">
+                <p class="rs-tier__name"><%= b.name %></p>
+                <p class="rs-tier__note"><%= b.blurb %></p>
+                <ul class="rs-bundle__list">
+                  <% b.includes.forEach(function (item) { %><li><%= item %></li><% }); %>
+                </ul>
+                <p class="rs-tier__note"><strong>$<%= b.separately %>/mo</strong> separately</p>
+                <a class="rs-btn rs-btn--line" href="<%= b.href %>">Ask for the bundle price</a>
+              </div>
+            <% }); %>
+          </div>
+        </article>
+
+        <article id="<%= partner.slug %>" class="rs-plan rs-plan--green reveal">
+          <header class="rs-plan__head">
+            <h2 class="rs-plan__name"><%= partner.name %></h2>
+            <p class="rs-plan__blurb"><%= partner.blurb %></p>
+          </header>
+          <div class="rs-plan__tiers rs-plan__tiers--one">
+            <div class="rs-tier rs-tier--lit">
+              <p class="rs-tier__name">For IT providers</p>
+              <p class="rs-tier__price">By quote</p>
+              <ul class="rs-bundle__list">
+                <% partner.includes.forEach(function (item) { %><li><%= item %></li><% }); %>
+              </ul>
+            </div>
+          </div>
+          <div class="rs-plan__foot"><a class="rs-btn rs-btn--line" href="<%= partner.href %>">Talk to us</a></div>
+        </article>
+
+        <article id="<%= proofPlus.slug %>" class="rs-plan rs-plan--violet rs-plan--wide reveal">
+          <header class="rs-plan__head">
+            <h2 class="rs-plan__name"><%= proofPlus.name %></h2>
+            <p class="rs-plan__blurb"><%= proofPlus.blurb %></p>
+          </header>
+          <div class="rs-plan__tiers rs-bundles">
+            <% proofPlus.features.forEach(function (f) { %>
+              <div class="rs-tier">
+                <p class="rs-tier__name"><%= f.title %></p>
+                <p class="rs-tier__note"><%= f.text %></p>
+              </div>
+            <% }); %>
+          </div>
+          <div class="rs-plan__foot">
+            <p class="rs-tier__price"><span class="rs-tier__per">from </span><span class="rs-tier__cur">$</span><%= proofPlus.from %><span class="rs-tier__per">/mo, by quote</span></p>
+            <a class="rs-btn rs-btn--solid" href="<%= proofPlus.href %>">Talk to us</a>
           </div>
         </article>
 

@@ -400,3 +400,17 @@
 /* ---------- footer: three columns ---------- */
 .site-footer__nav { display: flex; gap: 64px; }
 @media (max-width: 620px) { .site-footer__nav { gap: 28px; } }
+
+/* Pricing: bundles, IT Provider Partner and Proof+ (wide cards, tiers across the full width). */
+.rs-plan--wide { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "tiers" "extra" "foot"; grid-template-rows: none; }
+.rs-plan--wide .rs-plan__head { max-width: 760px; }
+.rs-bundles { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.rs-bundles .rs-tier { display: flex; flex-direction: column; gap: 12px; }
+.rs-bundles .rs-tier .rs-tier__name { margin: 0; }
+.rs-bundles .rs-btn { margin-top: auto; align-self: flex-start; }
+.rs-bundle__list { margin: 0; padding-left: 18px; color: var(--rs-cream); font-size: 0.85rem; line-height: 1.6; }
+.rs-tier .rs-bundle__list { margin: 4px 0 0; }
+.rs-plan--wide .rs-plan__foot { align-items: center; gap: 20px; }
+.rs-plan--wide .rs-plan__foot .rs-tier__price { margin: 0; font-size: 2rem; }
+.rs-plan__fine--pad { grid-area: extra; position: relative; z-index: 1; margin: 0; padding-top: 18px; border-top: 1px solid var(--rs-ink-line); }
+.rs-plan__fine--pad a { color: var(--accent); }

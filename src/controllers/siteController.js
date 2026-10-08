@@ -122,6 +122,10 @@ function pricingPage(req, res) {
     tools: pricing.tools,
     bundles: pricing.bundles,
     everything: pricing.everything,
+    partner: pricing.partner,
+    proofPlus: pricing.proofPlus,
+    // The self-serve PQC Forge app gets its button only once PQC_FORGE_PUBLIC_URL points at a running app.
+    pqcForgeAppHref: pqcReportCheckoutUrl(process.env.PQC_FORGE_PUBLIC_URL),
     toolkitPrices: { single: toolkits.PRICE, bundle: toolkits.BUNDLE_PRICE.toLocaleString("en-US") },
     pqcReportBuyHref: pqcReportCheckoutUrl(process.env.PQC_REPORT_CHECKOUT_URL),
     standards: standardsData

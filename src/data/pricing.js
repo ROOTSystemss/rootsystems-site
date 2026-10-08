@@ -9,9 +9,10 @@
 // real numbers has no `tiers` and is marked `contactOnly: true`, so the page
 // renders "Contact for early access" instead of a fabricated price.
 //
-// `bundles` and `everything` intentionally carry no prices at all — they need
-// one checkout across products, which doesn't exist yet, so both route to
-// /contact rather than inventing a number.
+// `bundles` and `everything` carry no bundle price: there is no checkout across
+// products yet, so they show what the parts cost separately (computed from the
+// tiers below) and route to /contact rather than inventing a discount.
+// `proofPlus` is the premium "talk to us" tier: a "from" price, never a checkout.
 const tools = [
   {
     slug: "offboarding-proof",
@@ -75,22 +76,86 @@ const tools = [
   }
 ];
 
-const bundles = [
-  {
-    slug: "grc-bundle",
-    name: "Compliance Proof bundle",
+// Monthly price of one tier, read from `tools` above so bundles can never drift from the live list.
+function tierPrice(slug, tierName) {
+  const tool = tools.find(function (t) { return t.slug === slug; });
+  const tier = tool && tool.tiers && tool.tiers.find(function (t) { return t.name === tierName; });
+  if (!tier) throw new Error("pricing.js: no tier " + tierName + " on " + slug);
+  return Number(String(tier.price).replace(/,/g, ""));
+}
+const CORE_STANDARD = 129; // the lower per-standard price (standards.js)
+const ALL_STANDARDS = 599; // standards.js BUNDLE_USD
+
+function usd(n) { return n.toLocaleString("en-US"); }
+
+// Bundles have no single checkout yet, so they carry no invented bundle price: the card shows what
+// the parts cost separately (from the live prices) and asks the buyer to talk to us for the bundle.
+function bundle(slug, name, blurb, parts) {
+  const total = parts.reduce(function (sum, p) { return sum + p.usd; }, 0);
+  return {
+    slug,
+    name,
     section: "grc",
-    blurb: "Offboarding Proof, Vendor Risk and HIPAA together.",
-    includes: ["Offboarding Proof", "Vendor Risk", "HIPAA"]
-  }
+    blurb,
+    includes: parts.map(function (p) { return p.label; }),
+    separately: usd(total),
+    href: "/contact?topic=" + encodeURIComponent(name + " bundle")
+  };
+}
+
+const bundles = [
+  bundle("compliance-starter", "Compliance Starter", "The first proof most small companies are asked for: people leaving, vendors, and one standard.", [
+    { label: "Offboarding Proof Team", usd: tierPrice("offboarding-proof", "Team") },
+    { label: "Vendor Risk Team", usd: tierPrice("tpra", "Team") },
+    { label: "One standard (NIST CSF, GDPR, CCPA, PCI DSS, NIS2 or NIST AI RMF)", usd: CORE_STANDARD }
+  ]),
+  bundle("clinic-proof-pack", "Clinic Proof Pack", "For practices and clinics: the HIPAA risk assessment plus proof that leavers lost access and vendors were checked.", [
+    { label: "HIPAA Clinic", usd: tierPrice("hipaa", "Clinic") },
+    { label: "Offboarding Proof Team", usd: tierPrice("offboarding-proof", "Team") },
+    { label: "Vendor Risk Team", usd: tierPrice("tpra", "Team") }
+  ]),
+  bundle("compliance-pro", "Compliance Pro", "Every Compliance Proof product at its top plan, with all 12 standards.", [
+    { label: "Offboarding Proof Business", usd: tierPrice("offboarding-proof", "Business") },
+    { label: "Vendor Risk Business", usd: tierPrice("tpra", "Business") },
+    { label: "HIPAA Clinic", usd: tierPrice("hipaa", "Clinic") },
+    { label: "All 12 standards", usd: ALL_STANDARDS }
+  ])
 ];
 
-// "Everything" covers only products that have real pricing (every tool with tiers).
-const everything = {
-  slug: "everything",
-  name: "Everything",
-  blurb: "Every priced RootSystems product on one combined plan.",
-  includes: tools.filter(function (t) { return t.tiers; }).map(function (t) { return t.name; })
+// "Everything": every subscription product (PQC Forge is a one-off report, so it is not included).
+const everything = (function () {
+  const parts = [
+    { label: "Offboarding Proof Business", usd: tierPrice("offboarding-proof", "Business") },
+    { label: "Vendor Risk Business", usd: tierPrice("tpra", "Business") },
+    { label: "HIPAA Clinic", usd: tierPrice("hipaa", "Clinic") },
+    { label: "All 12 standards", usd: ALL_STANDARDS },
+    { label: "AI Agent Trust Team", usd: tierPrice("agent-governance", "Team") }
+  ];
+  return Object.assign(bundle("everything", "RootSystems Complete", "Every RootSystems subscription on one bill and one contact.", parts), { section: "all" });
+})();
+
+// IT providers (MSPs) managing many client companies: priced per client, by quote.
+const partner = {
+  slug: "it-provider-partner",
+  name: "IT Provider Partner",
+  blurb: "Offboarding Proof and Vendor Risk for the client companies you manage, from one login, with reports under each client's name.",
+  includes: ["Offboarding Proof", "Vendor Risk", "One dashboard across clients", "Priced per client company"],
+  href: "/contact?topic=" + encodeURIComponent("IT Provider Partner plan")
 };
 
-module.exports = { tools, bundles, everything };
+// Proof+: the premium tier for the advancements. Quote only, never a checkout.
+const proofPlus = {
+  slug: "proof-plus",
+  name: "Proof+",
+  from: "799",
+  blurb: "For companies whose auditors, insurers or customers want more than a report: evidence sealed at the source and checks that run on their own.",
+  features: [
+    { title: "Evidence sealed at the source", text: "Each answer from Microsoft 365, Google Workspace or Okta is signed the moment it arrives, with the system's own request ID, so an auditor can trace it back." },
+    { title: "Reality checks", text: "Terminated in HR but still active in the directory, and MFA required by policy but missing on real accounts, listed account by account with the reason." },
+    { title: "Two independent timestamps", text: "A Bitcoin-anchored proof plus a standard RFC 3161 timestamp from a public timestamp authority, on every report." },
+    { title: "Continuous checks and priority support", text: "Checks run on a schedule instead of once a quarter, and a person answers within one business day." }
+  ],
+  href: "/contact?topic=" + encodeURIComponent("Proof+")
+};
+
+module.exports = { tools, bundles, everything, partner, proofPlus };
