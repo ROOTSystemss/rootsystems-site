@@ -1,4 +1,4 @@
-const { sections, products } = require("../data/products");
+const { sections, products, forgePublicUrl } = require("../data/products");
 const resources = require("../data/resources");
 const pricing = require("../data/pricing");
 const toolkits = require("../data/toolkits");
@@ -125,6 +125,7 @@ function pricingPage(req, res) {
     pqcPlans: pricing.pqcPlans,
     agentExtras: pricing.agentExtras,
     toolkitPrices: { single: toolkits.PRICE, bundle: toolkits.BUNDLE_PRICE.toLocaleString("en-US") },
+    pqcForgeHref: forgePublicUrl,
     pqcReportBuyHref: pqcReportCheckoutUrl(process.env.PQC_REPORT_CHECKOUT_URL),
     standards: standardsData
   });

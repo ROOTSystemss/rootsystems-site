@@ -132,6 +132,8 @@ const everything = {
   href: "/contact?topic=" + encodeURIComponent("RootSystems Complete")
 };
 
+// Self-serve CTAs for these tiers live on /pricing#pqc-forge and point at
+// PQC_FORGE_PUBLIC_URL (default https://pqc-forge.onrender.com). Stage 1 prices.
 const pqcPlans = [
   { name: "Community", price: "0", period: "mo", note: "Public repositories" },
   { name: "Pro", price: "79", period: "repo", note: "Private repos, migration PRs, evidence history" },

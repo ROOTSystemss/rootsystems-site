@@ -26,7 +26,7 @@
       <div class="wrap rs-jump__inner">
         <% tools.forEach(function (tool) { %><a class="rs-jump__link" href="#<%= tool.slug %>"><%= tool.name %></a><% }); %>
         <a class="rs-jump__link" href="#bundles">Bundles</a>
-        <a class="rs-jump__link" href="#by-invoice">PQC Forge</a>
+        <a class="rs-jump__link" href="#pqc-forge">PQC Forge</a>
         <a class="rs-jump__link" href="#everything">Complete</a>
       </div>
     </nav>
@@ -116,7 +116,7 @@
           </div>
         </article>
 
-        <article id="by-invoice" class="rs-plan rs-plan--green reveal">
+        <article id="pqc-forge" class="rs-plan rs-plan--green reveal">
           <header class="rs-plan__head">
             <h2 class="rs-plan__name">PQC Forge</h2>
             <p class="rs-plan__blurb">Finds the RSA and elliptic-curve cryptography a quantum computer will break, proposes the patch, and signs the evidence. Branch 2: Quantum-Safe.</p>
@@ -136,7 +136,7 @@
               <div class="rs-tier rs-tier--lit">
                 <p class="rs-tier__name">Readiness report</p>
                 <p class="rs-tier__price"><span class="rs-tier__cur">$</span>1,500<span class="rs-tier__per"> once</span></p>
-                <p class="rs-tier__note">Signed findings report and migration order. <%= pqcReportBuyHref ? "Pay online or by invoice." : "Invoiced." %></p>
+                <p class="rs-tier__note">Signed findings report and migration order. <%= pqcReportBuyHref ? "Buy via the checkout link, or in-app Billing." : "Buy in-app Billing, or via checkout link when configured." %></p>
               </div>
               <div class="rs-tier">
                 <p class="rs-tier__name">Migration Pilot</p>
@@ -151,8 +151,9 @@
             </div>
           </div>
           <div class="rs-plan__foot">
-            <% if (pqcReportBuyHref) { %><a class="rs-btn rs-btn--solid" href="<%= pqcReportBuyHref %>" rel="noopener">Buy the report</a><% } %>
+            <a class="rs-btn rs-btn--solid" href="<%= pqcForgeHref %>" rel="noopener">Start free</a>
             <a class="rs-btn rs-btn--line" href="/contact?topic=<%= encodeURIComponent('PQC Forge') %>">Talk to us</a>
+            <% if (pqcReportBuyHref) { %><a class="rs-btn rs-btn--line" href="<%= pqcReportBuyHref %>" rel="noopener">Buy the report</a><% } %>
           </div>
         </article>
 
