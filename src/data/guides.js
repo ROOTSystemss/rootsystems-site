@@ -101,7 +101,7 @@ const guides = [
         "A large enough quantum computer could break RSA and elliptic-curve cryptography (ECDSA, ECDH), which protect most signatures and key exchanges today. Data recorded now could be decrypted later."
       ] },
       { h: "What replaces it", p: [
-        "In 2024 NIST published FIPS 203 (ML-KEM, for key exchange), FIPS 204 (ML-DSA, for signatures) and FIPS 205 (SLH-DSA, for signatures). RootSystems signs every report with ML-DSA-65."
+        "In 2024 NIST published FIPS 203 (ML-KEM, for key exchange), FIPS 204 (ML-DSA, for signatures) and FIPS 205 (SLH-DSA, for signatures). RootSystems signs every report with ML-DSA-65. That means we use the standardized algorithm; it is not a claim that our software is a FIPS 140-validated cryptographic module."
       ] },
       { h: "What to do first", p: [
         "Find where RSA and elliptic-curve cryptography are used in your code and servers, stop adding more, and plan the migration. PQC Forge finds them, proposes the patch and fails a build that adds new vulnerable cryptography."
