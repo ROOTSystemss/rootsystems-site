@@ -17,6 +17,7 @@ const {
   dpa
 } = require("../controllers/siteController");
 const { verifyAgentPage, verifyAgentSubmit } = require("../controllers/verifyAgentController");
+const { verifyPage, keysApi } = require("../controllers/verifyController");
 
 const router = Router();
 
@@ -32,6 +33,8 @@ router.get("/standards", standardsPage);
 router.get("/security", securityPage);
 router.get("/verify-agent", verifyAgentPage);
 router.post("/verify-agent", verifyAgentSubmit);
+router.get("/verify", verifyPage);
+router.get("/api/keys", keysApi);
 router.get("/learn", learnPage);
 router.get("/learn/:slug", guidePage);
 router.get("/.well-known/security.txt", securityTxt);

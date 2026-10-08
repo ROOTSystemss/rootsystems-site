@@ -1967,5 +1967,16 @@ a.resource-item__name:hover {
 .agent-result__broad { margin: 10px 0 0; padding: 10px 14px; border-left: 4px solid var(--saffron); border-radius: 0 8px 8px 0; background: rgba(var(--saffron-rgb), .1); color: var(--saffron-deep); font-weight: 700; }
 .agent-result__muted { margin: 4px 0 0; color: var(--ink-faint); }
 .agent-result__note { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-faint); font-size: .78rem; line-height: 1.6; }
+/* /verify (Evidence Notary): one row per check */
+.verify-checks { display: grid; gap: 10px; margin: 20px 0 0; padding: 0; list-style: none; }
+.verify-check { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--paper); }
+.verify-check strong { color: var(--ink); }
+.verify-check p { margin: 2px 0 0; color: var(--ink-muted); font-size: .88rem; line-height: 1.5; overflow-wrap: anywhere; }
+.verify-check__mark { flex: 0 0 auto; width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; font-size: .8rem; font-weight: 800; }
+.verify-check--ok .verify-check__mark { background: var(--green-tint); color: var(--green-deep); }
+.verify-check--bad { border-color: rgba(var(--saffron-rgb), .5); }
+.verify-check--bad .verify-check__mark { background: rgba(var(--saffron-rgb), .14); color: var(--saffron-deep); }
+.verify-agent input[type=file] { width: 100%; padding: 10px; border: 1px dashed var(--border); border-radius: 10px; background: var(--paper); font: inherit; font-size: .88rem; }
+.verify-hint { margin-top: 18px; color: var(--ink-muted); font-size: .9rem; line-height: 1.6; }
 @media (max-width: 850px) { .verify-agent .contact-grid { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 560px) { .agent-result { padding: 20px 16px; } .agent-result__facts { grid-template-columns: minmax(0, 1fr); } .agent-result__state { font-size: 1.2rem; } }

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head><%- include("../partials/head") %></head>
+<body class="page-verify">
+  <%- include("../partials/header") %>
+  <main class="contact-page">
+    <%- include("../partials/page-hero", {
+      eyebrow: "Evidence Notary",
+      title: "Check a RootSystems report <em>yourself.</em>",
+      lead: "Drop in a report and its signed manifest. Your browser checks the post-quantum signature, who signed it, and that not one byte has changed. No account, and nothing is uploaded.",
+      compact: true,
+      noVideo: true
+    }) %>
+
+    <section class="contact-section verify-agent">
+      <div class="wrap contact-grid">
+        <div class="contact-intro">
+          <h2>Proof that does not ask you to trust us.</h2>
+          <p>Every report from <%= products.map(function (p) { return p.name; }).join(", ") %> comes with a manifest: the report's fingerprint, its link to the report before it, and an ML-DSA-65 signature. This page repeats every check the product made, in your browser, with the key each product publishes.</p>
+          <div class="contact-note">
+            <strong>Your files stay on this device.</strong>
+            <span>The checks run in this page. The only thing it fetches is the products' public signing keys.</span>
+          </div>
+          <p class="verify-hint">Where to find the files: in the product, open <strong>Reports</strong>, then download the PDF (and CSV if there is one) and the <strong>manifest</strong>. The timestamp proof (.ots) is optional.</p>
+        </div>
+
+        <div class="verify-agent__main">
+          <form id="verify-form" class="contact-form" novalidate>
+            <label class="form-field">
+              <span>Signed manifest (.json), required</span>
+              <input type="file" name="manifest" accept=".json,application/json" required>
+            </label>
+            <label class="form-field">
+              <span>Report PDF</span>
+              <input type="file" name="pdf" accept=".pdf,application/pdf">
+            </label>
+            <label class="form-field">
+              <span>Report CSV, if the report has one</span>
+              <input type="file" name="csv" accept=".csv,text/csv">
+            </label>
+            <label class="form-field">
+              <span>Timestamp proof (.ots), optional</span>
+              <input type="file" name="ots" accept=".ots">
+            </label>
+            <div class="contact-form__footer">
+              <button class="btn btn-primary" type="submit">Verify report</button>
+              <span>Nothing is uploaded.</span>
+            </div>
+          </form>
+          <div id="verify-result"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <%- include("../partials/footer") %>
+  <script src="/js/site.js"></script>
+  <script src="/vendor/ml-dsa65.min.js"></script>
+  <script src="/js/verify.js"></script>
+</body>
+</html>
