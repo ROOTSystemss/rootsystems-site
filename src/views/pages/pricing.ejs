@@ -19,7 +19,7 @@
         <% tools.forEach(function (tool) { %><a class="rs-jump__link" href="#<%= tool.slug %>"><%= tool.name %></a><% }); %>
         <a class="rs-jump__link" href="#by-invoice">PQC Forge</a>
         <a class="rs-jump__link" href="#bundles">Bundles</a>
-        <a class="rs-jump__link" href="#proof-plus">Proof+</a>
+        <a class="rs-jump__link" href="#trunk">Trunk</a>
       </div>
     </nav>
 
@@ -152,7 +152,7 @@
             <% }); %>
           </div>
           <div class="rs-plan__foot">
-            <p class="rs-tier__price"><span class="rs-tier__per">from </span><span class="rs-tier__cur">$</span><%= proofPlus.from %><span class="rs-tier__per">/mo, by quote</span></p>
+            <p class="rs-tier__price"><span class="rs-tier__per">+</span><span class="rs-tier__cur">$</span><%= proofPlus.perProduct %><span class="rs-tier__per">/mo per product · from $<%= proofPlus.from %>/mo across products</span></p>
             <a class="rs-btn rs-btn--solid" href="<%= proofPlus.href %>">Talk to us</a>
           </div>
         </article>

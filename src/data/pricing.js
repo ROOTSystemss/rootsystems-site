@@ -12,7 +12,7 @@
 // `bundles` and `everything` carry no bundle price: there is no checkout across
 // products yet, so they show what the parts cost separately (computed from the
 // tiers below) and route to /contact rather than inventing a discount.
-// `proofPlus` is the premium "talk to us" tier: a "from" price, never a checkout.
+// `proofPlus` is RootSystems Trunk, the add-on: per-product and "from" prices, never a checkout yet.
 const tools = [
   {
     slug: "offboarding-proof",
@@ -143,19 +143,22 @@ const partner = {
   href: "/contact?topic=" + encodeURIComponent("IT Provider Partner plan")
 };
 
-// Proof+: the premium tier for the advancements. Quote only, never a checkout.
+// RootSystems Trunk: the verified-evidence add-on inside every product (the same "Upgrade to Trunk"
+// button the apps show). Sold by conversation until it has its own checkout. Prices decided
+// 2026-10-10: +$299/mo on one product, from $799/mo across several.
 const proofPlus = {
-  slug: "proof-plus",
-  name: "Proof+",
+  slug: "trunk",
+  name: "RootSystems Trunk",
+  perProduct: "299",
   from: "799",
-  blurb: "For companies whose auditors, insurers or customers want more than a report: evidence sealed at the source and checks that run on their own.",
+  blurb: "An add-on to any plan, for companies whose auditors, insurers or customers want more than a report: evidence read from your own systems and sealed when it arrives, checked against reality, and verifiable by anyone.",
   features: [
     { title: "Evidence sealed at the source", text: "Each answer from Microsoft 365, Google Workspace or Okta is signed the moment it arrives, with the system's own request ID, so an auditor can trace it back." },
     { title: "Reality checks", text: "Terminated in HR but still active in the directory, and MFA required by policy but missing on real accounts, listed account by account with the reason." },
     { title: "Two independent timestamps", text: "A Bitcoin-anchored proof plus a standard RFC 3161 timestamp from a public timestamp authority, on every report." },
     { title: "Continuous checks and priority support", text: "Checks run on a schedule instead of once a quarter, and a person answers within one business day." }
   ],
-  href: "/contact?topic=" + encodeURIComponent("Proof+")
+  href: "/contact?topic=" + encodeURIComponent("RootSystems Trunk")
 };
 
 module.exports = { tools, bundles, everything, partner, proofPlus };
