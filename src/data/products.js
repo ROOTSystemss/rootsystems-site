@@ -27,7 +27,7 @@ const sections = [
   {
     slug: "quantum",
     label: "Branch 2: Quantum-Safe",
-    lead: "Find the cryptography a quantum computer will break, and the patch that fixes it.",
+    lead: "Find the cryptography a large enough quantum computer could break, and the patch that fixes it.",
     color: "green"
   }
 ];

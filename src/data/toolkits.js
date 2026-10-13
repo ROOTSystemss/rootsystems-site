@@ -12,7 +12,7 @@ const BUNDLE_PRICE = 999;
 
 const groups = [
   { slug: "frameworks", label: "Framework toolkits", color: "saffron", lead: "Every requirement of one framework, pre-loaded and numbered to the official text." },
-  { slug: "programmes", label: "Programme toolkits", color: "green", lead: "The governance processes auditors and customers ask about, ready to run." }
+  { slug: "programmes", label: "Program toolkits", color: "green", lead: "The governance processes auditors and customers ask about, ready to run." }
 ];
 
 const toolkits = [
@@ -48,7 +48,7 @@ const toolkits = [
   },
   {
     slug: "ai", group: "frameworks", name: "AI Governance",
-    who: "Companies building or deploying AI that need a programme customers can follow.",
+    who: "Companies building or deploying AI that need a program customers can follow.",
     inside: "71 checks across NIST AI RMF, ISO/IEC 42001 and EU AI Act Article 50, an AI system inventory, impact and oversight tracking.",
     source: { label: "NIST AI RMF", url: "https://www.nist.gov/itl/ai-risk-management-framework" }
   },

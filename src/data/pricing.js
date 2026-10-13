@@ -17,7 +17,7 @@ const tools = [
     slug: "offboarding-proof",
     name: "Offboarding Proof",
     section: "grc",
-    blurb: "Verifiable proof that departing employees actually lost access — on the day it happened, not weeks later.",
+    blurb: "Verifiable proof that departing employees lost access, checked and time-stamped as soon as you run it.",
     href: "https://offboarding-proof.onrender.com/signup",
     tiers: [
       { name: "Free", price: "0", period: "mo", note: "Up to 5 employees monitored" },
