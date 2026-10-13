@@ -44,7 +44,7 @@ const guides = [
     kind: "How it works",
     minutes: 3,
     title: "How to check a RootSystems report yourself",
-    summary: "Every report is signed. Here is how anyone can confirm it came from us and was not changed.",
+    summary: "Every report is signed and hash-chained. Here is how to check one on the product's Reports page.",
     sections: [
       { h: "Why reports are signed", p: [
         "A PDF is easy to edit. A signature makes an edit visible. Each report is fingerprinted with SHA-512 and signed with ML-DSA-65, the post-quantum signature standard NIST published in 2024 as FIPS 204."
@@ -53,7 +53,7 @@ const guides = [
         "Every product publishes its public signing key at /.well-known/rootsystems-signing-key.json on its own address. The key only checks signatures; it cannot create them."
       ] },
       { h: "Checking a report", p: [
-        "Upload your saved copy on the product's Reports page to check it, or check the signed manifest against the published key with any ML-DSA-65 library. If one character of the report changed, the check fails."
+        "Check a report on the product's Reports page. Technical teams can also check the signed manifest against the published key with any ML-DSA-65 library. If one character of the report changed, the check fails."
       ] }
     ]
   },
@@ -86,7 +86,7 @@ const guides = [
         "Access left open after someone leaves is a classic path to a breach, so SOC 2, ISO 27001, NIST SP 800-171 and HIPAA all expect access to be removed promptly and the removal to be recorded."
       ] },
       { h: "What proof looks like", p: [
-        "Proof is a record, made at the time, of each system the person could reach and the moment access ended, signed so it cannot be changed later. Offboarding Proof checks the connected systems and produces that signed record."
+        "Proof is a record, made at the time, of each system the person could reach and when the removal was confirmed, signed so it cannot be changed later. Offboarding Proof checks the connected systems when you run a check (reading their current state) and produces that signed, time-stamped record."
       ] }
     ]
   },

@@ -15,7 +15,7 @@ const sections = [
   {
     slug: "compliance",
     label: "Branch 1: Compliance Proof",
-    lead: "Sign up and start today. Every report is signed so anyone can check it.",
+    lead: "Sign up and start today. Every report is signed and hash-chained.",
     color: "saffron"
   },
   {
@@ -38,7 +38,7 @@ const products = [
     name: "Offboarding Proof",
     question: "Did everyone who left actually lose access?",
     description:
-      "Checks Google Workspace, Microsoft 365, Slack, GitHub and Okta after each departure, and produces a signed record: fully revoked, or exactly what is still open.",
+      "Checks Google Workspace, Microsoft 365, Slack, GitHub and Okta (connectors in Beta) when you run a check, and produces a signed record: fully revoked, or exactly what is still open.",
     price: "From $79/mo",
     status: "LIVE",
     buy: "self-serve",
@@ -113,7 +113,7 @@ const products = [
   {
     section: "quantum",
     name: "PQC Forge",
-    question: "Which of your systems will a quantum computer break?",
+    question: "Which of your systems could a large enough quantum computer break?",
     description:
       "Scans code and servers for RSA and elliptic-curve cryptography, generates the migration patch, and signs the evidence. We run it on our own products on every change.",
     price: "$2,500 readiness report",
