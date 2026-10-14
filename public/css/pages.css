@@ -400,3 +400,72 @@
 /* ---------- footer: three columns ---------- */
 .site-footer__nav { display: flex; gap: 64px; }
 @media (max-width: 620px) { .site-footer__nav { gap: 28px; } }
+
+/* ---------- Pricing: plan tier states (rest / hover+focus / selected) ----------
+   Tiers are radio buttons (see /js/pricing.js). Tune the three state colours here. Saffron stays the
+   brand accent (tier names, the lit tier); state colours sit on top of it. Pricing cards are dark in
+   both site themes (brand tokens), so these values are checked against --rs-ink-2. */
+:root {
+  --rs-plan-rest: rgba(243, 234, 217, 0.16);
+  --rs-plan-hover: #ad94ff;
+  --rs-plan-selected: #3ccf6e;
+}
+button.rs-tier {
+  display: block;
+  width: 100%;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-color: var(--rs-plan-rest);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+button.rs-tier.rs-tier--lit { border-color: var(--accent-line); }
+.rs-tier > .rs-tier__name, .rs-tier > .rs-tier__price, .rs-tier > .rs-tier__note { display: block; }
+button.rs-tier:hover {
+  border-color: var(--rs-plan-hover);
+  box-shadow: 0 0 0 1px var(--rs-plan-hover), 0 0 24px color-mix(in srgb, var(--rs-plan-hover) 35%, transparent);
+}
+button.rs-tier:focus-visible {
+  outline: 3px solid var(--rs-plan-hover);
+  outline-offset: 3px;
+  border-color: var(--rs-plan-hover);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--rs-plan-hover) 35%, transparent);
+}
+button.rs-tier[aria-checked="true"] {
+  border-color: var(--rs-plan-selected);
+  box-shadow: 0 0 0 1px var(--rs-plan-selected), 0 0 26px color-mix(in srgb, var(--rs-plan-selected) 38%, transparent);
+}
+button.rs-tier[aria-checked="true"]:focus-visible { outline-color: var(--rs-plan-selected); }
+.rs-tier__selected {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 10px;
+  padding: 3px 9px;
+  border: 1px solid var(--rs-plan-selected);
+  border-radius: 999px;
+  color: var(--rs-plan-selected);
+  font: 600 0.68rem/1.2 var(--rs-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+button.rs-tier[aria-checked="true"] .rs-tier__selected { display: inline-flex; }
+.rs-plan { transition: border-color 0.18s ease, box-shadow 0.18s ease; }
+.rs-plan:hover, .rs-plan:focus-within {
+  border-color: color-mix(in srgb, var(--rs-plan-hover) 55%, transparent);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35), 0 0 0 1px color-mix(in srgb, var(--rs-plan-hover) 45%, transparent);
+}
+.rs-plan.is-selected {
+  border-color: var(--rs-plan-selected);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--rs-plan-selected), 0 0 40px color-mix(in srgb, var(--rs-plan-selected) 22%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  button.rs-tier, .rs-plan { transition: none; }
+}
+@media (forced-colors: active) {
+  button.rs-tier[aria-checked="true"] { outline: 3px solid Highlight; }
+  .rs-tier__selected { border-color: CanvasText; color: CanvasText; }
+}

@@ -32,22 +32,24 @@
             </header>
 
             <% if (tool.tiers) { %>
-              <div class="rs-plan__tiers">
+              <div class="rs-plan__tiers" role="radiogroup" aria-label="<%= tool.name %> plans">
                 <% tool.tiers.forEach(function (tier, i) { %>
-                  <div class="rs-tier<%= i === 1 ? " rs-tier--lit" : "" %>">
-                    <p class="rs-tier__name"><%= tier.name %></p>
-                    <p class="rs-tier__price"><span class="rs-tier__cur">$</span><%= tier.price %><span class="rs-tier__per">/<%= tier.period %></span></p>
-                    <p class="rs-tier__note"><%= tier.note %></p>
-                  </div>
+                  <button type="button" class="rs-tier<%= i === 1 ? " rs-tier--lit" : "" %>" role="radio" aria-checked="false">
+                    <span class="rs-tier__selected" aria-hidden="true">✓ Selected</span>
+                    <span class="rs-tier__name"><%= tier.name %></span>
+                    <span class="rs-tier__price"><span class="rs-tier__cur">$</span><%= tier.price %><span class="rs-tier__per">/<%= tier.period %></span></span>
+                    <span class="rs-tier__note"><%= tier.note %></span>
+                  </button>
                 <% }); %>
               </div>
             <% } else if (tool.contactOnly) { %>
-              <div class="rs-plan__tiers rs-plan__tiers--one">
-                <div class="rs-tier rs-tier--lit">
-                  <p class="rs-tier__name">Early access</p>
-                  <p class="rs-tier__price">Contact us</p>
-                  <p class="rs-tier__note">Currently onboarding pilot customers. Reach out to discuss your use case.</p>
-                </div>
+              <div class="rs-plan__tiers rs-plan__tiers--one" role="radiogroup" aria-label="<%= tool.name %> plans">
+                <button type="button" class="rs-tier rs-tier--lit" role="radio" aria-checked="false">
+                  <span class="rs-tier__selected" aria-hidden="true">✓ Selected</span>
+                  <span class="rs-tier__name">Early access</span>
+                  <span class="rs-tier__price">Contact us</span>
+                  <span class="rs-tier__note">Currently onboarding pilot customers. Reach out to discuss your use case.</span>
+                </button>
               </div>
             <% } %>
 
@@ -79,12 +81,13 @@
             <h2 class="rs-plan__name">PQC Forge</h2>
             <p class="rs-plan__blurb">Finds the RSA and elliptic-curve cryptography a large enough quantum computer could break, proposes the patch, and signs the evidence. Today it is delivered as a readiness report.</p>
           </header>
-          <div class="rs-plan__tiers rs-plan__tiers--one">
-            <div class="rs-tier rs-tier--lit">
-              <p class="rs-tier__name">Readiness report</p>
-              <p class="rs-tier__price"><span class="rs-tier__cur">$</span>2,500<span class="rs-tier__per"> once</span></p>
-              <p class="rs-tier__note">We scan your repositories and servers and hand over a signed report. <%= pqcReportBuyHref ? "Pay online or by invoice." : "Invoiced." %></p>
-            </div>
+          <div class="rs-plan__tiers rs-plan__tiers--one" role="radiogroup" aria-label="PQC Forge plans">
+            <button type="button" class="rs-tier rs-tier--lit" role="radio" aria-checked="false">
+              <span class="rs-tier__selected" aria-hidden="true">✓ Selected</span>
+              <span class="rs-tier__name">Readiness report</span>
+              <span class="rs-tier__price"><span class="rs-tier__cur">$</span>2,500<span class="rs-tier__per"> once</span></span>
+              <span class="rs-tier__note">We scan your repositories and servers and hand over a signed report. <%= pqcReportBuyHref ? "Pay online or by invoice." : "Invoiced." %></span>
+            </button>
           </div>
           <div class="rs-plan__foot">
             <% if (pqcReportBuyHref) { %><a class="rs-btn rs-btn--solid" href="<%= pqcReportBuyHref %>" rel="noopener">Buy the report</a><% } %>
@@ -97,17 +100,19 @@
             <h2 class="rs-plan__name">Toolkits</h2>
             <p class="rs-plan__blurb">An Excel workbook and Word handbook per framework or program, with the requirements already filled in. No subscription.</p>
           </header>
-          <div class="rs-plan__tiers">
-            <div class="rs-tier">
-              <p class="rs-tier__name">One toolkit</p>
-              <p class="rs-tier__price"><span class="rs-tier__cur">$</span><%= toolkitPrices.single %><span class="rs-tier__per"> once</span></p>
-              <p class="rs-tier__note">HIPAA, SOC 2, ISO 27001, GDPR, PCI DSS, AI Governance and five program toolkits: Audit Readiness, Evidence Governance, Risk Governance, Supplier Governance and Management Review.</p>
-            </div>
-            <div class="rs-tier rs-tier--lit">
-              <p class="rs-tier__name">All 11</p>
-              <p class="rs-tier__price"><span class="rs-tier__cur">$</span><%= toolkitPrices.bundle %><span class="rs-tier__per"> once</span></p>
-              <p class="rs-tier__note">Every toolkit, for consultants and teams running several frameworks.</p>
-            </div>
+          <div class="rs-plan__tiers" role="radiogroup" aria-label="Toolkits plans">
+            <button type="button" class="rs-tier" role="radio" aria-checked="false">
+              <span class="rs-tier__selected" aria-hidden="true">✓ Selected</span>
+              <span class="rs-tier__name">One toolkit</span>
+              <span class="rs-tier__price"><span class="rs-tier__cur">$</span><%= toolkitPrices.single %><span class="rs-tier__per"> once</span></span>
+              <span class="rs-tier__note">HIPAA, SOC 2, ISO 27001, GDPR, PCI DSS, AI Governance and five program toolkits: Audit Readiness, Evidence Governance, Risk Governance, Supplier Governance and Management Review.</span>
+            </button>
+            <button type="button" class="rs-tier rs-tier--lit" role="radio" aria-checked="false">
+              <span class="rs-tier__selected" aria-hidden="true">✓ Selected</span>
+              <span class="rs-tier__name">All 11</span>
+              <span class="rs-tier__price"><span class="rs-tier__cur">$</span><%= toolkitPrices.bundle %><span class="rs-tier__per"> once</span></span>
+              <span class="rs-tier__note">Every toolkit, for consultants and teams running several frameworks.</span>
+            </button>
           </div>
           <div class="rs-plan__foot"><a class="rs-btn rs-btn--line" href="/toolkits">See the toolkits</a></div>
         </article>
@@ -132,5 +137,6 @@
 
   <%- include("../partials/footer") %>
   <script src="/js/site.js"></script>
+  <script src="/js/pricing.js"></script>
 </body>
 </html>
