@@ -53,7 +53,7 @@ const guides = [
         "Every product publishes its public signing key at /.well-known/rootsystems-signing-key.json on its own address. The key only checks signatures; it cannot create them."
       ] },
       { h: "Checking a report", p: [
-        "Check a report on the product's Reports page. Technical teams can also check the signed manifest against the published key with any ML-DSA-65 library. If one character of the report changed, the check fails."
+        "Check a report on the product's Reports page. An Offboarding Proof report can also be checked by anyone, without an account, at offboarding-proof.onrender.com/verify: upload its manifest, PDF and CSV and get a pass or fail. Technical teams can also check the signed manifest against the published key with any ML-DSA-65 library. If one character of the report changed, the check fails."
       ] }
     ]
   },
