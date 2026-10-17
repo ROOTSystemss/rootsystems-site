@@ -56,10 +56,10 @@
 
             <% if (tool.slug === "compliance-readiness") { %>
               <div class="rs-plan__standards">
-                <p class="rs-plan__sub">Each standard is its own plan</p>
+                <p class="rs-plan__sub">Each standard is its own plan. Click one to buy it.</p>
                 <ul class="rs-chips">
                   <% standards.standards.forEach(function (s) { %>
-                    <li><a class="rs-chip" href="/standards#<%= s.id %>"><%= s.name %> <span>$<%= s.price %></span></a></li>
+                    <li><a class="rs-chip" href="https://ai-compliance-readiness.onrender.com/buy/<%= s.id %>" data-checkout="compliance-readiness" title="Buy <%= s.name %>"><%= s.name %> <span>$<%= s.price %></span></a></li>
                   <% }); %>
                 </ul>
                 <p class="rs-plan__fine">Or all 12 standards for $<%= standards.BUNDLE_USD %>/mo. Your first assessment is free on any standard.</p>

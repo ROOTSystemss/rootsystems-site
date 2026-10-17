@@ -20,6 +20,9 @@ const server = app.listen(0, async () => {
         check(tool.name + " " + tier.name + " ($" + tier.price + "): the price opens checkout", html.includes('href="' + tier.buy + '" data-checkout="' + tool.slug + '"'));
       }
     }
+    const { standards } = require("../src/data/standards");
+    check("every paid tier of every product opens checkout", tools.filter((t) => t.tiers).every((t) => t.tiers.filter((x) => x.price !== "0" && x.name !== "Per standard").every((x) => x.buy)));
+    check("each standard's price opens its own checkout", standards.every((s) => html.includes('href="https://ai-compliance-readiness.onrender.com/buy/' + s.id + '" data-checkout="compliance-readiness"')));
     check("Offboarding Proof Team and Business go to checkout", html.includes("https://offboarding-proof.onrender.com/buy/starter") && html.includes("https://offboarding-proof.onrender.com/buy/pro"));
     check("the Offboarding prices are still $79 and $249", /\$<\/span>79<span/.test(html) && /\$<\/span>249<span/.test(html));
   } catch (err) {

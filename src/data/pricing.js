@@ -33,8 +33,8 @@ const tools = [
     href: "https://tpra.onrender.com/signup",
     tiers: [
       { name: "Free", price: "0", period: "mo", note: "5 vendor assessments" },
-      { name: "Team", price: "99", period: "mo", note: "Up to 25 vendor assessments" },
-      { name: "Business", price: "299", period: "mo", note: "Up to 100 vendor assessments" }
+      { name: "Team", price: "99", period: "mo", note: "Up to 25 vendor assessments", buy: "https://tpra.onrender.com/buy/starter" },
+      { name: "Business", price: "299", period: "mo", note: "Up to 100 vendor assessments", buy: "https://tpra.onrender.com/buy/pro" }
     ]
   },
   {
@@ -45,8 +45,8 @@ const tools = [
     href: "https://hipaa-g37n.onrender.com/signup",
     tiers: [
       { name: "Free", price: "0", period: "mo", note: "1 risk assessment" },
-      { name: "Practice", price: "99", period: "mo", note: "Up to 3 risk assessments per rolling 12 months" },
-      { name: "Clinic", price: "249", period: "mo", note: "Unlimited risk assessments" }
+      { name: "Practice", price: "99", period: "mo", note: "Up to 3 risk assessments per rolling 12 months", buy: "https://hipaa-g37n.onrender.com/buy/starter" },
+      { name: "Clinic", price: "249", period: "mo", note: "Unlimited risk assessments", buy: "https://hipaa-g37n.onrender.com/buy/pro" }
     ]
   },
   {
@@ -58,7 +58,7 @@ const tools = [
     tiers: [
       { name: "Free", price: "0", period: "mo", note: "Your first assessment, on any standard" },
       { name: "Per standard", price: "129", period: "mo", note: "$129 (NIST CSF, GDPR, CCPA, PCI DSS, NIS2, NIST AI RMF) or $199 (SOC 2, ISO 27001, CMMC, DORA, ISO 42001, EU AI Act)" },
-      { name: "Every standard", price: "599", period: "mo", note: "All 12 standards for one workspace" }
+      { name: "Every standard", price: "599", period: "mo", note: "All 12 standards for one workspace", buy: "https://ai-compliance-readiness.onrender.com/buy/bundle" }
     ]
   },
   {
@@ -69,8 +69,8 @@ const tools = [
     href: "https://agent-contract-gap.onrender.com/console",
     tiers: [
       { name: "Trial", price: "0", period: "mo", note: "Up to 2 active agent certificates" },
-      { name: "Team", price: "249", period: "mo", note: "Up to 25 active agent certificates" },
-      { name: "Business", price: "1,199", period: "mo", note: "Up to 100 active agent certificates, priority support" }
+      { name: "Team", price: "249", period: "mo", note: "Up to 25 active agent certificates", buy: "https://agent-contract-gap.onrender.com/buy/team" },
+      { name: "Business", price: "1,199", period: "mo", note: "Up to 100 active agent certificates, priority support", buy: "https://agent-contract-gap.onrender.com/buy/business" }
     ]
   }
 ];
