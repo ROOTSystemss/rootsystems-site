@@ -34,11 +34,14 @@
             <% if (tool.tiers) { %>
               <div class="rs-plan__tiers">
                 <% tool.tiers.forEach(function (tier, i) { %>
-                  <div class="rs-tier<%= i === 1 ? " rs-tier--lit" : "" %>">
+                  <%# Free opens sign-up; a paid tier with a checkout link opens checkout directly, no account needed. %>
+                  <% var tierHref = tier.price === "0" ? tool.href : tier.buy; %>
+                  <<%= tierHref ? "a" : "div" %> class="rs-tier<%= i === 1 ? " rs-tier--lit" : "" %><%= tierHref ? " rs-tier--link" : "" %>"<% if (tierHref) { %> href="<%= tierHref %>"<% if (tier.buy) { %> data-checkout="<%= tool.slug %>"<% } %><% } %>>
                     <p class="rs-tier__name"><%= tier.name %></p>
                     <p class="rs-tier__price"><span class="rs-tier__cur">$</span><%= tier.price %><span class="rs-tier__per">/<%= tier.period %></span></p>
                     <p class="rs-tier__note"><%= tier.note %></p>
-                  </div>
+                    <% if (tierHref) { %><span class="rs-tier__cta"><%= tier.price === "0" ? "Start free →" : "Buy now →" %></span><% } %>
+                  </<%= tierHref ? "a" : "div" %>>
                 <% }); %>
               </div>
             <% } else if (tool.contactOnly) { %>

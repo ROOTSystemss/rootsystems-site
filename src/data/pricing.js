@@ -21,8 +21,8 @@ const tools = [
     href: "https://offboarding-proof.onrender.com/signup",
     tiers: [
       { name: "Free", price: "0", period: "mo", note: "Up to 5 employees monitored" },
-      { name: "Team", price: "79", period: "mo", note: "Up to 50 employees monitored" },
-      { name: "Business", price: "249", period: "mo", note: "Up to 250 employees monitored. More, or many client companies? Ask about Enterprise." }
+      { name: "Team", price: "79", period: "mo", note: "Up to 50 employees monitored", buy: "https://offboarding-proof.onrender.com/buy/starter" },
+      { name: "Business", price: "249", period: "mo", note: "Up to 250 employees monitored. More, or many client companies? Ask about Enterprise.", buy: "https://offboarding-proof.onrender.com/buy/pro" }
     ]
   },
   {
