@@ -118,8 +118,10 @@
     aspect-ratio: 940 / 668;
     object-fit: contain;
     transform: none;
-    -webkit-mask-image: radial-gradient(closest-side at 50% 50%, #000 66%, transparent 100%);
-    mask-image: radial-gradient(closest-side at 50% 50%, #000 66%, transparent 100%);
+    /* Fade only the outermost dark margin into the page: starting the fade earlier dimmed the
+       crown's top, the outer leaves and the roots, so the tree's outline looked soft. */
+    -webkit-mask-image: radial-gradient(closest-side at 50% 50%, #000 88%, transparent 100%);
+    mask-image: radial-gradient(closest-side at 50% 50%, #000 88%, transparent 100%);
   }
   .rs-hero__media::after { display: none; }
   .rs-hero__glow { top: 50%; left: 50%; width: 100%; transform: translate(-50%, -50%); }
