@@ -2,7 +2,7 @@
 
 **Last updated: October 3, 2026**
 
-This Refund Policy explains how refunds work for RootSystems' subscription products, including Offboarding Proof, TPRA, the HIPAA Compliance Tool, AI Compliance Readiness, and the Agent Governance console (Authority Atlas, Trust Proof, and Agent Contract Gap), and for our one-time Toolkit downloads.
+This Refund Policy explains how refunds work for RootSystems' subscription products, including Offboarding Proof, Vendor Risk, HIPAA, Standards Readiness, and AI Agent Trust (Agent Certificates, the Action Ledger and Named Sign-off, and Contract & Insurance Gap), and for our one-time Toolkit downloads.
 
 ## 1. Free Trials and Free Tiers
 

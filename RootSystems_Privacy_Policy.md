@@ -2,14 +2,14 @@
 
 **Last updated: October 4, 2026**
 
-This Privacy Policy explains how RootSystems ("we," "us," or "our") collects, uses, and protects personal data when you visit rootsystems.app or use our products: Offboarding Proof, HIPAA Compliance, TPRA, AI Compliance Readiness, Authority Atlas, Trust Proof, Agent Contract Gap, and PQC Forge (together, the "Services"). One policy covers all of them.
+This Privacy Policy explains how RootSystems ("we," "us," or "our") collects, uses, and protects personal data when you visit rootsystems.app or use our products: Offboarding Proof, Vendor Risk, HIPAA, Standards Readiness, AI Agent Trust (Agent Certificates, the Action Ledger and Named Sign-off, and Contract & Insurance Gap), and PQC Forge (together, the "Services"). One policy covers all of them.
 
 RootSystems is an independent software business owned and operated by an individual in Tennessee, United States. Contact: hello@rootsystems.app.
 
 ## 1. Our Role: Controller and Processor
 
 - **Account, billing, and website data.** For the information we collect to run your account and our website, we decide how it is used and act as the **controller**.
-- **Data you put into the Services.** For the information your organization adds to a product (for example, employee lists in Offboarding Proof, vendor details in TPRA, or answers in an assessment), your organization is the controller and we act as its **processor**. We handle that data only to provide the Services, under our [Data Processing Agreement](/dpa).
+- **Data you put into the Services.** For the information your organization adds to a product (for example, employee lists in Offboarding Proof, vendor details in Vendor Risk, or answers in an assessment), your organization is the controller and we act as its **processor**. We handle that data only to provide the Services, under our [Data Processing Agreement](/dpa).
 
 ## 2. Information We Collect
 

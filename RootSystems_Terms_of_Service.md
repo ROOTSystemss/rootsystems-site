@@ -2,7 +2,7 @@
 
 **Last updated: October 4, 2026**
 
-These Terms of Service ("Terms") govern your access to and use of RootSystems' products and services, including Offboarding Proof, HIPAA Compliance, TPRA, AI Compliance Readiness, Authority Atlas, Trust Proof, Agent Contract Gap, and PQC Forge (collectively, the "Services"), provided by RootSystems ("we," "us," or "our"). By creating an account or using any of our Services, you agree to these Terms.
+These Terms of Service ("Terms") govern your access to and use of RootSystems' products and services, including Offboarding Proof, Vendor Risk, HIPAA, Standards Readiness, AI Agent Trust (Agent Certificates, the Action Ledger and Named Sign-off, and Contract & Insurance Gap), and PQC Forge (collectively, the "Services"), provided by RootSystems ("we," "us," or "our"). By creating an account or using any of our Services, you agree to these Terms.
 
 ## 1. Who We Are
 
