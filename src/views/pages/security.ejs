@@ -18,23 +18,23 @@
         <div class="rs-sec__grid">
           <article class="rs-sec__card rs-sec__card--saffron reveal">
             <p class="rs-sec__tag">Data minimization</p>
-            <h2 class="rs-sec__title">Your documents never reach us</h2>
-            <p>Evidence files you attach are fingerprinted with SHA-256 and discarded; we keep the fingerprint, name and size. Report files can be set to expire while their fingerprints stay, so you can still prove a report is genuine.</p>
+            <h2 class="rs-sec__title">What happens to your files</h2>
+            <p>Evidence files in Offboarding, Vendor Risk, HIPAA and Standards, and every file checked on /verify, are fingerprinted in memory and never written to disk or logs. AI Agent Trust keeps the contracts you upload, encrypted (AES-256-GCM), and deletes them after 30 days by default. Report files can be set to expire while their fingerprints stay, so you can still prove a report is genuine.</p>
           </article>
           <article class="rs-sec__card rs-sec__card--violet reveal">
             <p class="rs-sec__tag">Connectors</p>
             <h2 class="rs-sec__title">We record the answer, not a copy of your data</h2>
-            <p>A connector asks your system one question, such as "is this account disabled?", and keeps the answer and the time. It never copies your directory, mailbox or files, and never changes an account or setting. Alerts name people by employee number unless you choose to include names.</p>
+            <p>A connector asks your system one question, such as "is this account disabled?", and keeps the answer and the time. It never copies your directory, mailbox or files. Checks only read. Nothing changes an account unless you switch on close-access, which is off by default. Alerts name people by employee number unless you choose to include names.</p>
           </article>
           <article class="rs-sec__card rs-sec__card--green reveal">
             <p class="rs-sec__tag">Encryption</p>
             <h2 class="rs-sec__title">Encrypted at rest, in transit</h2>
-            <p>Stored data and connector credentials are encrypted with AES-256-GCM, and every product is served only over HTTPS. Passwords are never stored, only salted hashes (bcrypt or scrypt).</p>
+            <p>Customer content and connector credentials are encrypted at rest with AES-256-GCM, and every product is served only over HTTPS. Passwords are never stored, only salted hashes (bcrypt).</p>
           </article>
           <article class="rs-sec__card reveal">
             <p class="rs-sec__tag">Connectors</p>
             <h2 class="rs-sec__title">Read-only unless you say otherwise</h2>
-            <p>Connectors only read what a check needs. Offboarding Proof can also close a leaver's leftover access, but that is off by default, needs a company Admin to turn it on and extra write permissions you grant, never runs before the leaving date, only suspends or disables (nothing is deleted), and leaves a signed receipt for every action.</p>
+            <p>Connectors only read what a check needs. Offboarding Proof can also close a leaver's leftover access, but that is off by default, needs a company Admin to turn it on and extra write permissions you grant, never runs before the leaving date, and leaves a signed receipt for every action. Close-access disables or suspends the account and signs it out of active sessions and app permissions. No account, mailbox or file is deleted.</p>
           </article>
           <article class="rs-sec__card rs-sec__card--violet reveal">
             <p class="rs-sec__tag">Separation</p>
@@ -44,7 +44,7 @@
           <article class="rs-sec__card rs-sec__card--saffron reveal">
             <p class="rs-sec__tag">Signatures</p>
             <h2 class="rs-sec__title">Post-quantum signed reports</h2>
-            <p>Every report is fingerprinted with SHA-512 and signed with ML-DSA-65, the post-quantum signature algorithm standardized in NIST FIPS 204. Every report is signed and hash-chained; check a report on the product's Reports page (<a href="/learn/verify-a-report">how</a>). Offboarding Proof and Vendor Risk reports can also be checked by anyone, without an account, at <a href="https://offboarding-proof.onrender.com/verify">offboarding-proof.onrender.com/verify</a> and <a href="https://tpra.onrender.com/verify">tpra.onrender.com/verify</a>. AI agent certificates can be checked the same way: <a href="/verify-agent">verify an agent certificate</a>.</p>
+            <p>Every report is fingerprinted with SHA-256, signed with ML-DSA-65 (with a SHA-512 digest of the signed data), the post-quantum signature algorithm standardized in NIST FIPS 204. Every report is signed and hash-chained; check a report on the product's Reports page (<a href="/learn/verify-a-report">how</a>). Reports can also be checked by anyone, without an account, on each product's public /verify page: <a href="https://offboarding-proof.onrender.com/verify">Offboarding</a>, <a href="https://tpra.onrender.com/verify">Vendor Risk</a>, <a href="https://hipaa-g37n.onrender.com/verify">HIPAA</a>, <a href="https://ai-compliance-readiness.onrender.com/verify">Standards</a> and <a href="https://agent-contract-gap.onrender.com/verify">AI Agent Trust</a>. AI agent certificates can be checked the same way: <a href="/verify-agent">verify an agent certificate</a>.</p>
           </article>
           <article class="rs-sec__card rs-sec__card--green reveal">
             <p class="rs-sec__tag">Payments</p>
@@ -54,7 +54,7 @@
           <article class="rs-sec__card rs-sec__card--violet reveal">
             <p class="rs-sec__tag">Our own code</p>
             <h2 class="rs-sec__title">We run our own gate</h2>
-            <p>Every change to every RootSystems product runs through the PQC Forge gate, which fails the build if new quantum-vulnerable cryptography appears. Sign-in forms are rate-limited and check where requests come from.</p>
+            <p>Every change to our five products is scanned by the PQC Forge gate in CI, and a failing scan is flagged on the change. Sign-in forms are rate-limited and check where requests come from.</p>
           </article>
         </div>
 

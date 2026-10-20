@@ -31,7 +31,7 @@ const guides = [
         "Anyone can tick YES. Auditors know that, so they ask for the policy, the screenshot or the export behind each answer. A report that shows which answers are backed by a document is worth far more than a questionnaire."
       ] },
       { h: "What happens when you attach a file", p: [
-        "We compute the file's SHA-256 fingerprint, a 64-character code that changes completely if even one byte of the file changes. We keep the fingerprint, the file name and its size, and we discard the file itself. We never store your document.",
+        "We compute the file's SHA-256 fingerprint, a 64-character code that changes completely if even one byte of the file changes. We keep the fingerprint, the file name and its size, and we discard the file itself. Evidence files in Offboarding, Vendor Risk, HIPAA and Standards, and every file checked on /verify, are fingerprinted in memory and never written to disk or logs. AI Agent Trust keeps the contracts you upload, encrypted (AES-256-GCM), and deletes them after 30 days by default.",
         "The signed report lists every fingerprint. Months later, an auditor can fingerprint your copy of the file and see that it matches the one recorded on the day of the assessment."
       ] },
       { h: "The assurance rating", p: [
@@ -47,13 +47,13 @@ const guides = [
     summary: "Every report is signed and hash-chained. Here is how to check one on the product's Reports page.",
     sections: [
       { h: "Why reports are signed", p: [
-        "A PDF is easy to edit. A signature makes an edit visible. Each report is fingerprinted with SHA-512 and signed with ML-DSA-65, the post-quantum signature standard NIST published in 2024 as FIPS 204."
+        "A PDF is easy to edit. A signature makes an edit visible. Each report is fingerprinted with SHA-256 and signed with ML-DSA-65 (with a SHA-512 digest of the signed data), the post-quantum signature standard NIST published in 2024 as FIPS 204."
       ] },
       { h: "Where the key is", p: [
-        "Every product publishes its public signing key at /.well-known/rootsystems-signing-key.json on its own address. The key only checks signatures; it cannot create them."
+        "Every compliance product publishes its public signing key at /.well-known/rootsystems-signing-key.json on its own address. The key only checks signatures; it cannot create them."
       ] },
       { h: "Checking a report", p: [
-        "Check a report on the product's Reports page. An Offboarding Proof report can also be checked by anyone, without an account, at offboarding-proof.onrender.com/verify: upload its manifest, PDF and CSV and get a pass or fail. Technical teams can also check the signed manifest against the published key with any ML-DSA-65 library. If one character of the report changed, the check fails."
+        "Check a report on the product's Reports page. Reports from Offboarding, Vendor Risk, HIPAA, Standards and AI Agent Trust can also be checked by anyone, without an account, on that product's public /verify page (for example offboarding-proof.onrender.com/verify): upload its manifest, PDF and CSV and get a pass or fail. Technical teams can also check the signed manifest against the published key with any ML-DSA-65 library. If one character of the report changed, the check fails."
       ] }
     ]
   },
