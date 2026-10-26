@@ -26,7 +26,7 @@ const sections = [
   },
   {
     slug: "quantum",
-    label: "Branch 2: Quantum-Safe",
+    label: "Branch 2: Post-Quantum Signed",
     lead: "Find the cryptography a large enough quantum computer could break, and the patch that fixes it.",
     color: "green"
   }
@@ -123,4 +123,39 @@ const products = [
   }
 ];
 
-module.exports = { sections, products };
+// Every plan price, so this file lists the same prices as /pricing. Nothing is typed twice: each
+// price is read from the data the pricing page itself renders (pricing.js tiers, standards.js,
+// toolkits.js), so the two can never drift apart. `price` above stays the card's "From" line.
+const pricing = require("./pricing");
+const standardsData = require("./standards");
+const toolkits = require("./toolkits");
+
+const tierPlans = (slug) => {
+  const tool = pricing.tools.find((t) => t.slug === slug);
+  return tool && tool.tiers ? tool.tiers.map((t) => ({ name: t.name, price: "$" + t.price + "/" + t.period })) : [];
+};
+const perStandard = [...new Set(standardsData.standards.map((s) => s.price))].sort((a, b) => a - b);
+
+const PLANS = {
+  "Offboarding Proof": tierPlans("offboarding-proof"),
+  "HIPAA": tierPlans("hipaa"),
+  "Vendor Risk": tierPlans("tpra"),
+  "Standards Readiness": [
+    ...perStandard.map((usd) => ({ name: "Per standard", price: "$" + usd + "/mo" })),
+    { name: "Every standard", price: "$" + standardsData.BUNDLE_USD + "/mo" }
+  ],
+  // Agent Certificates, the Action Ledger and Contract & Insurance Gap are one console plan.
+  "Agent Certificates": tierPlans("agent-governance"),
+  "PQC Forge": [{ name: "Readiness report", price: "$2,500 once" }]
+};
+for (const product of products) product.plans = PLANS[product.name] || [];
+
+// Prices on /pricing that belong to no product card.
+const otherPrices = [
+  { name: "Toolkits", plans: [
+    { name: "One toolkit", price: "$" + toolkits.PRICE + " once" },
+    { name: "All toolkits", price: "$" + toolkits.BUNDLE_PRICE.toLocaleString("en-US") + " once" }
+  ] }
+];
+
+module.exports = { sections, products, otherPrices };

@@ -155,6 +155,30 @@ function guidePage(req, res, next) {
 }
 
 // Where to report a vulnerability (RFC 9116). Expires must be refreshed yearly.
+// /sitemap.xml and /robots.txt. The sitemap lists every public page the router serves (forms that
+// only accept a POST are not pages) plus each guide, always on the canonical https://rootsystems.app.
+const SITE_ORIGIN = "https://rootsystems.app";
+const SITEMAP_PATHS = ["/", "/pricing", "/toolkits", "/standards", "/security", "/verify-agent", "/learn", "/contact", "/terms", "/privacy", "/refund", "/dpa"];
+
+function sitemapUrls() {
+  return [...SITEMAP_PATHS, ...guides.map((g) => "/learn/" + g.slug)].map((p) => SITE_ORIGIN + p);
+}
+
+function sitemapXml(req, res) {
+  const xmlEscape = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  res.type("application/xml").send([
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...sitemapUrls().map((url) => "  <url><loc>" + xmlEscape(url) + "</loc></url>"),
+    "</urlset>",
+    ""
+  ].join("\n"));
+}
+
+function robotsTxt(req, res) {
+  res.type("text/plain").send(["User-agent: *", "Allow: /", "", "Sitemap: " + SITE_ORIGIN + "/sitemap.xml", ""].join("\n"));
+}
+
 function securityTxt(req, res) {
   res.type("text/plain").send([
     "Contact: mailto:hello@rootsystems.app",
@@ -195,6 +219,9 @@ module.exports = {
   learnPage,
   guidePage,
   securityTxt,
+  sitemapXml,
+  robotsTxt,
+  SITEMAP_PATHS,
   terms: legalPage("Terms of Service", "RootSystems_Terms_of_Service.md"),
   privacy: legalPage("Privacy Policy", "RootSystems_Privacy_Policy.md"),
   refund: legalPage("Refund Policy", "RootSystems_Refund_Policy.md"),

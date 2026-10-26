@@ -11,6 +11,8 @@ const {
   learnPage,
   guidePage,
   securityTxt,
+  sitemapXml,
+  robotsTxt,
   terms,
   privacy,
   refund,
@@ -35,6 +37,8 @@ router.post("/verify-agent", verifyAgentSubmit);
 router.get("/learn", learnPage);
 router.get("/learn/:slug", guidePage);
 router.get("/.well-known/security.txt", securityTxt);
+router.get("/sitemap.xml", sitemapXml);
+router.get("/robots.txt", robotsTxt);
 router.get("/terms", terms);
 router.get("/privacy", privacy);
 router.get("/refund", refund);
