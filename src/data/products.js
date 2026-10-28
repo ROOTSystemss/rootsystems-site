@@ -38,7 +38,7 @@ const products = [
     name: "Offboarding Proof",
     question: "Did everyone who left actually lose access?",
     description:
-      "Checks Microsoft 365, Slack, GitHub and Okta (connectors in Beta) when you run a check, and produces a signed record: fully revoked, or exactly what is still open.",
+      "Start from your industry's offboarding checklist. Keep the tools you use; we add signed proof your auditor, insurer or client can check.",
     price: "From $79/mo",
     status: "LIVE",
     buy: "self-serve",
