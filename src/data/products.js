@@ -123,39 +123,19 @@ const products = [
   }
 ];
 
-// Every plan price, so this file lists the same prices as /pricing. Nothing is typed twice: each
-// price is read from the data the pricing page itself renders (pricing.js tiers, standards.js,
-// toolkits.js), so the two can never drift apart. `price` above stays the card's "From" line.
-const pricing = require("./pricing");
-const standardsData = require("./standards");
-const toolkits = require("./toolkits");
-
-const tierPlans = (slug) => {
-  const tool = pricing.tools.find((t) => t.slug === slug);
-  return tool && tool.tiers ? tool.tiers.map((t) => ({ name: t.name, price: "$" + t.price + "/" + t.period })) : [];
-};
-const perStandard = [...new Set(standardsData.standards.map((s) => s.price))].sort((a, b) => a - b);
-
-const PLANS = {
-  "Offboarding Proof": tierPlans("offboarding-proof"),
-  "HIPAA": tierPlans("hipaa"),
-  "Vendor Risk": tierPlans("tpra"),
-  "Standards Readiness": [
-    ...perStandard.map((usd) => ({ name: "Per standard", price: "$" + usd + "/mo" })),
-    { name: "Every standard", price: "$" + standardsData.BUNDLE_USD + "/mo" }
-  ],
-  // Agent Certificates, the Action Ledger and Contract & Insurance Gap are one console plan.
-  "Agent Certificates": tierPlans("agent-governance"),
-  "PQC Forge": [{ name: "Readiness report", price: "$2,500 once" }]
-};
-for (const product of products) product.plans = PLANS[product.name] || [];
+// Every price comes from price-list.json, the single source of truth (also read by marketing-cli's
+// claim check). test/priceList.test.js fails if it and the pricing page's data (pricing.js tiers,
+// standards.js, toolkits.js) or a card disagree. Agent Certificates, the Action Ledger and Contract &
+// Insurance Gap share the one console plan.
+const priceList = require("./price-list.json");
+for (const product of products) {
+  const entry = priceList.products[product.name];
+  if (!entry) throw new Error(`price-list.json has no entry for ${product.name}`);
+  product.price = entry.card;
+  product.plans = entry.plans;
+}
 
 // Prices on /pricing that belong to no product card.
-const otherPrices = [
-  { name: "Toolkits", plans: [
-    { name: "One toolkit", price: "$" + toolkits.PRICE + " once" },
-    { name: "All toolkits", price: "$" + toolkits.BUNDLE_PRICE.toLocaleString("en-US") + " once" }
-  ] }
-];
+const otherPrices = Object.entries(priceList.other).map(([name, plans]) => ({ name, plans }));
 
 module.exports = { sections, products, otherPrices };
