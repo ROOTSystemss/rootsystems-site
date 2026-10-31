@@ -29,5 +29,23 @@ check("every product card reads its price and plans from price-list.json", () =>
 });
 check("every product has at least one plan", () => { for (const p of products) assert.ok(p.plans.length, p.name); });
 
+// Feature lists per plan: one list per plan name, and the same lists the product apps gate on
+// (their src/lib/planFeatures.js), checked when those repos sit next to this one.
+const fs = require("fs"), path = require("path");
+for (const [name, repo] of [["Offboarding Proof", "offboarding-proof"], ["HIPAA", "hipaa-compliance"], ["Vendor Risk", "tpra-tool"]]) {
+  check(`${name}: a feature list for every plan`, () => {
+    const f = priceList.products[name].features;
+    assert.deepStrictEqual(Object.keys(f), plansOf(name).map((p) => p.name));
+    assert.ok(Object.values(f).every((l) => Array.isArray(l) && l.length), "a plan with no features");
+  });
+  const file = path.join(__dirname, "..", "..", repo, "src", "lib", "planFeatures.js");
+  if (!fs.existsSync(file)) { console.log(`SKIP  ${name}: ${repo} not checked out next to the site`); continue; }
+  check(`${name}: features match ${repo}'s plan gating`, () => {
+    const pf = require(file);
+    const fromApp = Object.fromEntries(pf.TIERS.map((t) => [t.name, Object.values(pf.FEATURES).filter((x) => x.tier === t.id).map((x) => x.label)]));
+    assert.deepStrictEqual(priceList.products[name].features, fromApp);
+  });
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);
