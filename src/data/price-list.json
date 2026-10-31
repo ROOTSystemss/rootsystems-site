@@ -31,13 +31,13 @@
           "HR triggers",
           "Exports",
           "Access reviews",
-          "Email alerts"
+          "Email alerts",
+          "Connectors beyond the core four"
         ],
         "Business": [
           "Daily monitoring",
           "Close access",
           "Slack, Teams, ticket and monthly alerts",
-          "Connectors beyond the core four",
           "Report retention past 90 days"
         ]
       }
