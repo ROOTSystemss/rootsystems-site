@@ -1,0 +1,208 @@
+{
+  "_comment": "Single source of truth for every price on rootsystems.app. Read by src/data/products.js and by marketing-cli (claim check). test/priceList.test.js fails if pricing.js, standards.js, toolkits.js or a product card disagree. \"features\" lists what each plan adds (each plan includes the ones before it); the product apps gate on the same lists (src/lib/planFeatures.js, PLAN_GATING=1), and proof (verify, tamper test, signed reports) is never gated. Change a price or feature here and in the source data together.",
+  "products": {
+    "Offboarding Proof": {
+      "card": "From $79/mo",
+      "plans": [
+        {
+          "name": "Free",
+          "price": "$0/mo"
+        },
+        {
+          "name": "Team",
+          "price": "$79/mo"
+        },
+        {
+          "name": "Business",
+          "price": "$249/mo"
+        }
+      ],
+      "features": {
+        "Free": [
+          "Industry checklists",
+          "Signed offboarding records",
+          "Verify and tamper test",
+          "CSV import and download",
+          "Attestation"
+        ],
+        "Team": [
+          "Slack, GitHub, Microsoft 365 and Okta connectors",
+          "Webhook alerts",
+          "HR triggers",
+          "Exports",
+          "Access reviews",
+          "Email alerts",
+          "Connectors beyond the core four"
+        ],
+        "Business": [
+          "Daily monitoring",
+          "Close access",
+          "Slack, Teams, ticket and monthly alerts",
+          "Report retention past 90 days"
+        ]
+      }
+    },
+    "HIPAA": {
+      "card": "From $99/mo",
+      "plans": [
+        {
+          "name": "Free",
+          "price": "$0/mo"
+        },
+        {
+          "name": "Practice",
+          "price": "$99/mo"
+        },
+        {
+          "name": "Clinic",
+          "price": "$249/mo"
+        }
+      ],
+      "features": {
+        "Free": [
+          "Security Rule risk assessment",
+          "Tamper-evident report",
+          "Verify and tamper test"
+        ],
+        "Practice": [
+          "Risk register",
+          "BAA tracking",
+          "Training log",
+          "Exports"
+        ],
+        "Clinic": [
+          "Connected checks",
+          "Failure alerts",
+          "Priority support"
+        ]
+      }
+    },
+    "Vendor Risk": {
+      "card": "From $99/mo",
+      "plans": [
+        {
+          "name": "Free",
+          "price": "$0/mo"
+        },
+        {
+          "name": "Team",
+          "price": "$99/mo"
+        },
+        {
+          "name": "Business",
+          "price": "$299/mo"
+        }
+      ],
+      "features": {
+        "Free": [
+          "Vendor risk scoring",
+          "Signed results",
+          "Verify and tamper test"
+        ],
+        "Team": [
+          "Vendor questionnaire invites",
+          "Risk register",
+          "Exports"
+        ],
+        "Business": [
+          "Weekly vendor monitoring",
+          "Alerts",
+          "Multiple companies"
+        ]
+      }
+    },
+    "Standards Readiness": {
+      "card": "From $129/mo per standard",
+      "plans": [
+        {
+          "name": "Free",
+          "price": "$0/mo"
+        },
+        {
+          "name": "Per standard",
+          "price": "$129/mo"
+        },
+        {
+          "name": "Per standard",
+          "price": "$199/mo"
+        },
+        {
+          "name": "Every standard",
+          "price": "$599/mo"
+        }
+      ]
+    },
+    "Agent Certificates": {
+      "card": "From $249/mo",
+      "plans": [
+        {
+          "name": "Trial",
+          "price": "$0/mo"
+        },
+        {
+          "name": "Team",
+          "price": "$249/mo"
+        },
+        {
+          "name": "Business",
+          "price": "$1,199/mo"
+        }
+      ]
+    },
+    "Action Ledger": {
+      "card": "Included in the console",
+      "plans": [
+        {
+          "name": "Trial",
+          "price": "$0/mo"
+        },
+        {
+          "name": "Team",
+          "price": "$249/mo"
+        },
+        {
+          "name": "Business",
+          "price": "$1,199/mo"
+        }
+      ]
+    },
+    "Contract & Insurance Gap": {
+      "card": "Included in the console",
+      "plans": [
+        {
+          "name": "Trial",
+          "price": "$0/mo"
+        },
+        {
+          "name": "Team",
+          "price": "$249/mo"
+        },
+        {
+          "name": "Business",
+          "price": "$1,199/mo"
+        }
+      ]
+    },
+    "PQC Forge": {
+      "card": "$2,500 readiness report",
+      "plans": [
+        {
+          "name": "Readiness report",
+          "price": "$2,500 once"
+        }
+      ]
+    }
+  },
+  "other": {
+    "Toolkits": [
+      {
+        "name": "One toolkit",
+        "price": "$199 once"
+      },
+      {
+        "name": "All toolkits",
+        "price": "$999 once"
+      }
+    ]
+  }
+}

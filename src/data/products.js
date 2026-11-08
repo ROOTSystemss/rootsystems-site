@@ -26,7 +26,7 @@ const sections = [
   },
   {
     slug: "quantum",
-    label: "Branch 2: Quantum-Safe",
+    label: "Branch 2: Post-Quantum Signed",
     lead: "Find the cryptography a large enough quantum computer could break, and the patch that fixes it.",
     color: "green"
   }
@@ -38,7 +38,7 @@ const products = [
     name: "Offboarding Proof",
     question: "Did everyone who left actually lose access?",
     description:
-      "Checks Microsoft 365, Slack, GitHub and Okta (connectors in Beta) when you run a check, and produces a signed record: fully revoked, or exactly what is still open.",
+      "Start from your industry's offboarding checklist. Keep the tools you use; we add signed proof your auditor, insurer or client can check.",
     price: "From $79/mo",
     status: "LIVE",
     buy: "self-serve",
@@ -123,4 +123,19 @@ const products = [
   }
 ];
 
-module.exports = { sections, products };
+// Every price comes from price-list.json, the single source of truth (also read by marketing-cli's
+// claim check). test/priceList.test.js fails if it and the pricing page's data (pricing.js tiers,
+// standards.js, toolkits.js) or a card disagree. Agent Certificates, the Action Ledger and Contract &
+// Insurance Gap share the one console plan.
+const priceList = require("./price-list.json");
+for (const product of products) {
+  const entry = priceList.products[product.name];
+  if (!entry) throw new Error(`price-list.json has no entry for ${product.name}`);
+  product.price = entry.card;
+  product.plans = entry.plans;
+}
+
+// Prices on /pricing that belong to no product card.
+const otherPrices = Object.entries(priceList.other).map(([name, plans]) => ({ name, plans }));
+
+module.exports = { sections, products, otherPrices };
