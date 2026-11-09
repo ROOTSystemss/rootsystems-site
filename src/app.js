@@ -13,6 +13,7 @@ require("./utils/security").installSecurity(app, { sessions: false });
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.locals.socialLinksHtml = require("./data/socialLinks").socialLinksHtml(); // footer icon links (X, Instagram) from one list
 
 app.use(express.urlencoded({ extended: false, limit: "32kb" }));
 app.use(express.static(path.join(__dirname, "..", "public")));
