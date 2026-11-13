@@ -1,5 +1,7 @@
 // Renders scripts/og-image.html to public/images/og-image.png (1200x630) with a local headless Chrome or Edge.
 // Run by hand after changing the card: node scripts/build-og-image.js. Not part of the build.
+// The screenshot is ~600 KB; it must then be saved as a 256-colour palette PNG to stay under 300 KB
+// (test/seo.test.js checks), e.g. with sharp: png({ palette: true, colours: 256, dither: 1, effort: 10 }).
 const { execFileSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");

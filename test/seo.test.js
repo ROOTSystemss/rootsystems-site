@@ -48,6 +48,7 @@ const server = app.listen(0, async () => {
     // The image itself.
     const png = fs.readFileSync(path.join(__dirname, "..", "public", "images", "og-image.png"));
     check("og-image.png is a 1200x630 PNG served at /images/og-image.png", png.readUInt32BE(16) === 1200 && png.readUInt32BE(20) === 630 && (await fetch(base + "/images/og-image.png")).status === 200);
+    check("og-image.png is under 300 KB (WhatsApp and some unfurlers skip larger images)", png.length < 300 * 1024, Math.round(png.length / 1024) + " KB");
 
     // 2: JSON-LD.
     const orgOk = (h) => ld(h).some((o) => o["@type"] === "Organization" && o.name === "RootSystems" && o.url === "https://rootsystems.app/" && /^https:\/\/rootsystems\.app\/images\//.test(o.logo) && SOCIAL_LINKS.every((s) => o.sameAs.includes(s.url)));
@@ -65,9 +66,15 @@ const server = app.listen(0, async () => {
     check("guides are og:type article, other pages website", guides.every((g) => meta(pages["/learn/" + g.slug].text, "property", "og:type") === "article") && meta(pages["/"].text, "property", "og:type") === "website");
 
     // 3: alt text.
+    // The header/footer logo sits right next to the word "RootSystems", so its alt is empty (decorative: a
+    // screen reader would otherwise say the name twice). Every other image needs descriptive alt text.
     const imgs = PAGES.flatMap((p) => [...pages[p].text.matchAll(/<img\b[^>]*>/g)].map((m) => m[0]));
-    const noAlt = imgs.filter((t) => !/\balt="[^"]{3,}"/.test(t));
-    check("every <img> on every page has descriptive alt text (" + imgs.length + " images)", imgs.length > 0 && noAlt.length === 0, noAlt.join(" "));
+    const brandMarks = imgs.filter((t) => /class="brand__mark"/.test(t));
+    const others = imgs.filter((t) => !/class="brand__mark"/.test(t));
+    const noAlt = others.filter((t) => !/\balt="[^"]{3,}"/.test(t));
+    check("every content <img> has descriptive alt text (" + others.length + " images)", others.length > 0 && noAlt.length === 0, noAlt.join(" "));
+    check("the logo next to the word RootSystems has empty alt (decorative), never a missing alt", brandMarks.length > 0 && brandMarks.every((t) => /\balt=""/.test(t)));
+    check("...and the word is really next to it in the header and footer", PAGES.every((p) => [...pages[p].text.matchAll(/<img class="brand__mark"[^>]*>\s*<span class="brand__word">RootSystems<\/span>/g)].length === 2));
 
     // 5: sitemap and robots.
     const sitemap = (await get("/sitemap.xml")).text;
