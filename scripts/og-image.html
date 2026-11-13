@@ -1,0 +1,43 @@
+<!doctype html>
+<!-- Source of public/images/og-image.png (1200x630), the link-preview image for every page.
+     Regenerate: node scripts/build-og-image.js (headless Chrome/Edge screenshot of this file). -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: radial-gradient(ellipse 70% 90% at 82% 50%, rgba(255,153,51,.16), transparent 60%), #070a12;
+    color: #f3ead9; font-family: Inter, system-ui, sans-serif; position: relative;
+  }
+  .tree {
+    position: absolute; right: -40px; top: 0; height: 630px; width: 760px;
+    background: url("../public/images/rootsystems-tree-hero.jpg") center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+            mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+    opacity: .9;
+  }
+  .content { position: absolute; left: 80px; top: 0; bottom: 0; width: 640px; display: flex; flex-direction: column; justify-content: center; }
+  .brand { display: flex; align-items: center; gap: 16px; font-weight: 600; font-size: 30px; letter-spacing: .01em; }
+  .brand img { width: 52px; height: 56px; }
+  h1 { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 92px; line-height: 1.02; margin: 44px 0 26px; letter-spacing: -.015em; }
+  h1 em { font-style: normal; color: #ff9933; }
+  p { font-size: 27px; line-height: 1.4; color: #c9c2b4; margin: 0; max-width: 560px; }
+  .url { position: absolute; left: 80px; bottom: 52px; font-family: "JetBrains Mono", monospace; font-size: 22px; color: #ff9933; letter-spacing: .02em; }
+  .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 8px; background: linear-gradient(90deg, #ff9933 0 33.3%, #3ccf6e 33.3% 66.6%, #9d7cff 66.6%); }
+</style>
+</head>
+<body>
+  <div class="tree"></div>
+  <div class="content">
+    <div class="brand"><img src="../public/images/rs-logo.svg" alt="RootSystems logo">RootSystems</div>
+    <h1>Proof, <em>not paperwork.</em></h1>
+    <p>Signed, verifiable evidence for offboarding, HIPAA, vendor risk, standards and AI agents.</p>
+  </div>
+  <div class="url">rootsystems.app</div>
+  <div class="bar"></div>
+</body>
+</html>

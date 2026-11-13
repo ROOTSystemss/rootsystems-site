@@ -17,6 +17,9 @@ app.locals.socialLinksHtml = require("./data/socialLinks").socialLinksHtml(); //
 
 app.use(express.urlencoded({ extended: false, limit: "32kb" }));
 app.use(express.static(path.join(__dirname, "..", "public")));
+// The page's own path, for its canonical URL and per-page tags (src/utils/seo.js, rendered by head.ejs).
+app.locals.seoTags = require("./utils/seo").tags;
+app.use((req, res, next) => { res.locals.seoPath = req.path; next(); });
 
 // This parent site mounts at "/" — rootsystems.app itself. Individual
 // products live at subfolder paths on the SAME domain (rootsystems.app/tpra,
@@ -60,7 +63,8 @@ app.use("/", siteRoutes);
 
 app.use((req, res) => {
   res.status(404).render("pages/not-found", {
-    title: "Page not found — RootSystems"
+    title: "Page not found — RootSystems",
+    noindex: true // no canonical for a page that does not exist
   });
 });
 
