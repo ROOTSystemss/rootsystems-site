@@ -22,6 +22,8 @@ const server = app.listen(0, async () => {
     check("every subprocessor from src/data/subprocessors.js is listed", subprocessors.every((s) => html.includes('data-subprocessor="' + s.name + '"')), subprocessors.map((s) => s.name).join(","));
     check("each subprocessor names the configuration it comes from", subprocessors.every((s) => typeof s.source === "string" && s.source.length > 5));
     for (const name of ["Render", "Neon", "Resend", "Dodo Payments", "Vercel"]) check("lists " + name, text.includes(name));
+    // 2026-11-14: Offboarding Proof works with any system (Universal Connector); direct integrations optional.
+    check("says Offboarding works with any system, read-only, direct integrations optional", /id="universal-connector"/.test(html) && /works with any system/i.test(text) && /only ever called with GET/.test(text) && /Direct integrations are optional add-ons/.test(text) && /help\/universal-connector/.test(html));
     check("links to the Offboarding SAMPLE signed report", /href="https:\/\/offboarding-proof\.onrender\.com\/sample\/report"/.test(html) && /SAMPLE/.test(text));
     check("close-access: disable only, nothing deleted, preview, dry run, hourly cap", /Nothing is deleted/.test(text) && /preview/i.test(text) && /dry run/i.test(text) && /per hour/.test(text) && !/signs it out of active sessions and app permissions/.test(text));
     const claims = [/SOC ?2 (certified|compliant|Type)/i, /ISO ?27001 (certified|compliant)/i, /HIPAA[- ]compliant/i, /FIPS[- ]validated/i, /quantum[- ]safe/i, /penetration[- ]tested/i];

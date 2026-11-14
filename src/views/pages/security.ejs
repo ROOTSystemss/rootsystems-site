@@ -21,7 +21,12 @@
             <h2 class="rs-sec__title">What happens to your files</h2>
             <p>Evidence files in Offboarding, Vendor Risk, HIPAA and Standards, and every file checked on /verify, are fingerprinted in memory and never written to disk or logs. AI Agent Trust keeps the contracts you upload, encrypted (AES-256-GCM), and deletes them after 30 days by default. Report files can be set to expire while their fingerprints stay, so you can still prove a report is genuine.</p>
           </article>
-          <article class="rs-sec__card rs-sec__card--violet reveal">
+          <article class="rs-sec__card rs-sec__card--violet reveal" id="universal-connector">
+            <p class="rs-sec__tag">Works with any system</p>
+            <h2 class="rs-sec__title">The Universal Connector only reads</h2>
+            <p>Offboarding Proof works with any system your people log into, with no direct integration needed. Upload the system's user export (CSV or XLSX), or point the Universal Connector at the system's own API or SCIM address. It is read-only by design: files are only parsed (formulas and macros are never run), and APIs are only ever called with GET, with redirects to other hosts refused. It keeps each export's date and SHA-256 fingerprint and only the rows that match your employees. Data that is missing, unreadable or older than 24 hours reads "Not verified", never "Removed". Direct integrations are optional add-ons, each offered only after it passes a live test. <a href="https://offboarding-proof.onrender.com/help/universal-connector">How it works</a>.</p>
+          </article>
+          <article class="rs-sec__card reveal">
             <p class="rs-sec__tag">Connectors</p>
             <h2 class="rs-sec__title">We record the answer, not a copy of your data</h2>
             <p>A connector asks your system one question, such as "is this account disabled?", and keeps the answer and the time. It never copies your directory, mailbox or files. Checks only read. Nothing changes an account unless you switch on close-access, which is off by default. Alerts name people by employee number unless you choose to include names.</p>

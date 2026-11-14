@@ -86,7 +86,7 @@ const guides = [
         "Access left open after someone leaves is a classic path to a breach, so SOC 2, ISO 27001, NIST SP 800-171 and HIPAA all expect access to be removed promptly and the removal to be recorded."
       ] },
       { h: "What proof looks like", p: [
-        "Proof is a record, made at the time, of each system the person could reach and when the removal was confirmed, signed so it cannot be changed later. Offboarding Proof checks the connected systems when you run a check (reading their current state) and produces that signed, time-stamped record."
+        "Proof is a record, made at the time, of each system the person could reach and when the removal was confirmed, signed so it cannot be changed later. Offboarding Proof works with any system: it reads each one's current state from the system's own user export, API or SCIM address (the Universal Connector, read-only), or from an optional direct integration, and produces that signed, time-stamped record, with each person's access before and after."
       ] }
     ]
   },

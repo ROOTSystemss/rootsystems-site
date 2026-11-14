@@ -38,7 +38,7 @@ const products = [
     name: "Offboarding Proof",
     question: "Did everyone who left actually lose access?",
     description:
-      "Start from your industry's offboarding checklist. Keep the tools you use; we add signed proof your auditor, insurer or client can check.",
+      "Works with any system: upload a user export or connect its API or SCIM, no integration needed. Signed before-and-after proof your auditor, insurer or client can check. Direct integrations optional.",
     price: "From $79/mo",
     status: "LIVE",
     buy: "self-serve",

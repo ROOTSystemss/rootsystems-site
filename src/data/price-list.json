@@ -23,16 +23,17 @@
           "Signed offboarding records",
           "Verify and tamper test",
           "CSV import and download",
-          "Attestation"
+          "Attestation",
+          "Universal Connector: any system (export upload, REST API or SCIM)"
         ],
         "Team": [
-          "Slack, GitHub, Microsoft 365 and Okta connectors",
+          "Direct connector add-ons (Slack, GitHub, Microsoft 365, Okta), once live-tested",
           "Webhook alerts",
           "HR triggers",
           "Exports",
           "Access reviews",
           "Email alerts",
-          "Connectors beyond the core four"
+          "More direct connector add-ons, once live-tested"
         ],
         "Business": [
           "Daily monitoring",
