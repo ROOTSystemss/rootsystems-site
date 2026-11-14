@@ -140,7 +140,7 @@ function standardsPage(req, res) {
 }
 
 function securityPage(req, res) {
-  res.render("pages/security", { title: "Security — RootSystems" });
+  res.render("pages/security", { title: "Security — RootSystems", subprocessors: require("../data/subprocessors") });
 }
 
 function learnPage(req, res) {

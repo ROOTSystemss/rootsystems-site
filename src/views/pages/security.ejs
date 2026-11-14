@@ -29,12 +29,12 @@
           <article class="rs-sec__card rs-sec__card--green reveal">
             <p class="rs-sec__tag">Encryption</p>
             <h2 class="rs-sec__title">Encrypted at rest, in transit</h2>
-            <p>Customer content and connector credentials are encrypted at rest with AES-256-GCM, and every product is served only over HTTPS. Passwords are never stored, only salted hashes (bcrypt).</p>
+            <p>Customer content and connector credentials are encrypted at rest with AES-256-GCM, and every product is served only over HTTPS. Passwords are never stored, only salted hashes (bcrypt). In Offboarding Proof, Owners and Admins are prompted to turn on two-factor sign-in with an authenticator app.</p>
           </article>
           <article class="rs-sec__card reveal">
             <p class="rs-sec__tag">Connectors</p>
             <h2 class="rs-sec__title">Read-only unless you say otherwise</h2>
-            <p>Connectors only read what a check needs. Offboarding Proof can also close a leaver's leftover access, but that is off by default, needs a company Admin to turn it on and extra write permissions you grant, never runs before the leaving date, and leaves a signed receipt for every action. Close-access disables or suspends the account and signs it out of active sessions and app permissions. No account, mailbox or file is deleted.</p>
+            <p>Connectors only read what a check needs. Offboarding Proof can also close a leaver's leftover access, but that is off by default, needs a company Admin to turn it on and extra write permissions you grant, never runs before the leaving date, and leaves a signed receipt for every action. Close-access disables or suspends the account and signs it out of active sessions. Nothing is deleted: app permissions, groups, mailboxes and files are left for a person to review, and each step records how to undo it. An Admin can preview it first, run it as a dry run that changes nothing, and cap how many accounts it closes per hour.</p>
           </article>
           <article class="rs-sec__card rs-sec__card--violet reveal">
             <p class="rs-sec__tag">Separation</p>
@@ -66,7 +66,32 @@
           </div>
         </div>
 
-        <p class="rs-note">Where your data is processed, and by which providers, is listed in the <a href="/privacy">privacy policy</a> and the <a href="/dpa">data processing agreement</a>.</p>
+        <div class="rs-sec__samples reveal" id="sample-reports">
+          <h2 class="rs-sec__title">See a signed report before you sign up</h2>
+          <p>Download a <strong>SAMPLE</strong> report with made-up data and check it yourself on the public verify page: unchanged, it passes; change one character and it fails.</p>
+          <ul>
+            <li><a href="https://offboarding-proof.onrender.com/sample/report">Offboarding Proof: SAMPLE signed report (PDF, CSV, signed manifest)</a></li>
+            <li><a href="https://offboarding-proof.onrender.com/sample">Offboarding Proof for MSPs: SAMPLE all-clients view and client summaries</a></li>
+          </ul>
+        </div>
+
+        <div class="rs-sec__subprocessors reveal" id="subprocessors">
+          <h2 class="rs-sec__title">Subprocessors</h2>
+          <p>The providers that process customer data for us, taken from our products' actual configuration.</p>
+          <div class="rs-table-wrap">
+            <table class="rs-table">
+              <thead><tr><th scope="col">Provider</th><th scope="col">What it does for us</th><th scope="col">Where</th></tr></thead>
+              <tbody>
+                <% (typeof subprocessors !== "undefined" ? subprocessors : []).forEach((s) => { %>
+                  <tr data-subprocessor="<%= s.name %>"><td><%= s.name %></td><td><%= s.purpose %></td><td><%= s.location %></td></tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+          <p class="rs-note">OpenTimestamps public calendars receive only a SHA-256 fingerprint of a report (to timestamp it in Bitcoin), never its content. We hold no security certification today (no SOC 2 or ISO 27001 report); this page describes how the products are built.</p>
+        </div>
+
+        <p class="rs-note">Where your data is processed, and by which providers, is also covered in the <a href="/privacy">privacy policy</a> and the <a href="/dpa">data processing agreement</a>.</p>
       </div>
     </section>
   </main>
