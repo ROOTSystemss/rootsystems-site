@@ -1,6 +1,6 @@
 # Data Processing Agreement
 
-**Last updated: September 27, 2026**
+**Last updated: November 14, 2026**
 
 This Data Processing Agreement ("DPA") forms part of the RootSystems [Terms of Service](/terms) between RootSystems ("we," "Processor") and the organization that uses our products ("you," "Customer"). It applies whenever we process personal data on your behalf while providing any RootSystems product: Offboarding Proof, Vendor Risk, HIPAA, Standards Readiness, AI Agent Trust (Agent Certificates, the Action Ledger and Named Sign-off, and Contract & Insurance Gap), or PQC Forge (the "Services").
 
@@ -79,6 +79,7 @@ Each party's liability under this DPA is subject to the limitations in the Terms
 | Neon | Database hosting on Amazon Web Services | United States (US West) |
 | Vercel Inc. | Hosting of the rootsystems.app website | United States / global edge network |
 | Dodo Payments | Checkout, subscriptions, and tax as merchant of record (billing contact details only) | See Dodo Payments' own documentation |
+| Resend, Inc. | Transactional email: address confirmation, password reset, invitations and alerts (recipient address and message content) | United States |
 | Google LLC | Support email (Gmail) | United States |
 
 ---
