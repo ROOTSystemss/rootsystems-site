@@ -38,7 +38,7 @@ const products = [
     name: "Offboarding Proof",
     question: "Did everyone who left actually lose access?",
     description:
-      "Works with any system: upload a user export or connect its API or SCIM, no integration needed. Signed before-and-after proof your auditor, insurer or client can check. Direct integrations optional.",
+      "Works with Microsoft 365, Okta and any system via user export, REST API or SCIM. Signed before-and-after proof your auditor, insurer or client can check.",
     price: "From $79/mo",
     status: "LIVE",
     buy: "self-serve",
