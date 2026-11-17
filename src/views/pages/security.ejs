@@ -50,6 +50,7 @@
             <p class="rs-sec__tag">Signatures</p>
             <h2 class="rs-sec__title">Post-quantum signed reports</h2>
             <p>Every report is fingerprinted with SHA-256, signed with ML-DSA-65 (with a SHA-512 digest of the signed data), the post-quantum signature algorithm standardized in NIST FIPS 204. Every report is signed and hash-chained; check a report on the product's Reports page (<a href="/learn/verify-a-report">how</a>). Reports can also be checked by anyone, without an account, on each product's public /verify page: <a href="https://offboarding-proof.onrender.com/verify">Offboarding</a>, <a href="https://tpra.onrender.com/verify">Vendor Risk</a>, <a href="https://hipaa-g37n.onrender.com/verify">HIPAA</a>, <a href="https://ai-compliance-readiness.onrender.com/verify">Standards</a> and <a href="https://agent-contract-gap.onrender.com/verify">AI Agent Trust</a>. AI agent certificates can be checked the same way: <a href="/verify-agent">verify an agent certificate</a>.</p>
+          <p id="second-witness">Offboarding Proof, Vendor Risk and HIPAA reports also get a second, independent timestamp from an RFC 3161 timestamp authority (freetsa.org), next to the Bitcoin timestamp; their /verify pages show both witnesses. Those /verify pages also offer a single-file offline verifier: download it and check a report on your own computer, with no RootSystems server involved.</p>
           </article>
           <article class="rs-sec__card rs-sec__card--green reveal">
             <p class="rs-sec__tag">Payments</p>
@@ -98,7 +99,7 @@
               </tbody>
             </table>
           </div>
-          <p class="rs-note">OpenTimestamps public calendars receive only a SHA-256 fingerprint of a report (to timestamp it in Bitcoin), never its content. We hold no security certification today (no SOC 2 or ISO 27001 report); this page describes how the products are built.</p>
+          <p class="rs-note">OpenTimestamps public calendars and the freetsa.org timestamp authority receive only a SHA-256 fingerprint of a report (to timestamp it), never its content. We hold no security certification today (no SOC 2 or ISO 27001 report); this page describes how the products are built.</p>
         </div>
 
         <p class="rs-note">Where your data is processed, and by which providers, is also covered in the <a href="/privacy">privacy policy</a> and the <a href="/dpa">data processing agreement</a>.</p>
