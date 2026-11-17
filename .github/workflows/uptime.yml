@@ -1,0 +1,74 @@
+# AD-078 uptime monitor (knock-out 2026-11-17). Free: GitHub's scheduled runners only, no paid service, no email code.
+# Every ~15 minutes (GitHub may run schedules late) it checks each product in src/data/statusTargets.js and appends
+# the result to status/history.json on the `status-data` branch. That branch is never merged into main, so the
+# website does not redeploy on every check; rootsystems.app/status reads the file from raw.githubusercontent.com.
+# When a product is down in two runs in a row, ONE issue labelled "uptime" is opened (or updated); it closes
+# itself when every product answers again. GitHub notifies the repository owner about the issue.
+name: Uptime check
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: uptime
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Get the status-data branch (created on the first run)
+        env:
+          REPO_URL: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+        run: |
+          if git ls-remote --exit-code --heads "$REPO_URL" status-data >/dev/null 2>&1; then
+            git clone --quiet --depth 1 --single-branch --branch status-data "$REPO_URL" ../status-data
+          else
+            mkdir -p ../status-data && cd ../status-data
+            git init --quiet -b status-data
+            git remote add origin "$REPO_URL"
+            printf '%s\n' "Uptime history written by .github/workflows/uptime.yml on main. Read by https://rootsystems.app/status." "Format: src/utils/statusHistory.js on main. Never merge this branch into main." > README.md
+          fi
+
+      - name: Check every product
+        run: node scripts/uptime-check.js ../status-data/status/history.json ../alert.json
+
+      - name: Save the result to status-data
+        working-directory: ../status-data
+        run: |
+          git config user.name "rootsystems-uptime"
+          git config user.email "uptime@users.noreply.github.com"
+          git add -A
+          git commit --quiet -m "uptime check $(date -u +%Y-%m-%dT%H:%MZ)" || exit 0
+          git push --quiet origin status-data
+
+      - name: Open, update or close the one uptime issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create uptime --color B42318 --description "Uptime monitor" --force >/dev/null 2>&1 || true
+          DOWN=$(node -e "console.log(require('../alert.json').down.join(' '))")
+          OPEN=$(gh issue list --label uptime --state open --json number --jq '.[0].number // empty')
+          if [ -n "$DOWN" ]; then
+            node -e "process.stdout.write(require('../alert.json').body)" > ../issue.md
+            if [ -z "$OPEN" ]; then
+              gh issue create --title "Uptime: a product is down" --label uptime --body-file ../issue.md
+            else
+              gh issue edit "$OPEN" --body-file ../issue.md
+            fi
+          elif [ -n "$OPEN" ]; then
+            gh issue close "$OPEN" --comment "Every product answered in the latest check. Closed by the uptime monitor."
+          fi
