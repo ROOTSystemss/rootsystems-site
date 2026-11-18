@@ -1,109 +1,237 @@
 <!doctype html>
 <html lang="en">
-<head><%- include("../partials/head") %></head>
+<head>
+  <%- include("../partials/head") %>
+  <link rel="stylesheet" href="/css/home.css?v=20261118" />
+</head>
+<%
+  // Homepage redesign 2026-11-18 (spec: 05-BUSINESS/2026-11-18__Design__Homepage__Redesign-Reference.html).
+  // Product links come from src/data/products.js (the real sign-up / console addresses), never hand-typed here.
+  const byName = {};
+  products.forEach(function (p) { byName[p.name] = p; });
+  const href = function (name) { return (byName[name] && byName[name].href) || "/pricing"; };
+  const branches = [
+    {
+      id: "compliance", tone: "saffron", num: "Branch 1", title: "Compliance Proof",
+      lead: "Evidence an auditor can check, for the questions you get every quarter.",
+      tools: "/pricing#offboarding-proof",
+      rows: [
+        { name: "Offboarding Proof", q: "Did every leaver really lose access?", href: href("Offboarding Proof") },
+        { name: "Vendor Risk", q: "Is this vendor safe to trust with our data?", href: href("Vendor Risk") },
+        { name: "HIPAA", q: "Could we pass a HIPAA audit this month?", href: href("HIPAA") },
+        { name: "Standards Readiness", q: "How close are we to SOC 2, ISO 27001 and 10 more?", href: href("Standards Readiness") }
+      ]
+    },
+    {
+      id: "pqc", tone: "green", num: "Branch 2", title: "Post-Quantum Signed",
+      lead: "Find the cryptography a large enough quantum computer could break, and the patch that fixes it.",
+      tools: "/pricing#by-invoice",
+      rows: [
+        { name: "PQC Forge readiness report", q: "What will a quantum computer break first?", href: "/pricing#by-invoice" },
+        { name: "Built into every report", q: "Every RootSystems report uses post-quantum signatures, made to stay verifiable after quantum computers arrive." }
+      ]
+    },
+    {
+      id: "agents", tone: "violet", num: "Branch 3", title: "AI Agent Trust",
+      lead: "Signed agent authority, a ledger of every action, and a check against your contracts and insurance.",
+      tools: "/pricing#agent-governance",
+      rows: [
+        { name: "Agent certificates", q: "What is this AI agent allowed to do?", href: href("Agent Certificates") },
+        { name: "Action ledger", q: "Who allowed the agent to do that?", href: href("Action Ledger") },
+        { name: "Contract & insurance gap", q: "Are our AI agents covered if something goes wrong?", href: href("Contract & Insurance Gap") }
+      ]
+    }
+  ];
+  const START_FREE = "/pricing"; // every tool's free plan and its sign-up button
+%>
 <body class="page-home">
-  <%- include("../partials/header") %>
-  <main>
+  <a class="hp-skip" href="#main">Skip to content</a>
 
-    <section class="rs-hero">
-      <div class="rs-hero__media" aria-hidden="true">
-        <picture>
-          <source media="(min-width: 1100px)" srcset="/images/rootsystems-tree-desktop.webp 1x, /images/rootsystems-tree-desktop@2x.webp 2x" type="image/webp">
-          <source media="(min-width: 1100px)" srcset="/images/rootsystems-tree-desktop.jpg">
-          <source srcset="/images/rootsystems-tree-hero.webp" type="image/webp">
-          <img class="rs-hero__img" src="/images/rootsystems-tree-hero.jpg" alt="A glowing tree whose canopy is made of saffron, green and violet hexagons and whose roots are circuit lines, on a dark background: the RootSystems emblem" width="1280" height="668" fetchpriority="high" decoding="async">
-        </picture>
-        <span class="rs-hero__glow"></span>
-      </div>
-      <div class="wrap rs-hero__inner">
-        <p class="rs-kicker"><span class="rs-kicker__dot"></span>Compliance software that produces evidence</p>
-        <h1 class="rs-hero__title">Proof that <em>holds up.</em></h1>
-        <p class="rs-hero__scope">Focused tools for HIPAA, SOC 2, ISO 27001, the EU AI Act and post-quantum readiness.</p>
-        <p class="rs-hero__lead">When an auditor, a client or a regulator asks <em>“can you prove it?”</em>, RootSystems gives you a report that answers, signed with post-quantum signatures (ML-DSA-65) and hash-chained, so any change to it shows.</p>
-        <div class="rs-hero__actions">
-          <a class="rs-btn rs-btn--solid" href="/pricing">See plans and pricing</a>
-          <a class="rs-btn rs-btn--line" href="/contact">Request a demo</a>
+  <header class="hp-nav">
+    <div class="hp-wrap hp-nav__inner">
+      <a href="/" class="hp-brand" aria-label="RootSystems home">
+        <img class="brand__mark" src="/images/rs-logo.svg" alt="" width="36" height="40" />
+        <span class="brand__word">RootSystems</span>
+      </a>
+      <nav class="hp-nav__links" aria-label="Primary navigation">
+        <a href="#branches">Products</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/learn/verify-a-report">Verify a report</a>
+        <a href="/security">Security</a>
+      </nav>
+      <a class="hp-btn hp-btn--solid hp-btn--sm hp-nav__cta" href="<%= START_FREE %>">Start free</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="hp-wrap hp-hero">
+      <div class="hp-hero__copy">
+        <p class="hp-pill"><span class="hp-dot hp-dot--green"></span>COMPLIANCE SOFTWARE THAT PRODUCES EVIDENCE</p>
+        <h1 class="hp-h1">Don’t <em>say</em> you’re compliant.<br><span class="hp-saffron">Prove it.</span></h1>
+        <p class="hp-lead">Every tool ends in a signed report your auditor, client or insurer can check for themselves, even offline. No screenshots, no “trust us”.</p>
+        <div class="hp-actions">
+          <a class="hp-btn hp-btn--solid" href="<%= START_FREE %>">Start free</a>
+          <a class="hp-btn hp-btn--line" href="/security#sample-reports">See a sample report</a>
         </div>
-        <ul class="rs-proofline" aria-label="Security standards">
-          <li><strong>ML-DSA-65</strong> post-quantum signatures (the algorithm in NIST FIPS 204)</li>
-          <li><strong>SHA-256</strong> fingerprints</li>
-          <li><strong>AES-256</strong> encryption at rest</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="floors" class="rs-floors">
-      <div class="wrap">
-        <header class="rs-section-head">
-          <p class="rs-eyebrow">Three branches</p>
-          <h2 class="rs-h2">One root system. Every branch<br>answers a different question.</h2>
-        </header>
-        <div class="rs-floors__grid">
-          <a class="rs-floorcard rs-floorcard--saffron reveal" href="/pricing#offboarding-proof">
-            <span class="rs-floorcard__num">Branch 1</span>
-            <h3 class="rs-floorcard__title">Compliance Proof</h3>
-            <p class="rs-floorcard__text">Offboarding, vendor risk, HIPAA and readiness for twelve standards. Evidence an auditor can check.</p>
-            <span class="rs-floorcard__go">See the tools <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span>
-          </a>
-          <a class="rs-floorcard rs-floorcard--green reveal" href="/pricing#by-invoice">
-            <span class="rs-floorcard__num">Branch 2</span>
-            <h3 class="rs-floorcard__title">Post-Quantum Signed</h3>
-            <p class="rs-floorcard__text">Find the cryptography a large enough quantum computer could break, and the patch that fixes it.</p>
-            <span class="rs-floorcard__go">See the tools <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span>
-          </a>
-          <a class="rs-floorcard rs-floorcard--violet reveal" href="/pricing#agent-governance">
-            <span class="rs-floorcard__num">Branch 3</span>
-            <h3 class="rs-floorcard__title">AI Agent Trust</h3>
-            <p class="rs-floorcard__text">Signed agent authority, a ledger of every action, and a check against your contracts and insurance.</p>
-            <span class="rs-floorcard__go">See the tools <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></span>
-          </a>
+        <p class="hp-fine">Every tool starts free · Paid plans from $79/month</p>
+        <div class="hp-explore">
+          <span class="hp-label">EXPLORE THE THREE BRANCHES</span>
+          <div class="hp-chips">
+            <a class="hp-chip hp-chip--saffron" href="#compliance"><span class="hp-dot"></span>Compliance Proof</a>
+            <a class="hp-chip hp-chip--green" href="#pqc"><span class="hp-dot"></span>Post-Quantum Signed</a>
+            <a class="hp-chip hp-chip--violet" href="#agents"><span class="hp-dot"></span>AI Agent Trust</a>
+          </div>
         </div>
       </div>
-    </section>
 
-    <section id="verify" class="rs-verify">
-      <div class="wrap rs-verify__grid">
-        <div>
-          <p class="rs-eyebrow rs-eyebrow--on-dark">How verification works</p>
-          <h2 class="rs-h2 rs-h2--on-dark">Don’t take our word for it. Check the signature.</h2>
-          <ol class="rs-steps">
-            <li><span>1</span><div><strong>Every report is signed.</strong><p>Each report is signed with ML-DSA-65, the post-quantum signature standard NIST published in 2024, and fingerprinted with SHA-256, signed with ML-DSA-65 (with a SHA-512 digest of the signed data).</p></div></li>
-            <li><span>2</span><div><strong>The key is public.</strong><p>Every compliance product publishes its signing key at a fixed address. You can check any report on the product's Reports page.</p></div></li>
-            <li><span>3</span><div><strong>Change one character and it fails.</strong><p>An edited report no longer matches its signature. It proves the report came from us and is unchanged, and the signature is designed to stay verifiable after quantum computers arrive.</p></div></li>
-          </ol>
-        </div>
-        <figure class="rs-code" aria-label="The live Offboarding Proof signing key">
-          <figcaption><span class="rs-code__live"></span>Live now: Offboarding Proof’s published key</figcaption>
-<pre><code><span class="c-mute">GET</span> offboarding-proof.onrender.com
-    <span class="c-mute">/.well-known/rootsystems-signing-key.json</span>
-
-{
-  <span class="c-key">"configured"</span>: <span class="c-val">true</span>,
-  <span class="c-key">"algorithm"</span>:  <span class="c-str">"ML-DSA-65"</span>,
-  <span class="c-key">"standard"</span>:   <span class="c-str">"NIST FIPS 204"</span>,
-  <span class="c-key">"keyId"</span>:      <span class="c-str">"a46b6270385f02a6aa7ee057c8614e2d"</span>,
-  <span class="c-key">"publicKey"</span>:  <span class="c-mute">"… 1,952 bytes …"</span>
-}</code></pre>
-          <a class="rs-code__link" href="https://offboarding-proof.onrender.com/.well-known/rootsystems-signing-key.json" rel="noopener">Open the real key <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4"/></svg></a>
+      <div class="hp-hero__card">
+        <figure class="hp-sample" aria-label="A SAMPLE Offboarding Report with made-up numbers">
+          <div class="hp-sample__head">
+            <span class="hp-sample__title">Offboarding Report</span>
+            <span class="hp-sample__tag">SAMPLE · #0142</span>
+          </div>
+          <dl class="hp-sample__rows">
+            <div><dt>Leavers checked</dt><dd>12</dd></div>
+            <div><dt>Access removed</dt><dd class="hp-ok">12 / 12</dd></div>
+          </dl>
+          <div class="hp-sample__foot">
+            <span>Signed · Timestamped · Checkable offline</span>
+            <span class="hp-stamp">VERIFIED</span>
+          </div>
         </figure>
       </div>
     </section>
 
-    <section class="rs-close">
-      <div class="wrap rs-close__inner">
-        <img class="rs-close__mark" src="/images/rs-logo.svg" alt="RootSystems logo" width="72" height="75">
-        <h2 class="rs-h2">Built by one independent studio,<br>to be verified rather than believed.</h2>
-        <div class="rs-hero__actions">
-          <a class="rs-btn rs-btn--solid" href="/pricing">See plans and pricing</a>
-          <a class="rs-btn rs-btn--line-dark" href="/contact">Talk to us</a>
+    <div class="hp-strip">
+      <ul class="hp-wrap hp-strip__inner" aria-label="How every report is protected">
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><polygon points="8,1 14,4.5 14,11.5 8,15 2,11.5 2,4.5" class="hp-hex hp-hex--saffron"/></svg>ML-DSA-65 signatures (NIST FIPS 204)</li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><polygon points="8,1 14,4.5 14,11.5 8,15 2,11.5 2,4.5" class="hp-hex hp-hex--green"/></svg>SHA-256 hash chains</li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><polygon points="8,1 14,4.5 14,11.5 8,15 2,11.5 2,4.5" class="hp-hex hp-hex--violet"/></svg>Bitcoin + RFC 3161 timestamps</li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><polygon points="8,1 14,4.5 14,11.5 8,15 2,11.5 2,4.5" class="hp-hex"/></svg>AES-256 encryption at rest</li>
+      </ul>
+    </div>
+
+    <section id="branches" class="hp-wrap hp-section">
+      <header class="hp-head">
+        <p class="hp-label hp-green">ONE ROOT SYSTEM · THREE BRANCHES</p>
+        <h2 class="hp-h2">Every branch answers a different question.</h2>
+        <p class="hp-sub">Pick the tool for the question you’re being asked. They all grow from the same proof engine.</p>
+      </header>
+      <div class="hp-tree">
+        <picture>
+          <source srcset="/images/rootsystems-tree-hero.webp" type="image/webp">
+          <img src="/images/rootsystems-tree-hero.jpg" alt="A glowing tree whose canopy is made of saffron, green and violet hexagons and whose roots are circuit lines: the RootSystems emblem" width="1280" height="668" loading="lazy" decoding="async">
+        </picture>
+      </div>
+      <div class="hp-branches">
+        <% branches.forEach(function (b) { %>
+        <article id="<%= b.id %>" class="hp-branch hp-branch--<%= b.tone %>">
+          <div class="hp-branch__head">
+            <span class="hp-label hp-tone"><%= b.num.toUpperCase() %></span>
+            <h3 class="hp-h3"><%= b.title %></h3>
+            <p><%= b.lead %></p>
+          </div>
+          <div class="hp-branch__rows">
+            <% b.rows.forEach(function (r) { %>
+              <% if (r.href) { %>
+              <a class="hp-row" href="<%= r.href %>"><span class="hp-row__name"><%= r.name %></span><span class="hp-row__q"><%= r.q %></span></a>
+              <% } else { %>
+              <div class="hp-row"><span class="hp-row__name"><%= r.name %></span><span class="hp-row__q"><%= r.q %></span></div>
+              <% } %>
+            <% }) %>
+          </div>
+          <a class="hp-branch__go hp-tone" href="<%= b.tools %>">See the tools →</a>
+        </article>
+        <% }) %>
+      </div>
+    </section>
+
+    <section id="verify" class="hp-band">
+      <div class="hp-wrap hp-section">
+        <header class="hp-head">
+          <p class="hp-label hp-green">HOW VERIFICATION WORKS</p>
+          <h2 class="hp-h2">Don’t take our word for it. Check the signature.</h2>
+        </header>
+        <ol class="hp-steps">
+          <li><span class="hp-step__n hp-saffron">1</span><h3>Every report is signed.</h3><p>Signed with ML-DSA-65, the post-quantum standard NIST published in 2024, and fingerprinted with SHA-256.</p></li>
+          <li><span class="hp-step__n hp-green">2</span><h3>The key is public.</h3><p>Every compliance product publishes its signing key at a fixed address, so anyone can check a report without trusting us.</p></li>
+          <li><span class="hp-step__n hp-violet">3</span><h3>Change one character, it fails.</h3><p>An edited report no longer matches its signature. It proves the report came from us and is unchanged.</p></li>
+        </ol>
+
+        <div class="hp-proof">
+          <div class="hp-compare" aria-label="Example: an unchanged report passes, an edited one fails">
+            <div class="hp-compare__row hp-compare__row--ok">
+              <span>Access removed: <b>12 / 12</b></span>
+              <strong>✓ Signature valid</strong>
+            </div>
+            <div class="hp-compare__row hp-compare__row--bad">
+              <span>Access removed: <b>12 / 1<mark>3</mark></b></span>
+              <strong>✕ Signature fails</strong>
+            </div>
+          </div>
+
+          <figure class="hp-key" aria-label="The live Offboarding Proof signing key">
+            <figcaption class="hp-label">LIVE NOW: OFFBOARDING PROOF’S PUBLISHED KEY</figcaption>
+<pre class="hp-code"><code><span class="c-mute">GET offboarding-proof.onrender.com</span>
+<span class="c-mute">  /.well-known/rootsystems-signing-key.json</span>
+
+{
+  "algorithm": <span class="c-green">"ML-DSA-65"</span>,
+  "standard": <span class="c-green">"NIST FIPS 204"</span>,
+  "keyId": <span class="c-saffron">"a46b6270385f02a6aa7ee057c8614e2d"</span>,
+  "publicKey": <span class="c-violet">"… 1,952 bytes …"</span>
+}</code></pre>
+            <div class="hp-actions">
+              <a class="hp-btn hp-btn--saffron-line" href="https://offboarding-proof.onrender.com/verify">Verify a report yourself</a>
+              <a class="hp-btn hp-btn--line" href="https://offboarding-proof.onrender.com/.well-known/rootsystems-signing-key.json" rel="noopener">Open the real key</a>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="hp-close">
+      <div class="hp-wrap hp-close__inner">
+        <img src="/images/rs-logo.svg" alt="RootSystems logo" width="72" height="80" />
+        <h2 class="hp-h2 hp-h2--big">Proof, <em class="hp-saffron">not paperwork.</em></h2>
+        <p class="hp-sub">Built by one independent studio, to be verified rather than believed.</p>
+        <div class="hp-actions hp-actions--center">
+          <a class="hp-btn hp-btn--solid" href="<%= START_FREE %>">Start free</a>
+          <a class="hp-btn hp-btn--line" href="/pricing">See plans and pricing</a>
+          <a class="hp-btn hp-btn--line" href="/contact">Talk to us</a>
         </div>
       </div>
     </section>
 
   </main>
-  <%- include("../partials/footer") %>
-  <script src="/js/site.js"></script>
+
+  <footer class="hp-footer">
+    <div class="hp-wrap hp-footer__inner">
+      <span class="hp-footbrand">
+        <a href="/" class="hp-brand hp-brand--foot" aria-label="RootSystems home"><img class="brand__mark" src="/images/rs-logo.svg" alt="" width="20" height="22" />
+        <span class="brand__word">RootSystems</span></a>
+        <span>© <%= new Date().getFullYear() %> · Memphis, TN</span>
+      </span>
+      <div class="hp-footer__links">
+        <a href="/security">Security</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/learn/verify-a-report">Verify</a>
+        <span class="hp-social"><%- socialLinksHtml %></span>
+      </div>
+    </div>
+    <nav class="hp-wrap hp-footer__more" aria-label="More pages">
+      <a href="/standards">Standards</a>
+      <a href="/toolkits">Toolkits</a>
+      <a href="/learn">Learn</a>
+      <a href="/status">Status</a>
+      <a href="/verify-agent">Verify an agent certificate</a>
+      <a href="/contact">Contact</a>
+      <a href="/refund">Refunds</a>
+      <a href="/dpa">DPA</a>
+      <a href="mailto:hello@rootsystems.app">hello@rootsystems.app</a>
+    </nav>
+  </footer>
 </body>
 </html>
-
-<script>(function(){var vid=document.querySelector(".rs-hero__video");if(!vid)return;vid.currentTime=0.2;vid.addEventListener("timeupdate",function(){if(vid.currentTime>=5.85){vid.currentTime=0.2;vid.play();}});})();</script>
