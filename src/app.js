@@ -16,6 +16,20 @@ app.set("views", path.join(__dirname, "views"));
 app.locals.socialLinksHtml = require("./data/socialLinks").socialLinksHtml(); // footer icon links (X, Instagram) from one list
 
 app.use(express.urlencoded({ extended: false, limit: "32kb" }));
+// QA 2026-11-18 F35: baseline security headers on every response (the site sent none): no MIME sniffing, no framing,
+// referrer limited to the origin, no camera/microphone/location, and a CSP that forbids framing, plugins and <base>
+// hijacking. Scripts are not restricted by origin here (pages use inline scripts); that is a separate change.
+app.disable("x-powered-by");
+app.use((req, res, next) => {
+  res.set({
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+    "Content-Security-Policy": "frame-ancestors 'none'; object-src 'none'; base-uri 'self'",
+  });
+  next();
+});
 app.use(express.static(path.join(__dirname, "..", "public")));
 // The page's own path, for its canonical URL and per-page tags (src/utils/seo.js, rendered by head.ejs).
 app.locals.seoTags = require("./utils/seo").tags;
